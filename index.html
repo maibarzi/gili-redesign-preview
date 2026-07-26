@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gili – Mehr Stammkundinnen für deinen Salon</title>
-  <meta name="description" content="Gili sorgt persönlich dafür, dass deine Salonkundinnen wiederkommen – über WhatsApp, genau im richtigen Moment, ganz ohne Zusatzaufwand für dich." />
+  <meta name="description" content="Gili beantwortet Anfragen, vereinbart Termine und hält Kontakt zu deinen Salonkundinnen – persönlich eingerichtet, persönlich begleitet." />
 
   <!-- Open Graph -->
   <meta property="og:title" content="Gili – Mehr Stammkundinnen für deinen Salon" />
-  <meta property="og:description" content="Gemeinsam entwickeln wir, wie dein Salon mit Kundinnen in Kontakt bleibt. Gili übernimmt diese Kommunikation für dich." />
+  <meta property="og:description" content="Gili beantwortet Anfragen über WhatsApp, Instagram und deine Website, vereinbart Termine und bleibt nach dem Besuch mit deinen Kundinnen in Kontakt." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://gili.live" />
 
@@ -24,13 +24,13 @@
       theme: {
         extend: {
           colors: {
-            warm:    '#FAF8F4',
-            cream:   '#F4F0E8',
-            terra:   '#C4622D',
-            ink:     '#1A1A18',
-            sage:    '#A8BEB2',
-            muted:   '#8A8580',
-            border:  '#E7E2DB',
+            warm:   '#FAF8F4',
+            cream:  '#F4F0E8',
+            terra:  '#C4622D',
+            ink:    '#1A1A18',
+            sage:   '#A8BEB2',
+            muted:  '#8A8580',
+            border: '#E7E2DB',
           },
           fontFamily: {
             serif: ['"DM Serif Display"', 'Georgia', 'serif'],
@@ -47,194 +47,165 @@
   <style>
     /* ─── Base ─── */
     html { scroll-behavior: smooth; }
-    body { background-color: #FAF8F4; color: #1A1A18; font-family: 'Instrument Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    body { background-color: #FAF8F4; color: #1A1A18; font-family: 'Instrument Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
     * { box-sizing: border-box; }
     img, svg { max-width: 100%; }
 
-    /* ─── Typography ─── */
-    .font-serif { font-family: 'DM Serif Display', Georgia, serif; }
-
     /* ─── Scroll-reveal ─── */
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
     .reveal.visible { opacity: 1; transform: none; }
 
-    /* ─── Phone mockup ─── */
+    /* ─── Hero phone ─── */
     .phone-frame {
-      width: 100%;
-      max-width: 280px;
-      border-radius: 36px;
-      background: #1A1A18;
-      padding: 10px;
-      box-shadow: 0 32px 80px rgba(26,26,24,0.18), 0 8px 24px rgba(26,26,24,0.10);
+      width: 100%; max-width: 272px;
+      border-radius: 36px; background: #1A1A18; padding: 10px;
+      box-shadow: 0 28px 72px rgba(26,26,24,0.16), 0 8px 24px rgba(26,26,24,0.08);
     }
     .phone-screen {
-      border-radius: 28px;
-      overflow: hidden;
-      background: #ECE5DD;
-      min-height: 480px;
-      display: flex;
-      flex-direction: column;
+      border-radius: 28px; overflow: hidden;
+      background: #ECE5DD; min-height: 460px;
+      display: flex; flex-direction: column;
     }
     .wa-header {
-      background: #075E54;
-      padding: 10px 14px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
+      background: #075E54; padding: 10px 14px;
+      display: flex; align-items: center; gap: 10px; flex-shrink: 0;
     }
     .wa-avatar {
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      background: #A8BEB2;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'DM Serif Display', serif;
-      color: white;
-      font-size: 14px;
-      flex-shrink: 0;
+      width: 34px; height: 34px; border-radius: 50%;
+      background: #A8BEB2; display: flex; align-items: center; justify-content: center;
+      font-family: 'DM Serif Display', serif; color: white; font-size: 13px; flex-shrink: 0;
     }
-    .wa-header-text h3 { color: white; font-size: 13px; font-weight: 600; margin: 0; line-height: 1.2; }
-    .wa-header-text p  { color: rgba(255,255,255,0.7); font-size: 11px; margin: 0; }
+    .wa-header-text h3 { color: white; font-size: 12.5px; font-weight: 600; margin: 0; line-height: 1.2; }
+    .wa-header-text p  { color: rgba(255,255,255,0.7); font-size: 10.5px; margin: 0; }
     .wa-chat {
-      flex: 1;
-      padding: 12px 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      overflow: hidden;
+      flex: 1; padding: 10px 9px;
+      display: flex; flex-direction: column; gap: 6px; overflow: hidden;
     }
-    .wa-bubble {
-      max-width: 80%;
-      padding: 8px 10px;
-      border-radius: 10px;
-      font-size: 12.5px;
-      line-height: 1.45;
-      position: relative;
-    }
+    .wa-bubble { max-width: 82%; padding: 8px 10px; border-radius: 10px; font-size: 12px; line-height: 1.45; }
     .wa-bubble.in  { background: #fff; align-self: flex-start; border-radius: 2px 10px 10px 10px; }
     .wa-bubble.out { background: #DCF8C6; align-self: flex-end; border-radius: 10px 2px 10px 10px; }
-    .wa-time { font-size: 10px; color: #999; margin-top: 3px; text-align: right; }
+    .wa-time { font-size: 9.5px; color: #999; margin-top: 3px; text-align: right; }
     .wa-bubble.in .wa-time { text-align: left; }
-    .wa-check { display: inline-block; color: #4FC3F7; margin-left: 2px; font-size: 11px; }
+    .wa-check { color: #4FC3F7; margin-left: 2px; }
 
-    /* Chat animations */
-    .wa-msg {
-      opacity: 0;
-      transform: translateY(8px);
-    }
+    /* Hero chat animation */
+    .wa-msg { opacity: 0; transform: translateY(6px); }
     @media (prefers-reduced-motion: no-preference) {
-      .wa-msg.show {
-        animation: msgIn 0.35s ease forwards;
-      }
+      .wa-msg.show { animation: msgIn 0.3s ease forwards; }
     }
     @media (prefers-reduced-motion: reduce) {
       .wa-msg { opacity: 1; transform: none; }
     }
-    @keyframes msgIn {
-      to { opacity: 1; transform: none; }
+    @keyframes msgIn { to { opacity: 1; transform: none; } }
+
+    /* ─── Compact mockups ─── */
+    .compact-mockup {
+      background: white; border: 1px solid #E7E2DB;
+      border-radius: 16px; padding: 18px 16px;
+      box-shadow: 0 2px 16px rgba(26,26,24,0.05);
+    }
+    .cm-label {
+      display: block; font-size: 9.5px; font-weight: 700;
+      letter-spacing: 0.13em; text-transform: uppercase;
+      color: #A8BEB2; margin-bottom: 14px;
+    }
+    .cm-bubbles { display: flex; flex-direction: column; gap: 8px; }
+    .cm-in {
+      background: #F4F0E8; border-radius: 3px 12px 12px 12px;
+      padding: 9px 11px; font-size: 13px; line-height: 1.5;
+      color: #1A1A18; align-self: flex-start; max-width: 90%;
+    }
+    .cm-out {
+      background: #E6EEE9; border-radius: 12px 3px 12px 12px;
+      padding: 9px 11px; font-size: 13px; line-height: 1.5;
+      color: #1A1A18; align-self: flex-end; max-width: 78%;
+    }
+    .cm-review-btn {
+      display: block; margin-top: 10px; text-align: center;
+      border: 1.5px solid #A8BEB2; color: #1A1A18;
+      border-radius: 8px; padding: 7px 12px;
+      font-size: 12.5px; font-weight: 500;
+      cursor: default; background: transparent;
+      transition: background 0.2s;
     }
 
-    /* ─── Timeline ─── */
-    .timeline-wrap { position: relative; }
-
-    /* Desktop horizontal timeline */
-    @media (min-width: 768px) {
-      .timeline-wrap::before {
-        content: '';
-        position: absolute;
-        top: 24px;
-        left: 0; right: 0;
-        height: 2px;
-        background: #E7E2DB;
-        z-index: 0;
-      }
-      .tl-item { flex: 1; text-align: center; }
-      .tl-dot {
-        width: 48px; height: 48px;
-        border-radius: 50%;
-        background: #FAF8F4;
-        border: 2px solid #E7E2DB;
-        display: flex; align-items: center; justify-content: center;
-        margin: 0 auto 12px;
-        position: relative; z-index: 1;
-        color: #C4622D;
-      }
-      .tl-dot.active {
-        background: #C4622D;
-        border-color: #C4622D;
-        color: white;
-      }
+    /* ─── Gili team mockup (terracotta section) ─── */
+    .team-mockup {
+      background: #FAF8F4; border-radius: 16px;
+      overflow: hidden; max-width: 380px;
+      box-shadow: 0 6px 32px rgba(26,26,24,0.18);
+    }
+    .team-mockup-header {
+      background: #1A1A18; padding: 11px 15px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .team-avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: #C4622D; display: flex; align-items: center; justify-content: center;
+      font-family: 'DM Serif Display', serif; color: white; font-size: 12px; flex-shrink: 0;
+    }
+    .team-header-text h3 { color: white; font-size: 12.5px; font-weight: 600; margin: 0; }
+    .team-header-text p  { color: rgba(255,255,255,0.5); font-size: 10.5px; margin: 0; }
+    .team-chat {
+      padding: 14px 12px;
+      display: flex; flex-direction: column; gap: 9px;
+      background: #FAF8F4;
+    }
+    .team-in {
+      background: white; border: 1px solid #E7E2DB;
+      border-radius: 3px 12px 12px 12px;
+      padding: 9px 11px; font-size: 13px; line-height: 1.5;
+      color: #1A1A18; align-self: flex-start; max-width: 88%;
+    }
+    .team-out {
+      background: rgba(196,98,45,0.12);
+      border-radius: 12px 3px 12px 12px;
+      padding: 9px 11px; font-size: 13px; line-height: 1.5;
+      color: #1A1A18; align-self: flex-end; max-width: 80%;
     }
 
-    /* Mobile vertical timeline */
-    @media (max-width: 767px) {
-      .timeline-wrap { padding-left: 36px; }
-      .timeline-wrap::before {
-        content: '';
-        position: absolute;
-        top: 0; bottom: 0;
-        left: 10px;
-        width: 2px;
-        background: #E7E2DB;
-        z-index: 0;
-      }
-      .tl-item { position: relative; margin-bottom: 28px; display: block; }
-      .tl-dot {
-        width: 40px; height: 40px;
-        border-radius: 50%;
-        background: #FAF8F4;
-        border: 2px solid #E7E2DB;
-        display: flex; align-items: center; justify-content: center;
-        position: absolute;
-        left: -46px; top: 0;
-        z-index: 1;
-        color: #C4622D;
-      }
-      .tl-dot.active { background: #C4622D; border-color: #C4622D; color: white; }
-      .tl-label { font-size: 14px; font-weight: 600; color: #1A1A18; margin-bottom: 2px; }
-      .tl-sub { font-size: 13px; color: #8A8580; }
-      .tl-content { padding-top: 6px; }
+    /* ─── Collaboration timeline ─── */
+    .collab-timeline { position: relative; }
+    .collab-timeline::before {
+      content: ''; position: absolute;
+      left: 19px; top: 42px; bottom: 10px;
+      width: 1px; background: #E7E2DB; z-index: 0;
     }
-
-    /* ─── Journey steps ─── */
-    .journey-connector {
-      flex: 1;
-      height: 2px;
-      background: #E7E2DB;
-      position: relative;
-      top: -16px;
+    .tl-step { display: flex; gap: 18px; position: relative; margin-bottom: 36px; }
+    .tl-step:last-child { margin-bottom: 0; }
+    .tl-num {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: #FAF8F4; border: 1.5px solid #E7E2DB;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 14px; color: #8A8580;
+      flex-shrink: 0; position: relative; z-index: 1;
+      transition: background 0.2s, border-color 0.2s;
     }
+    .tl-num.terra { background: #C4622D; border-color: #C4622D; color: white; }
+    .tl-content { padding-top: 8px; flex: 1; }
+    .tl-content h3 { font-weight: 600; color: #1A1A18; margin-bottom: 5px; font-size: 15px; line-height: 1.3; }
+    .tl-content p { color: #8A8580; font-size: 13.5px; line-height: 1.6; }
+    .tl-step.featured .tl-content {
+      background: #F4F0E8; border-radius: 12px;
+      padding: 14px 16px; margin-top: 0; padding-top: 14px;
+    }
+    .tl-step.featured .tl-content h3 { font-size: 16px; }
 
     /* ─── FAQ accordion ─── */
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.35s ease;
-    }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
     .faq-answer.open { max-height: 300px; }
     .faq-icon { transition: transform 0.3s ease; flex-shrink: 0; }
     .faq-item.open .faq-icon { transform: rotate(45deg); }
 
-    /* ─── Focus states ─── */
-    :focus-visible {
-      outline: 2px solid #C4622D;
-      outline-offset: 3px;
-      border-radius: 4px;
-    }
-
-    /* ─── No horizontal overflow ─── */
-    body { overflow-x: hidden; }
-
     /* ─── Mobile menu ─── */
-    #mobile-menu {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-    }
+    #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
     #mobile-menu.open { max-height: 300px; }
 
-    /* ─── Divider line ─── */
+    /* ─── Dividers ─── */
     .section-divider { border: none; border-top: 1px solid #E7E2DB; margin: 0; }
+
+    /* ─── Focus ─── */
+    :focus-visible { outline: 2px solid #C4622D; outline-offset: 3px; border-radius: 4px; }
   </style>
 </head>
 
@@ -247,26 +218,22 @@
   <div class="max-w-6xl mx-auto px-5 md:px-8">
     <div class="flex items-center justify-between h-16">
 
-      <!-- Logo -->
       <a href="#" class="font-serif text-2xl tracking-tight" aria-label="Gili – Startseite">
         Gili<span style="color:#C4622D">.</span>
       </a>
 
-      <!-- Desktop nav links -->
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-muted" aria-label="Hauptnavigation">
-        <a href="#zusammenarbeit" class="hover:text-ink transition-colors">Zusammenarbeit</a>
         <a href="#so-funktioniert-es" class="hover:text-ink transition-colors">So funktioniert es</a>
-        <a href="#preise" class="hover:text-ink transition-colors">Preise</a>
-        <a href="#faq" class="hover:text-ink transition-colors">FAQ</a>
+        <a href="#zusammenarbeit"     class="hover:text-ink transition-colors">Zusammenarbeit</a>
+        <a href="#preise"             class="hover:text-ink transition-colors">Preise</a>
+        <a href="#faq"                class="hover:text-ink transition-colors">FAQ</a>
       </nav>
 
-      <!-- Desktop CTA -->
-      <!-- EDITABLE: Update DEMO_URL in the script below to set the booking link -->
-      <a href="#" id="nav-cta" class="hidden md:inline-flex items-center gap-2 bg-terra text-white text-sm font-semibold px-5 py-2.5 rounded-xl hover:bg-[#b0561f] transition-colors focus-visible:ring-2 focus-visible:ring-terra">
+      <!-- EDITABLE: primary CTA links to DEMO_URL -->
+      <a href="#" id="nav-cta" class="hidden md:inline-flex items-center gap-2 bg-terra text-white text-sm font-semibold px-5 py-2.5 rounded-xl hover:bg-[#b0561f] transition-colors">
         Kostenlose Demo buchen
       </a>
 
-      <!-- Mobile: CTA + hamburger -->
       <div class="flex md:hidden items-center gap-3">
         <a href="#" id="nav-cta-mobile" class="inline-flex items-center bg-terra text-white text-xs font-semibold px-4 py-2 rounded-xl hover:bg-[#b0561f] transition-colors">
           Demo buchen
@@ -277,13 +244,12 @@
       </div>
     </div>
 
-    <!-- Mobile dropdown menu -->
     <div id="mobile-menu" role="navigation" aria-label="Mobile Navigation">
       <nav class="py-4 border-t border-border flex flex-col gap-4 text-sm font-medium text-muted">
-        <a href="#zusammenarbeit" class="hover:text-ink transition-colors mobile-nav-link">Zusammenarbeit</a>
         <a href="#so-funktioniert-es" class="hover:text-ink transition-colors mobile-nav-link">So funktioniert es</a>
-        <a href="#preise" class="hover:text-ink transition-colors mobile-nav-link">Preise</a>
-        <a href="#faq" class="hover:text-ink transition-colors mobile-nav-link">FAQ</a>
+        <a href="#zusammenarbeit"     class="hover:text-ink transition-colors mobile-nav-link">Zusammenarbeit</a>
+        <a href="#preise"             class="hover:text-ink transition-colors mobile-nav-link">Preise</a>
+        <a href="#faq"                class="hover:text-ink transition-colors mobile-nav-link">FAQ</a>
       </nav>
     </div>
   </div>
@@ -293,98 +259,78 @@
 <!-- ═══════════════════════════════════════════
      SECTION 2 — HERO
 ════════════════════════════════════════════ -->
-<section id="hero" class="relative overflow-hidden">
+<section id="hero">
   <div class="max-w-6xl mx-auto px-5 md:px-8 py-20 md:py-28 lg:py-32">
-    <div class="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+    <div class="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
 
       <!-- Left: copy -->
       <div class="reveal">
-        <!-- Label -->
         <p class="inline-block text-xs font-semibold tracking-widest uppercase text-terra border border-terra/30 bg-terra/5 rounded-full px-4 py-1.5 mb-8">
           Kundenbindung für Friseur- und Beauty-Salons
         </p>
 
-        <!-- Headline -->
-        <h1 class="font-serif text-4xl md:text-5xl leading-[1.12] tracking-tight text-ink mb-8">
+        <!-- EDITABLE: Hero headline -->
+        <h1 class="font-serif text-4xl md:text-5xl leading-[1.1] tracking-tight text-ink mb-7">
           Du hast hart gearbeitet,<br class="hidden sm:block" />
           um neue Kundinnen zu gewinnen.<br class="hidden sm:block" />
           Gili sorgt dafür,<br class="hidden sm:block" />
-          dass sie wiederkommen.
+          dass sie bei dir bleiben.
         </h1>
 
-        <!-- Supporting copy -->
+        <!-- EDITABLE: Hero supporting text -->
         <p class="text-base md:text-lg text-muted leading-relaxed mb-10 max-w-xl">
-          Gemeinsam entwickeln wir, wie dein Salon mit Kundinnen in Kontakt bleibt. Gili übernimmt diese Kommunikation anschließend für dich – persönlich, automatisch und genau im richtigen Moment.
+          Gili beantwortet Anfragen über WhatsApp, Instagram und deine Website, vereinbart Termine und bleibt auch nach dem Besuch mit deinen Kundinnen in Kontakt.
         </p>
 
-        <!-- CTAs -->
         <div class="flex flex-col sm:flex-row gap-4 mb-10">
-          <!-- EDITABLE: primary CTA -->
           <a href="#" class="demo-btn inline-flex items-center justify-center gap-2 bg-terra text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-[#b0561f] transition-colors text-sm">
             Kostenlose Demo buchen
           </a>
-          <a href="#zusammenarbeit" class="inline-flex items-center justify-center gap-2 text-ink font-semibold border border-border px-7 py-3.5 rounded-xl hover:bg-cream transition-colors text-sm">
+          <a href="#so-funktioniert-es" class="inline-flex items-center justify-center gap-2 text-ink font-semibold border border-border px-7 py-3.5 rounded-xl hover:bg-cream transition-colors text-sm">
             Gili kennenlernen
             <i data-lucide="arrow-down" class="w-4 h-4"></i>
           </a>
         </div>
 
-        <!-- Trust line -->
         <p class="text-xs text-muted tracking-wide">
-          Persönlich eingerichtet · 0&nbsp;% Provision · WhatsApp statt komplizierter Software
+          Persönlich eingerichtet · 0&nbsp;% Provision · WhatsApp, Instagram &amp; Website
         </p>
       </div>
 
-      <!-- Right: WhatsApp phone mockup 1 (Balayage booking) -->
-      <div class="flex justify-center lg:justify-end reveal" style="transition-delay: 0.15s">
+      <!-- Right: WhatsApp booking mockup -->
+      <div class="flex justify-center lg:justify-end reveal" style="transition-delay:0.15s">
         <div class="phone-frame" id="phone1">
-          <!-- Notch bar -->
           <div class="flex justify-center mb-2">
-            <div style="width:60px;height:5px;background:#2a2a28;border-radius:3px;"></div>
+            <div style="width:56px;height:5px;background:#2a2a28;border-radius:3px;"></div>
           </div>
           <div class="phone-screen">
-            <!-- WhatsApp header -->
             <div class="wa-header">
-              <div style="color:rgba(255,255,255,0.8); cursor:pointer;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+              <div style="color:rgba(255,255,255,0.75);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
               </div>
               <div class="wa-avatar">L</div>
               <div class="wa-header-text" style="flex:1;">
                 <h3>Salon Lena</h3>
                 <p>online</p>
               </div>
-              <div style="color:rgba(255,255,255,0.8); display:flex;gap:14px;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.58 4.35 2 2 0 0 1 3.54 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.29 6.29l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              </div>
             </div>
-
-            <!-- Date separator -->
             <div class="wa-chat" id="chat1" style="background:#ECE5DD;">
-
-              <div class="flex justify-center mb-2">
-                <span style="background:rgba(255,255,255,0.6);font-size:10.5px;color:#666;padding:3px 10px;border-radius:8px;">Montag, 28. Juli</span>
+              <div class="flex justify-center mb-1">
+                <span style="background:rgba(255,255,255,0.55);font-size:10px;color:#666;padding:2px 9px;border-radius:7px;">Montag, 28. Juli</span>
               </div>
-
-              <!-- Message 1: client outgoing -->
               <div class="wa-msg wa-bubble out">
                 Hallo! Ich würde so gerne einen Balayage-Termin buchen. Hätten Sie diese Woche noch Zeit?
                 <div class="wa-time">14:32 <span class="wa-check">✓✓</span></div>
               </div>
-
-              <!-- Message 2: bot incoming -->
               <div class="wa-msg wa-bubble in">
                 Hallo Lisa! ✨ Sehr gerne. Wir hätten Donnerstag, 30. Juli um 15:00&nbsp;Uhr frei – passt dir das?
                 <div class="wa-time">14:33</div>
               </div>
-
-              <!-- Message 3: client outgoing -->
               <div class="wa-msg wa-bubble out">
                 Ja, perfekt! 😊
                 <div class="wa-time">14:34 <span class="wa-check">✓✓</span></div>
               </div>
-
-              <!-- Message 4: bot confirmation (full format) -->
-              <div class="wa-msg wa-bubble in" style="max-width:88%;">
+              <div class="wa-msg wa-bubble in" style="max-width:90%;">
                 Perfekt, Lisa! ✨ 15:00&nbsp;Uhr passt wunderbar, ich habe den Termin für dich eingetragen.&nbsp;🧡<br>
                 📅 Donnerstag, 30.&nbsp;Juli<br>
                 ⏰ 15:00&nbsp;Uhr<br>
@@ -393,7 +339,6 @@
                 Wir freuen uns auf dich!&nbsp;🌸
                 <div class="wa-time">14:35</div>
               </div>
-
             </div>
           </div>
         </div>
@@ -407,330 +352,60 @@
 
 
 <!-- ═══════════════════════════════════════════
-     SECTION 3 — THE HUMAN PROBLEM
-════════════════════════════════════════════ -->
-<section id="human-problem" class="py-24 md:py-32">
-  <div class="max-w-3xl mx-auto px-5 md:px-8">
-
-    <div class="reveal">
-      <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-ink mb-10">
-        Nach dem Termin beginnt der Teil, den im Salonalltag kaum jemand schafft.
-      </h2>
-
-      <div class="text-muted text-base md:text-lg leading-relaxed space-y-5">
-        <p>
-          Du investierst Zeit, Energie und Geld, um neue Kundinnen zu gewinnen. Du überzeugst, du lieferst gute Arbeit, du baust Vertrauen auf. Und dann? Dann kehrt der Alltag zurück.
-        </p>
-        <p>
-          Zwischen Terminen, Telefonaten und dem nächsten Kunden bleibt kaum Raum für das, was danach kommt. Dabei entscheidet sich genau dort, ob eine Kundin wiederkommt – oder nicht.
-        </p>
-      </div>
-
-      <!-- Questions as a quiet list -->
-      <div class="mt-12 space-y-5 border-l-2 border-terra/20 pl-8">
-        <p class="text-ink font-medium text-lg md:text-xl">Wer lädt die Kundin rechtzeitig wieder ein?</p>
-        <p class="text-ink font-medium text-lg md:text-xl">Wer bittet sie um eine Bewertung?</p>
-        <p class="text-ink font-medium text-lg md:text-xl">Wer erzählt ihr von einem passenden Angebot?</p>
-        <p class="text-ink font-medium text-lg md:text-xl">Wer sorgt dafür, dass sie den Salon nicht einfach vergisst?</p>
-      </div>
-
-      <div class="mt-14 pt-10 border-t border-border">
-        <p class="font-serif text-2xl md:text-3xl text-terra italic">
-          Genau hier beginnt Gili.
-        </p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<hr class="section-divider" />
-
-
-<!-- ═══════════════════════════════════════════
-     SECTION 4 — THE PERSONAL VALUE
-════════════════════════════════════════════ -->
-<section id="zusammenarbeit" class="py-24 md:py-32 bg-cream">
-  <div class="max-w-6xl mx-auto px-5 md:px-8">
-
-    <div class="mb-14 md:mb-20 reveal">
-      <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-ink mb-6">
-        Wir beginnen nicht mit der Technik.<br class="hidden md:block" />
-        Wir beginnen mit deinem Salon.
-      </h2>
-      <p class="text-muted text-base md:text-lg max-w-2xl leading-relaxed">
-        Bevor Gili eine einzige Nachricht verschickt, lernen wir deinen Salon, deine Kundinnen und deine Art zu kommunizieren kennen.
-      </p>
-    </div>
-
-    <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-
-      <!-- Left: editorial desk illustration SVG -->
-      <div class="reveal" style="transition-delay: 0.1s">
-        <div class="rounded-2xl overflow-hidden bg-warm border border-border p-6 md:p-8">
-          <!-- INLINE SVG: Desk scene illustration -->
-          <svg viewBox="0 0 420 320" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Persönliches Beratungsgespräch – Schreibtisch mit Notizbuch, Telefon und Kaffee" role="img">
-
-            <!-- Desk surface background -->
-            <rect width="420" height="320" fill="#FAF8F4" rx="8"/>
-
-            <!-- Subtle desk shadow/surface line -->
-            <ellipse cx="210" cy="290" rx="190" ry="18" fill="#E7E2DB" opacity="0.5"/>
-
-            <!-- ── NOTEBOOK (open, center-left, slightly rotated) ── -->
-            <g transform="rotate(-3, 150, 170)">
-              <!-- Left page -->
-              <rect x="60" y="80" width="120" height="160" rx="3" fill="white" stroke="#E7E2DB" stroke-width="1.5"/>
-              <!-- Right page -->
-              <rect x="182" y="80" width="120" height="160" rx="3" fill="white" stroke="#E7E2DB" stroke-width="1.5"/>
-              <!-- Spine -->
-              <rect x="178" y="80" width="6" height="160" fill="#E7E2DB"/>
-              <!-- Notebook cover top edge (binding) -->
-              <rect x="60" y="78" width="244" height="5" rx="2" fill="#C4622D" opacity="0.7"/>
-
-              <!-- Lines on left page (like text) -->
-              <line x1="74" y1="106" x2="170" y2="106" stroke="#E7E2DB" stroke-width="1.2"/>
-              <line x1="74" y1="118" x2="170" y2="118" stroke="#E7E2DB" stroke-width="1.2"/>
-              <line x1="74" y1="130" x2="155" y2="130" stroke="#E7E2DB" stroke-width="1.2"/>
-              <line x1="74" y1="142" x2="170" y2="142" stroke="#E7E2DB" stroke-width="1.2"/>
-              <line x1="74" y1="154" x2="145" y2="154" stroke="#E7E2DB" stroke-width="1.2"/>
-              <line x1="74" y1="166" x2="170" y2="166" stroke="#E7E2DB" stroke-width="1.2"/>
-              <line x1="74" y1="178" x2="160" y2="178" stroke="#E7E2DB" stroke-width="1.2"/>
-              <line x1="74" y1="190" x2="170" y2="190" stroke="#E7E2DB" stroke-width="1.2"/>
-              <line x1="74" y1="202" x2="130" y2="202" stroke="#E7E2DB" stroke-width="1.2"/>
-              <line x1="74" y1="214" x2="170" y2="214" stroke="#E7E2DB" stroke-width="1.2"/>
-
-              <!-- Handwritten-style planning lines on right page (terracotta/sage) -->
-              <line x1="196" y1="100" x2="290" y2="100" stroke="#C4622D" stroke-width="1.5" opacity="0.4"/>
-              <line x1="196" y1="113" x2="280" y2="113" stroke="#C4622D" stroke-width="1" opacity="0.3"/>
-              <line x1="196" y1="126" x2="265" y2="126" stroke="#C4622D" stroke-width="1" opacity="0.3"/>
-
-              <!-- Small checkboxes on right page -->
-              <rect x="196" y="146" width="8" height="8" rx="1" stroke="#A8BEB2" stroke-width="1.5" fill="none"/>
-              <line x1="198" y1="150" x2="200" y2="152" stroke="#A8BEB2" stroke-width="1.5"/>
-              <line x1="200" y1="152" x2="203" y2="148" stroke="#A8BEB2" stroke-width="1.5"/>
-              <line x1="210" y1="150" x2="265" y2="150" stroke="#E7E2DB" stroke-width="1"/>
-
-              <rect x="196" y="162" width="8" height="8" rx="1" stroke="#A8BEB2" stroke-width="1.5" fill="none"/>
-              <line x1="198" y1="166" x2="200" y2="168" stroke="#A8BEB2" stroke-width="1.5"/>
-              <line x1="200" y1="168" x2="203" y2="164" stroke="#A8BEB2" stroke-width="1.5"/>
-              <line x1="210" y1="166" x2="280" y2="166" stroke="#E7E2DB" stroke-width="1"/>
-
-              <rect x="196" y="178" width="8" height="8" rx="1" stroke="#E7E2DB" stroke-width="1.5" fill="none"/>
-              <line x1="210" y1="182" x2="270" y2="182" stroke="#E7E2DB" stroke-width="1"/>
-
-              <rect x="196" y="194" width="8" height="8" rx="1" stroke="#E7E2DB" stroke-width="1.5" fill="none"/>
-              <line x1="210" y1="198" x2="255" y2="198" stroke="#E7E2DB" stroke-width="1"/>
-
-              <!-- Small terracotta dot accent -->
-              <circle cx="250" cy="224" r="3" fill="#C4622D" opacity="0.5"/>
-              <circle cx="262" cy="224" r="3" fill="#C4622D" opacity="0.3"/>
-              <circle cx="274" cy="224" r="3" fill="#C4622D" opacity="0.2"/>
-            </g>
-
-            <!-- ── PEN (diagonal on notebook) ── -->
-            <g transform="rotate(-3, 150, 170)">
-              <rect x="210" y="230" width="100" height="7" rx="3.5" fill="#1A1A18" transform="rotate(-35, 210, 230)"/>
-              <polygon points="179,264 173,272 183,268" fill="#C4622D"/>
-            </g>
-
-            <!-- ── COFFEE CUP (upper right) ── -->
-            <g transform="translate(320, 90)">
-              <!-- Cup body -->
-              <path d="M8 0 L52 0 L48 58 L12 58 Z" fill="#A8BEB2" opacity="0.8" rx="4"/>
-              <path d="M10 0 L50 0 L46 56 L14 56 Z" fill="#A8BEB2" rx="4"/>
-              <!-- Cup opening ellipse -->
-              <ellipse cx="30" cy="0" rx="22" ry="6" fill="#8A9E98"/>
-              <!-- Coffee surface -->
-              <ellipse cx="30" cy="0" rx="18" ry="4.5" fill="#6B4226"/>
-              <!-- Handle -->
-              <path d="M52 15 Q70 15 70 30 Q70 45 52 45" stroke="#A8BEB2" stroke-width="5" fill="none" stroke-linecap="round"/>
-              <!-- Saucer -->
-              <ellipse cx="30" cy="62" rx="32" ry="7" fill="#E7E2DB"/>
-              <!-- Steam lines -->
-              <path d="M20 -12 Q22 -20 18 -28" stroke="#C4622D" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.4"/>
-              <path d="M30 -14 Q32 -24 28 -32" stroke="#C4622D" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.35"/>
-              <path d="M40 -12 Q42 -20 38 -28" stroke="#C4622D" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.3"/>
-            </g>
-
-            <!-- ── PHONE (lower right, simple) ── -->
-            <g transform="translate(330, 190)">
-              <rect x="0" y="0" width="52" height="88" rx="8" fill="#1A1A18"/>
-              <rect x="3" y="12" width="46" height="66" rx="4" fill="#2A2A28"/>
-              <!-- Screen glow -->
-              <rect x="4" y="13" width="44" height="64" rx="3" fill="#3A3A38" opacity="0.6"/>
-              <!-- Home bar -->
-              <rect x="17" y="82" width="18" height="3" rx="1.5" fill="#555"/>
-              <!-- Notch -->
-              <rect x="18" y="4" width="16" height="5" rx="2.5" fill="#2A2A28"/>
-              <!-- Screen content hint (tiny lines) -->
-              <rect x="9" y="20" width="34" height="3" rx="1" fill="#A8BEB2" opacity="0.4"/>
-              <rect x="9" y="27" width="26" height="3" rx="1" fill="#A8BEB2" opacity="0.3"/>
-              <rect x="9" y="34" width="34" height="3" rx="1" fill="#C4622D" opacity="0.3"/>
-            </g>
-
-            <!-- ── SMALL LEAF / PLANT accent (upper left) ── -->
-            <g transform="translate(30, 60)">
-              <ellipse cx="20" cy="30" rx="15" ry="22" fill="#A8BEB2" opacity="0.4" transform="rotate(-20, 20, 30)"/>
-              <ellipse cx="32" cy="28" rx="13" ry="19" fill="#A8BEB2" opacity="0.3" transform="rotate(15, 32, 28)"/>
-              <line x1="26" y1="48" x2="26" y2="72" stroke="#A8BEB2" stroke-width="1.5" opacity="0.5"/>
-              <!-- Small pot -->
-              <path d="M16 72 L36 72 L34 90 L18 90 Z" fill="#E7E2DB"/>
-              <rect x="13" y="70" width="26" height="4" rx="2" fill="#E7E2DB"/>
-            </g>
-
-          </svg>
-        </div>
-      </div>
-
-      <!-- Right: content -->
-      <div class="reveal" style="transition-delay: 0.2s">
-        <h3 class="font-serif text-2xl md:text-3xl text-ink mb-6 leading-tight">
-          Dein Salon hat eine eigene Art zu kommunizieren. Gili lernt sie.
-        </h3>
-
-        <p class="text-muted text-base leading-relaxed mb-8">
-          Bevor irgendetwas eingerichtet wird, nehmen wir uns Zeit für ein persönliches Gespräch. Gemeinsam klären wir:
-        </p>
-
-        <!-- Questions list -->
-        <ul class="space-y-4 mb-10">
-          <li class="flex gap-3 items-start">
-            <i data-lucide="check" class="w-4 h-4 text-terra mt-1 flex-shrink-0"></i>
-            <span class="text-ink text-sm leading-relaxed">Nach welchem Zeitraum sollen Kundinnen wieder eingeladen werden?</span>
-          </li>
-          <li class="flex gap-3 items-start">
-            <i data-lucide="check" class="w-4 h-4 text-terra mt-1 flex-shrink-0"></i>
-            <span class="text-ink text-sm leading-relaxed">Welche Leistungen brauchen unterschiedliche Erinnerungen?</span>
-          </li>
-          <li class="flex gap-3 items-start">
-            <i data-lucide="check" class="w-4 h-4 text-terra mt-1 flex-shrink-0"></i>
-            <span class="text-ink text-sm leading-relaxed">Wann ist der beste Moment für eine Google-Bewertung?</span>
-          </li>
-          <li class="flex gap-3 items-start">
-            <i data-lucide="check" class="w-4 h-4 text-terra mt-1 flex-shrink-0"></i>
-            <span class="text-ink text-sm leading-relaxed">Welche Angebote passen zu welchen Kundinnen?</span>
-          </li>
-          <li class="flex gap-3 items-start">
-            <i data-lucide="check" class="w-4 h-4 text-terra mt-1 flex-shrink-0"></i>
-            <span class="text-ink text-sm leading-relaxed">Soll dein Ton herzlich, elegant, direkt oder verspielt sein?</span>
-          </li>
-          <li class="flex gap-3 items-start">
-            <i data-lucide="check" class="w-4 h-4 text-terra mt-1 flex-shrink-0"></i>
-            <span class="text-ink text-sm leading-relaxed">Welche Kommunikation passt wirklich zu deinem Salon?</span>
-          </li>
-        </ul>
-
-        <div class="bg-warm border border-border rounded-2xl p-6 mb-8">
-          <p class="text-ink text-sm leading-relaxed">
-            Du musst diese Antworten nicht allein finden. Unsere Beraterinnen bringen Erfahrung in Kundenkommunikation und Kundenbindung mit. Gemeinsam entwickeln wir einen Ablauf, der zu deinem Salon passt – nicht zu irgendeiner Vorlage.
-          </p>
-        </div>
-
-        <p class="font-serif text-xl text-terra italic mb-10">
-          "Danach weiß Gili nicht nur, was sie senden soll. Sie weiß, wie dein Salon mit Kundinnen spricht."
-        </p>
-
-        <!-- CTA -->
-        <a href="#" class="demo-btn inline-flex items-center gap-2 bg-terra text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-[#b0561f] transition-colors text-sm">
-          Kostenlose Demo buchen
-          <i data-lucide="arrow-right" class="w-4 h-4"></i>
-        </a>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<hr class="section-divider" />
-
-
-<!-- ═══════════════════════════════════════════
-     SECTION 5 — ONGOING SUPPORT
+     SECTION 3 — AFTER THE APPOINTMENT
 ════════════════════════════════════════════ -->
 <section id="so-funktioniert-es" class="py-24 md:py-32">
   <div class="max-w-6xl mx-auto px-5 md:px-8">
 
-    <div class="max-w-3xl mb-16 reveal">
-      <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-ink mb-6">
-        Wir verschwinden nicht nach der Einrichtung.
-      </h2>
-      <p class="text-muted text-base md:text-lg leading-relaxed mb-6">
-        Ein Salon verändert sich. Neue Leistungen kommen hinzu, Jahreszeiten wechseln und manchmal gibt es ein Angebot, das deine Kundinnen kennen sollten.
-      </p>
+    <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-ink mb-14 reveal">
+      Nach dem Termin beginnt der Teil,<br class="hidden md:block" />
+      den im Salonalltag kaum jemand schafft.
+    </h2>
 
-      <div class="bg-cream border border-border rounded-2xl p-6 md:p-8 mb-6">
-        <p class="font-serif text-xl text-ink mb-3">Einmal im Monat melden wir uns bei dir und fragen:</p>
-        <p class="font-serif text-xl text-terra italic">"Gibt es etwas Neues, das du deinen Kundinnen sagen möchtest?"</p>
+    <!-- Three compact conversation excerpts -->
+    <div class="grid sm:grid-cols-3 gap-5 md:gap-6 reveal" style="transition-delay:0.1s">
+
+      <!-- Mockup 1: Wiederkommen -->
+      <div class="compact-mockup">
+        <span class="cm-label">Wiederkommen</span>
+        <div class="cm-bubbles">
+          <div class="cm-in">
+            Hallo Anna&nbsp;🌸<br>
+            dein letzter Besuch ist schon ein paar Wochen her. Hättest du nächste Woche Lust auf einen neuen Termin?
+          </div>
+          <div class="cm-out">
+            Ja, sehr gern! Mittwochvormittag wäre perfekt.
+          </div>
+        </div>
       </div>
 
-      <p class="text-muted text-base leading-relaxed">
-        Du antwortest kurz. Wir kümmern uns darum, dass Gili die passende Nachricht an die richtigen Kundinnen sendet.
-      </p>
-    </div>
-
-    <!-- Timeline -->
-    <div class="reveal" style="transition-delay: 0.1s">
-      <!-- Desktop horizontal / mobile vertical via CSS -->
-      <div class="timeline-wrap md:flex md:items-start md:gap-4 relative">
-
-        <div class="tl-item md:flex-1">
-          <div class="tl-dot active">
-            <i data-lucide="star" class="w-5 h-5"></i>
+      <!-- Mockup 2: Google-Bewertung — offset right on mobile -->
+      <div class="compact-mockup ml-5 sm:ml-0">
+        <span class="cm-label">Google-Bewertung</span>
+        <div class="cm-bubbles">
+          <div class="cm-in">
+            Hallo Anna, danke für deinen Besuch gestern!<br>
+            Wenn du zufrieden warst, freuen wir uns sehr über eine kurze Google-Bewertung.
           </div>
-          <div class="tl-content md:text-center">
-            <p class="tl-label md:font-semibold md:text-sm md:text-ink md:mb-1">Einrichtung</p>
-            <p class="tl-sub md:text-xs md:text-muted">Persönliches Gespräch &amp; Setup</p>
-          </div>
+          <a href="#" class="cm-review-btn" tabindex="-1" aria-hidden="true">Bewertung schreiben</a>
         </div>
-
-        <div class="tl-item md:flex-1">
-          <div class="tl-dot">
-            <i data-lucide="sparkles" class="w-5 h-5"></i>
-          </div>
-          <div class="tl-content md:text-center">
-            <p class="tl-label md:font-semibold md:text-sm md:text-ink md:mb-1">Neuer Service</p>
-            <p class="tl-sub md:text-xs md:text-muted">Gili informiert die richtigen Kundinnen</p>
-          </div>
-        </div>
-
-        <div class="tl-item md:flex-1">
-          <div class="tl-dot">
-            <i data-lucide="sun" class="w-5 h-5"></i>
-          </div>
-          <div class="tl-content md:text-center">
-            <p class="tl-label md:font-semibold md:text-sm md:text-ink md:mb-1">Sommeraktion</p>
-            <p class="tl-sub md:text-xs md:text-muted">Saisonales Angebot, passend versendet</p>
-          </div>
-        </div>
-
-        <div class="tl-item md:flex-1">
-          <div class="tl-dot">
-            <i data-lucide="user-plus" class="w-5 h-5"></i>
-          </div>
-          <div class="tl-content md:text-center">
-            <p class="tl-label md:font-semibold md:text-sm md:text-ink md:mb-1">Neue Mitarbeiterin</p>
-            <p class="tl-sub md:text-xs md:text-muted">Gili stellt sie deinen Kundinnen vor</p>
-          </div>
-        </div>
-
-        <div class="tl-item md:flex-1">
-          <div class="tl-dot">
-            <i data-lucide="gift" class="w-5 h-5"></i>
-          </div>
-          <div class="tl-content md:text-center">
-            <p class="tl-label md:font-semibold md:text-sm md:text-ink md:mb-1">Weihnachtszeit</p>
-            <p class="tl-sub md:text-xs md:text-muted">Saisonale Botschaft zur richtigen Zeit</p>
-          </div>
-        </div>
-
       </div>
 
-      <p class="font-serif text-xl md:text-2xl text-center text-ink mt-12 italic">
-        Gili entwickelt sich mit deinem Salon.
-      </p>
-    </div>
+      <!-- Mockup 3: Neues aus dem Salon -->
+      <div class="compact-mockup">
+        <span class="cm-label">Neues aus dem Salon</span>
+        <div class="cm-bubbles">
+          <div class="cm-in">
+            Hallo Anna&nbsp;🌿<br>
+            im August gibt es bei uns ein besonderes Pflegeangebot. Möchtest du mehr darüber erfahren?
+          </div>
+          <div class="cm-out">
+            Ja, gern!
+          </div>
+        </div>
+      </div>
 
+    </div>
   </div>
 </section>
 
@@ -738,69 +413,179 @@
 
 
 <!-- ═══════════════════════════════════════════
-     SECTION 6 — THE CLIENT JOURNEY
+     SECTION 4 — WHAT GILI TAKES OVER
 ════════════════════════════════════════════ -->
 <section class="py-24 md:py-32 bg-cream">
-  <div class="max-w-6xl mx-auto px-5 md:px-8">
+  <div class="max-w-4xl mx-auto px-5 md:px-8">
 
-    <div class="text-center max-w-2xl mx-auto mb-16 reveal">
-      <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-ink mb-6">
-        Während du dich um deinen Salon kümmerst, bleibt Gili in Kontakt.
+    <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-ink mb-12 reveal">
+      Was Gili für deinen Salon übernimmt
+    </h2>
+
+    <div class="divide-y divide-border reveal" style="transition-delay:0.1s">
+
+      <!-- Row 1 -->
+      <div class="flex gap-5 py-8 md:py-10">
+        <div class="flex-shrink-0 mt-1">
+          <i data-lucide="message-circle" class="w-5 h-5 text-terra"></i>
+        </div>
+        <div>
+          <h3 class="font-semibold text-ink text-base md:text-lg mb-2">Antworten und Termine vereinbaren</h3>
+          <p class="text-muted text-sm md:text-base leading-relaxed">
+            Gili beantwortet Anfragen über WhatsApp, Instagram und deine Website und vereinbart passende Termine direkt im Gespräch.
+          </p>
+        </div>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="flex gap-5 py-8 md:py-10">
+        <div class="flex-shrink-0 mt-1">
+          <i data-lucide="layout-dashboard" class="w-5 h-5 text-terra"></i>
+        </div>
+        <div>
+          <h3 class="font-semibold text-ink text-base md:text-lg mb-2">Alles an einem Ort behalten</h3>
+          <p class="text-muted text-sm md:text-base leading-relaxed">
+            Gespräche, Termine und Kundendaten werden in deinem persönlichen Dashboard gespeichert. So behältst du jederzeit den Überblick.
+          </p>
+        </div>
+      </div>
+
+      <!-- Row 3 -->
+      <div class="flex gap-5 py-8 md:py-10">
+        <div class="flex-shrink-0 mt-1">
+          <i data-lucide="heart-handshake" class="w-5 h-5 text-terra"></i>
+        </div>
+        <div>
+          <h3 class="font-semibold text-ink text-base md:text-lg mb-2">Kundenbindung gemeinsam planen</h3>
+          <p class="text-muted text-sm md:text-base leading-relaxed">
+            Gemeinsam entwickeln wir einen Plan dafür, wie dein Salon nach dem Termin mit Kundinnen in Kontakt bleibt. Gili setzt ihn anschließend für dich um.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION 5 — PERSONAL GUIDANCE
+     (Terracotta — the Gili team relationship)
+════════════════════════════════════════════ -->
+<section style="background:#C4622D;">
+  <div class="max-w-6xl mx-auto px-5 md:px-8 py-24 md:py-32">
+    <div class="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+
+      <!-- Left: copy -->
+      <div class="reveal">
+        <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight mb-7" style="color:#FAF8F4;">
+          Gili bleibt nicht nur mit deinen Kundinnen in Kontakt.<br />
+          <span style="opacity:0.75;">Sondern auch mit dir.</span>
+        </h2>
+        <p class="text-base md:text-lg leading-relaxed mb-10" style="color:rgba(250,248,244,0.8);">
+          Wir richten Gili nicht nur ein und verschwinden wieder. Wir lernen deinen Salon kennen, entwickeln deine Kundenkommunikation gemeinsam mit dir weiter und melden uns jeden Monat persönlich.
+        </p>
+        <div class="inline-flex items-center gap-2 text-sm font-semibold" style="color:#FAF8F4;">
+          <i data-lucide="users" class="w-4 h-4"></i>
+          Persönlich begleitet von deinem Gili Team
+        </div>
+      </div>
+
+      <!-- Right: Gili team conversation mockup -->
+      <div class="flex justify-center lg:justify-end reveal" style="transition-delay:0.15s">
+        <div class="team-mockup w-full">
+          <div class="team-mockup-header">
+            <div class="team-avatar">G</div>
+            <div class="team-header-text" style="flex:1;">
+              <h3>Dein Gili Team</h3>
+              <p>Persönliche Begleitung</p>
+            </div>
+          </div>
+          <div class="team-chat">
+            <div class="team-in">
+              Hallo Julia, gibt es diesen Monat etwas Neues, das deine Kundinnen wissen sollten?
+            </div>
+            <div class="team-out">
+              Ja, ab August bieten wir eine neue Haarpflege an.
+            </div>
+            <div class="team-in">
+              Perfekt. Wir bereiten die passende Nachricht vor und kümmern uns um den Versand.
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION 6 — COLLABORATION TIMELINE
+════════════════════════════════════════════ -->
+<section id="zusammenarbeit" class="py-24 md:py-32">
+  <div class="max-w-3xl mx-auto px-5 md:px-8">
+
+    <div class="mb-14 reveal">
+      <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-ink">
+        So läuft die Zusammenarbeit mit Gili
       </h2>
     </div>
 
-    <!-- Journey steps: 2-col on mobile, 4-col on desktop -->
-    <div class="relative reveal" style="transition-delay: 0.1s">
-      <!-- Desktop connector line (hidden on mobile) -->
-      <div class="hidden md:block absolute top-10 left-[12.5%] right-[12.5%] h-px bg-border z-0"></div>
+    <div class="collab-timeline reveal" style="transition-delay:0.1s">
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 relative z-10">
-
-        <!-- Step 1 -->
-        <div class="flex flex-col items-center text-center">
-          <div class="w-20 h-20 rounded-2xl bg-warm border border-border flex items-center justify-center mb-5 relative">
-            <i data-lucide="message-circle" class="w-8 h-8 text-terra"></i>
-            <span class="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-terra text-white text-xs font-bold flex items-center justify-center">1</span>
-          </div>
-          <p class="text-xs font-semibold text-terra uppercase tracking-widest mb-2">Vor dem Termin</p>
-          <p class="text-ink font-semibold text-sm mb-2">Gili antwortet und bucht</p>
-          <p class="text-muted text-sm leading-relaxed">Gili beantwortet die Anfrage und vereinbart den Termin – persönlich und verlässlich.</p>
+      <!-- Step 1 -->
+      <div class="tl-step">
+        <div class="tl-num">1</div>
+        <div class="tl-content">
+          <h3>Persönliches Erstgespräch</h3>
+          <p>Wir lernen deinen Salon, deine Kundinnen und deine Art der Kommunikation kennen. Gemeinsam legen wir fest, welche Nachrichten zu deinem Salon passen und wann sie verschickt werden sollen.</p>
         </div>
-
-        <!-- Step 2 -->
-        <div class="flex flex-col items-center text-center">
-          <div class="w-20 h-20 rounded-2xl bg-warm border border-border flex items-center justify-center mb-5 relative">
-            <i data-lucide="star" class="w-8 h-8 text-terra"></i>
-            <span class="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-terra text-white text-xs font-bold flex items-center justify-center">2</span>
-          </div>
-          <p class="text-xs font-semibold text-terra uppercase tracking-widest mb-2">Einen Tag danach</p>
-          <p class="text-ink font-semibold text-sm mb-2">Danke &amp; Bewertung</p>
-          <p class="text-muted text-sm leading-relaxed">Gili bedankt sich herzlich und lädt die Kundin freundlich zu deiner Google-Seite ein.</p>
-        </div>
-
-        <!-- Step 3 -->
-        <div class="flex flex-col items-center text-center">
-          <div class="w-20 h-20 rounded-2xl bg-warm border border-border flex items-center justify-center mb-5 relative">
-            <i data-lucide="sparkles" class="w-8 h-8 text-terra"></i>
-            <span class="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-terra text-white text-xs font-bold flex items-center justify-center">3</span>
-          </div>
-          <p class="text-xs font-semibold text-terra uppercase tracking-widest mb-2">Wenn es etwas Neues gibt</p>
-          <p class="text-ink font-semibold text-sm mb-2">Passende Angebote</p>
-          <p class="text-muted text-sm leading-relaxed">Gili informiert die richtigen Kundinnen über Angebote oder neue Leistungen – nie alle, nur die passenden.</p>
-        </div>
-
-        <!-- Step 4 -->
-        <div class="flex flex-col items-center text-center">
-          <div class="w-20 h-20 rounded-2xl bg-warm border border-border flex items-center justify-center mb-5 relative">
-            <i data-lucide="calendar-heart" class="w-8 h-8 text-terra"></i>
-            <span class="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-terra text-white text-xs font-bold flex items-center justify-center">4</span>
-          </div>
-          <p class="text-xs font-semibold text-terra uppercase tracking-widest mb-2">Zum richtigen Moment</p>
-          <p class="text-ink font-semibold text-sm mb-2">Persönliche Einladung</p>
-          <p class="text-muted text-sm leading-relaxed">Nach dem individuell festgelegten Zeitraum lädt Gili die Kundin persönlich zu ihrem nächsten Besuch ein.</p>
-        </div>
-
       </div>
+
+      <!-- Step 2 -->
+      <div class="tl-step">
+        <div class="tl-num">2</div>
+        <div class="tl-content">
+          <h3>Gili geht live</h3>
+          <p>Wir richten alles für dich ein. Gili beginnt, Anfragen zu beantworten, Termine zu vereinbaren und die Kommunikation mit deinen Kundinnen zu übernehmen.</p>
+        </div>
+      </div>
+
+      <!-- Step 3 — featured (core retention value) -->
+      <div class="tl-step featured">
+        <div class="tl-num" style="border-color:#E7E2DB;">3</div>
+        <div class="tl-content">
+          <h3>Gili lädt Kundinnen wieder ein</h3>
+          <p>Einen Tag nach dem Besuch erinnert Gili die Kundin an deine Google-Bewertungen. Zum gemeinsam festgelegten Zeitpunkt – zum Beispiel fünf Wochen nach ihrem Besuch – schreibt Gili ihr persönlich und lädt sie zu ihrem nächsten Termin ein.</p>
+        </div>
+      </div>
+
+      <!-- Step 4 — terracotta (personal guidance) -->
+      <div class="tl-step">
+        <div class="tl-num terra">4</div>
+        <div class="tl-content">
+          <h3>Einmal im Monat melden wir uns bei dir</h3>
+          <p>Wir fragen, ob es ein neues Angebot, eine neue Leistung, eine neue Mitarbeiterin oder etwas anderes gibt, das deine Kundinnen wissen sollten.</p>
+        </div>
+      </div>
+
+      <!-- Step 5 — terracotta (personal guidance) -->
+      <div class="tl-step">
+        <div class="tl-num terra">5</div>
+        <div class="tl-content">
+          <h3>Gili setzt es für dich um</h3>
+          <p>Du erzählst uns kurz, was neu ist. Wir bereiten die passende Kommunikation vor, und Gili sendet sie an die passenden Kundinnen.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="mt-14 reveal" style="transition-delay:0.2s">
+      <a href="#" class="demo-btn inline-flex items-center gap-2 bg-terra text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-[#b0561f] transition-colors text-sm">
+        Kostenlose Demo buchen
+        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </a>
     </div>
 
   </div>
@@ -810,140 +595,23 @@
 
 
 <!-- ═══════════════════════════════════════════
-     SECTION 7 — CUSTOMER EXPERIENCE MOCKUP
+     SECTION 7 — PRICING
 ════════════════════════════════════════════ -->
-<section class="py-24 md:py-32">
-  <div class="max-w-6xl mx-auto px-5 md:px-8">
-
-    <div class="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
-
-      <!-- Left: phone mockup 2 (reactivation) -->
-      <div class="flex justify-center lg:justify-start reveal" style="transition-delay: 0.1s">
-        <div class="phone-frame" id="phone2" style="max-width: 300px;">
-          <div class="flex justify-center mb-2">
-            <div style="width:60px;height:5px;background:#2a2a28;border-radius:3px;"></div>
-          </div>
-          <div class="phone-screen" style="min-height: 520px;">
-            <!-- WhatsApp header -->
-            <div class="wa-header">
-              <div style="color:rgba(255,255,255,0.8);">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-              </div>
-              <div class="wa-avatar" style="background: #C4622D;">S</div>
-              <div class="wa-header-text" style="flex:1;">
-                <h3>Salon Luna</h3>
-                <p>online</p>
-              </div>
-            </div>
-
-            <!-- Chat 2 -->
-            <div class="wa-chat" id="chat2" style="background:#ECE5DD;">
-
-              <div class="flex justify-center mb-2">
-                <span style="background:rgba(255,255,255,0.6);font-size:10.5px;color:#666;padding:3px 10px;border-radius:8px;">Dienstag, 22. Juli</span>
-              </div>
-
-              <!-- Message 1: reactivation from salon -->
-              <div class="wa-msg wa-bubble in" style="max-width:88%;">
-                Hallo Sophia! 🌸 Es ist eine Weile her – wir würden uns freuen, dich bald wieder bei uns zu sehen. Hättest du Lust auf einen Termin?
-                <div class="wa-time">10:15</div>
-              </div>
-
-              <!-- Message 2: client replies -->
-              <div class="wa-msg wa-bubble out">
-                Oh ja! Ich brauche auf jeden Fall einen Haarschnitt. Hätten Sie noch etwas frei?
-                <div class="wa-time">10:18 <span class="wa-check">✓✓</span></div>
-              </div>
-
-              <!-- Message 3: offers two times -->
-              <div class="wa-msg wa-bubble in" style="max-width:88%;">
-                Natürlich! Wir hätten für dich:<br>
-                📅 Mi., 5. August – 09:00&nbsp;Uhr<br>
-                📅 Mi., 5. August – 11:00&nbsp;Uhr<br>
-                Was passt dir besser?
-                <div class="wa-time">10:19</div>
-              </div>
-
-              <!-- Message 4: client chooses -->
-              <div class="wa-msg wa-bubble out">
-                11:00 Uhr wäre toll!
-                <div class="wa-time">10:20 <span class="wa-check">✓✓</span></div>
-              </div>
-
-              <!-- Message 5: full confirmation -->
-              <div class="wa-msg wa-bubble in" style="max-width:92%;">
-                Perfekt, Sophia! ✨ 11:00&nbsp;Uhr passt wunderbar, ich habe den Termin für dich eingetragen.&nbsp;🧡<br>
-                📅 Mittwoch, 5.&nbsp;August<br>
-                ⏰ 11:00&nbsp;Uhr<br>
-                ✂️ Haarschnitt<br>
-                📍 Salon Luna, Neubaugasse&nbsp;12, Wien<br>
-                Wir freuen uns auf dich!&nbsp;🌸
-                <div class="wa-time">10:21</div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right: explanation -->
-      <div class="reveal" style="transition-delay: 0.2s">
-        <p class="text-xs font-semibold tracking-widest uppercase text-terra mb-4">So fühlt sich Gili für deine Kundinnen an</p>
-        <h2 class="font-serif text-3xl md:text-4xl leading-tight text-ink mb-6">
-          Persönlich, aufmerksam und ganz selbstverständlich im Namen deines Salons.
-        </h2>
-        <div class="space-y-5 text-muted text-base leading-relaxed">
-          <p>
-            Sophia hat ihren letzten Termin vor einiger Zeit gehabt. Im Salonalltag fällt das kaum auf – bis eine Kundin einfach nicht mehr kommt.
-          </p>
-          <p>
-            Gili erinnert sich. Sie schreibt Sophia zum vereinbarten Zeitpunkt, bietet Termine an, bestätigt die Buchung – und das alles in deinem Namen, in deinem Ton.
-          </p>
-          <p>
-            Für Sophia fühlt es sich an wie eine persönliche Nachricht von ihrem Lieblingssalon. Nicht wie eine automatische Erinnerung.
-          </p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<hr class="section-divider" />
-
-
-<!-- ═══════════════════════════════════════════
-     SECTION 8 — SIGNATURE STATEMENT
-════════════════════════════════════════════ -->
-<section class="py-32 md:py-40 bg-ink">
-  <div class="max-w-4xl mx-auto px-5 md:px-8 text-center reveal">
-    <p class="font-serif text-3xl md:text-4xl lg:text-5xl text-warm leading-relaxed">
-      Die meisten Systeme beantworten Nachrichten.<br />
-      <span class="text-terra">Gili kümmert sich darum, dass Kundinnen wiederkommen.</span>
-    </p>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════
-     SECTION 9 — PRICING
-════════════════════════════════════════════ -->
-<section id="preise" class="py-24 md:py-32">
+<section id="preise" class="py-24 md:py-32 bg-cream">
   <div class="max-w-5xl mx-auto px-5 md:px-8">
 
     <div class="text-center mb-4 reveal">
       <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-ink mb-4">
         Transparent. Ohne versteckte Kosten.
       </h2>
-      <!-- EDITABLE: Summer offer banner -->
+      <!-- EDITABLE: Summer offer banner — remove when offer ends -->
       <div class="inline-flex items-center gap-2 bg-terra/10 border border-terra/20 rounded-full px-5 py-2 mt-4">
         <i data-lucide="sun" class="w-4 h-4 text-terra"></i>
         <span class="text-terra font-semibold text-sm">Sommerangebot: Der erste Monat ist kostenlos.</span>
       </div>
     </div>
 
-    <!-- Pricing cards -->
-    <div class="grid md:grid-cols-2 gap-6 mt-12 reveal" style="transition-delay: 0.1s">
+    <div class="grid md:grid-cols-2 gap-6 mt-12 reveal" style="transition-delay:0.1s">
 
       <!-- SOLO -->
       <div class="border border-border rounded-2xl p-8 bg-warm">
@@ -951,7 +619,6 @@
           <h3 class="font-serif text-2xl text-ink mb-1">Solo</h3>
           <p class="text-muted text-sm">Für Saloninhaberinnen, die allein arbeiten</p>
         </div>
-
         <!-- EDITABLE: Pricing details -->
         <div class="space-y-4 mb-8">
           <div class="flex justify-between items-baseline border-b border-border pb-4">
@@ -971,29 +638,14 @@
             <span class="font-serif text-xl text-ink">88&nbsp;€&nbsp;<span class="text-muted text-sm font-sans">/ Monat</span></span>
           </div>
         </div>
-
         <a href="#" class="demo-btn block text-center bg-terra text-white font-semibold px-6 py-3.5 rounded-xl hover:bg-[#b0561f] transition-colors text-sm mb-5">
           Kostenlose Demo buchen
         </a>
-
-        <!-- Shared notes -->
         <ul class="space-y-2">
-          <li class="flex items-center gap-2 text-xs text-muted">
-            <i data-lucide="check" class="w-3.5 h-3.5 text-sage flex-shrink-0"></i>
-            Monatlich kündbar
-          </li>
-          <li class="flex items-center gap-2 text-xs text-muted">
-            <i data-lucide="check" class="w-3.5 h-3.5 text-sage flex-shrink-0"></i>
-            0&nbsp;% Provision auf Buchungen
-          </li>
-          <li class="flex items-center gap-2 text-xs text-muted">
-            <i data-lucide="check" class="w-3.5 h-3.5 text-sage flex-shrink-0"></i>
-            Persönliche Einrichtung inklusive
-          </li>
-          <li class="flex items-center gap-2 text-xs text-muted">
-            <i data-lucide="check" class="w-3.5 h-3.5 text-sage flex-shrink-0"></i>
-            Laufende Begleitung inklusive
-          </li>
+          <li class="flex items-center gap-2 text-xs text-muted"><i data-lucide="check" class="w-3.5 h-3.5 text-sage flex-shrink-0"></i>Monatlich kündbar</li>
+          <li class="flex items-center gap-2 text-xs text-muted"><i data-lucide="check" class="w-3.5 h-3.5 text-sage flex-shrink-0"></i>0&nbsp;% Provision auf Buchungen</li>
+          <li class="flex items-center gap-2 text-xs text-muted"><i data-lucide="check" class="w-3.5 h-3.5 text-sage flex-shrink-0"></i>Persönliche Einrichtung inklusive</li>
+          <li class="flex items-center gap-2 text-xs text-muted"><i data-lucide="check" class="w-3.5 h-3.5 text-sage flex-shrink-0"></i>Laufende Begleitung inklusive</li>
         </ul>
       </div>
 
@@ -1006,7 +658,6 @@
           <h3 class="font-serif text-2xl text-ink mb-1">Team</h3>
           <p class="text-muted text-sm">Ab 2 Stylistinnen</p>
         </div>
-
         <!-- EDITABLE: Pricing details -->
         <div class="space-y-4 mb-8">
           <div class="flex justify-between items-baseline border-b border-border pb-4">
@@ -1026,34 +677,18 @@
             <span class="font-serif text-xl text-ink">ab&nbsp;60&nbsp;€&nbsp;<span class="text-muted text-sm font-sans">/ Stylistin</span></span>
           </div>
         </div>
-
         <a href="#" class="demo-btn block text-center bg-terra text-white font-semibold px-6 py-3.5 rounded-xl hover:bg-[#b0561f] transition-colors text-sm mb-5">
           Kostenlose Demo buchen
         </a>
-
-        <!-- Shared notes -->
         <ul class="space-y-2">
-          <li class="flex items-center gap-2 text-xs text-muted">
-            <i data-lucide="check" class="w-3.5 h-3.5 text-sage flex-shrink-0"></i>
-            Monatlich kündbar
-          </li>
-          <li class="flex items-center gap-2 text-xs text-muted">
-            <i data-lucide="check" class="w-3.5 h-3.5 text-sage flex-shrink-0"></i>
-            0&nbsp;% Provision auf Buchungen
-          </li>
-          <li class="flex items-center gap-2 text-xs text-muted">
-            <i data-lucide="check" class="w-3.5 h-3.5 text-sage flex-shrink-0"></i>
-            Persönliche Einrichtung inklusive
-          </li>
-          <li class="flex items-center gap-2 text-xs text-muted">
-            <i data-lucide="check" class="w-3.5 h-3.5 text-sage flex-shrink-0"></i>
-            Laufende Begleitung inklusive
-          </li>
+          <li class="flex items-center gap-2 text-xs text-muted"><i data-lucide="check" class="w-3.5 h-3.5 text-sage flex-shrink-0"></i>Monatlich kündbar</li>
+          <li class="flex items-center gap-2 text-xs text-muted"><i data-lucide="check" class="w-3.5 h-3.5 text-sage flex-shrink-0"></i>0&nbsp;% Provision auf Buchungen</li>
+          <li class="flex items-center gap-2 text-xs text-muted"><i data-lucide="check" class="w-3.5 h-3.5 text-sage flex-shrink-0"></i>Persönliche Einrichtung inklusive</li>
+          <li class="flex items-center gap-2 text-xs text-muted"><i data-lucide="check" class="w-3.5 h-3.5 text-sage flex-shrink-0"></i>Laufende Begleitung inklusive</li>
         </ul>
       </div>
 
     </div>
-
   </div>
 </section>
 
@@ -1061,9 +696,9 @@
 
 
 <!-- ═══════════════════════════════════════════
-     SECTION 10 — FAQ
+     SECTION 8 — FAQ
 ════════════════════════════════════════════ -->
-<section id="faq" class="py-24 md:py-32 bg-cream">
+<section id="faq" class="py-24 md:py-32">
   <div class="max-w-3xl mx-auto px-5 md:px-8">
 
     <div class="text-center mb-12 reveal">
@@ -1072,10 +707,9 @@
       </h2>
     </div>
 
-    <div class="space-y-0 reveal" style="transition-delay: 0.1s" role="list">
+    <div class="space-y-0 reveal" style="transition-delay:0.1s" role="list">
 
-      <!-- FAQ items -->
-      <!-- EDITABLE: Add or update FAQ items here -->
+      <!-- EDITABLE: FAQ items -->
       <div class="faq-item border-t border-border" role="listitem">
         <button class="faq-trigger w-full flex items-center justify-between gap-4 py-6 text-left" aria-expanded="false">
           <span class="font-medium text-ink text-base">Brauche ich technisches Wissen?</span>
@@ -1126,13 +760,14 @@
         </div>
       </div>
 
+      <!-- EDITABLE: Updated for channel consistency with hero -->
       <div class="faq-item border-t border-border border-b" role="listitem">
         <button class="faq-trigger w-full flex items-center justify-between gap-4 py-6 text-left" aria-expanded="false">
-          <span class="font-medium text-ink text-base">Arbeitet Gili nur über WhatsApp?</span>
+          <span class="font-medium text-ink text-base">Über welche Kanäle kommuniziert Gili?</span>
           <i data-lucide="plus" class="faq-icon w-5 h-5 text-terra flex-shrink-0"></i>
         </button>
         <div class="faq-answer">
-          <p class="text-muted text-sm leading-relaxed pb-6">Die persönliche Kommunikation mit deinen Kundinnen findet bewusst über WhatsApp statt – dort, wo sie bereits jeden Tag erreichbar sind.</p>
+          <p class="text-muted text-sm leading-relaxed pb-6">Gili beantwortet Anfragen über WhatsApp, Instagram und deine Website – dort, wo deine Kundinnen bereits erreichbar sind. Die Kommunikation läuft immer im Namen deines Salons.</p>
         </div>
       </div>
 
@@ -1142,60 +777,46 @@
 
 
 <!-- ═══════════════════════════════════════════
-     SECTION 11 — FINAL CTA
+     SECTION 9 — FINAL CTA
 ════════════════════════════════════════════ -->
-<section class="py-24 md:py-32">
+<section class="py-24 md:py-32 bg-cream">
   <div class="max-w-3xl mx-auto px-5 md:px-8 text-center reveal">
-
     <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-ink mb-6">
       Bereit, aus mehr Kundinnen Stammkundinnen zu machen?
     </h2>
     <p class="text-muted text-base md:text-lg leading-relaxed mb-10">
       Lerne Gili in einer kostenlosen Demo kennen – persönlich und ohne Verpflichtung.
     </p>
-
-    <!-- EDITABLE: Final CTA button -->
+    <!-- EDITABLE: Final CTA -->
     <a href="#" class="demo-btn inline-flex items-center gap-2 bg-terra text-white font-semibold px-8 py-4 rounded-xl hover:bg-[#b0561f] transition-colors text-base mb-5">
       Kostenlose Demo buchen
       <i data-lucide="arrow-right" class="w-5 h-5"></i>
     </a>
-
-    <p class="text-xs text-muted tracking-wide">
-      Keine Kreditkarte · Keine Verpflichtung
-    </p>
+    <p class="text-xs text-muted tracking-wide">Keine Kreditkarte · Keine Verpflichtung</p>
   </div>
 </section>
 
 
 <!-- ═══════════════════════════════════════════
-     SECTION 12 — FOOTER
+     SECTION 10 — FOOTER
 ════════════════════════════════════════════ -->
-<footer class="border-t border-border bg-cream py-12 md:py-16">
+<footer class="border-t border-border bg-warm py-12 md:py-16">
   <div class="max-w-6xl mx-auto px-5 md:px-8">
     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
-
-      <!-- Logo + email -->
       <div>
         <a href="#" class="font-serif text-2xl tracking-tight text-ink block mb-3" aria-label="Gili">
           Gili<span style="color:#C4622D">.</span>
         </a>
         <!-- EDITABLE: Contact email -->
-        <a href="mailto:hallo@gili.live" class="text-muted text-sm hover:text-ink transition-colors">
-          hallo@gili.live
-        </a>
+        <a href="mailto:hallo@gili.live" class="text-muted text-sm hover:text-ink transition-colors">hallo@gili.live</a>
       </div>
-
-      <!-- Legal links -->
       <nav aria-label="Rechtliches" class="flex gap-6 text-sm text-muted">
         <!-- EDITABLE: Replace # with actual Impressum and Datenschutz URLs -->
         <a href="#" class="hover:text-ink transition-colors">Impressum</a>
         <a href="#" class="hover:text-ink transition-colors">Datenschutz</a>
       </nav>
     </div>
-
-    <p class="mt-10 text-xs text-muted">
-      © <span id="current-year"></span> Gili. Alle Rechte vorbehalten.
-    </p>
+    <p class="mt-10 text-xs text-muted">© <span id="current-year"></span> Gili. Alle Rechte vorbehalten.</p>
   </div>
 </footer>
 
@@ -1204,21 +825,18 @@
      JAVASCRIPT
 ════════════════════════════════════════════ -->
 <script>
-  // ─── EDITABLE: Update this URL to set the demo booking link ───
+  // ─── EDITABLE: Set demo booking URL ───
   const DEMO_URL = "#";
 
-  // Apply demo URL to all CTA buttons
   document.querySelectorAll('.demo-btn, #nav-cta, #nav-cta-mobile').forEach(el => {
     el.href = DEMO_URL;
   });
 
-  // Current year in footer
   document.getElementById('current-year').textContent = new Date().getFullYear();
 
-  // ─── Initialize Lucide icons ───
   lucide.createIcons();
 
-  // ─── Smooth scroll for anchor links ───
+  // ─── Smooth scroll ───
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       const target = this.getAttribute('href');
@@ -1227,8 +845,7 @@
       if (!el) return;
       e.preventDefault();
       const navHeight = document.getElementById('nav').offsetHeight;
-      const top = el.getBoundingClientRect().top + window.scrollY - navHeight - 16;
-      window.scrollTo({ top, behavior: 'smooth' });
+      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - navHeight - 16, behavior: 'smooth' });
     });
   });
 
@@ -1240,12 +857,10 @@
     const isOpen = mobileMenu.classList.toggle('open');
     menuToggle.setAttribute('aria-expanded', isOpen);
     menuToggle.setAttribute('aria-label', isOpen ? 'Menü schließen' : 'Menü öffnen');
-    // Swap icon
     menuToggle.querySelector('[data-lucide]').setAttribute('data-lucide', isOpen ? 'x' : 'menu');
     lucide.createIcons();
   });
 
-  // Close menu when nav link clicked
   document.querySelectorAll('.mobile-nav-link').forEach(link => {
     link.addEventListener('click', () => {
       mobileMenu.classList.remove('open');
@@ -1262,38 +877,27 @@
       const item = trigger.closest('.faq-item');
       const answer = item.querySelector('.faq-answer');
       const isOpen = item.classList.contains('open');
-
-      // Close all
       document.querySelectorAll('.faq-item').forEach(i => {
         i.classList.remove('open');
         i.querySelector('.faq-answer').classList.remove('open');
         i.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
       });
-
-      // Open clicked if it was closed
       if (!isOpen) {
         item.classList.add('open');
         answer.classList.add('open');
         trigger.setAttribute('aria-expanded', 'true');
       }
     });
-
-    // Keyboard: Enter and Space
-    trigger.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        trigger.click();
-      }
+    trigger.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); trigger.click(); }
     });
   });
 
-  // ─── Scroll-reveal (IntersectionObserver) ───
+  // ─── Scroll-reveal ───
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if (prefersReducedMotion) {
-    document.querySelectorAll('.reveal').forEach(el => {
-      el.classList.add('visible');
-    });
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
   } else {
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -1302,47 +906,28 @@
           revealObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
-
+    }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
   }
 
-  // ─── Chat animation: messages appear one by one ───
-  function animateChat(chatId, delay = 400) {
+  // ─── Hero chat animation ───
+  function animateChat(chatId, delay = 300) {
     if (prefersReducedMotion) {
       document.querySelectorAll(`#${chatId} .wa-msg`).forEach(m => m.classList.add('show'));
       return;
     }
-    const msgs = document.querySelectorAll(`#${chatId} .wa-msg`);
-    msgs.forEach((msg, i) => {
-      setTimeout(() => msg.classList.add('show'), delay + i * 700);
+    document.querySelectorAll(`#${chatId} .wa-msg`).forEach((msg, i) => {
+      setTimeout(() => msg.classList.add('show'), delay + i * 650);
     });
   }
 
-  // Trigger chat1 when hero enters view
-  const chat1Observer = new IntersectionObserver((entries) => {
+  const phone1Observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animateChat('chat1', 300);
-        chat1Observer.unobserve(entry.target);
-      }
+      if (entry.isIntersecting) { animateChat('chat1', 250); phone1Observer.unobserve(entry.target); }
     });
   }, { threshold: 0.3 });
   const phone1 = document.getElementById('phone1');
-  if (phone1) chat1Observer.observe(phone1);
-
-  // Trigger chat2 when second phone enters view
-  const chat2Observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animateChat('chat2', 300);
-        chat2Observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.3 });
-  const phone2 = document.getElementById('phone2');
-  if (phone2) chat2Observer.observe(phone2);
-
+  if (phone1) phone1Observer.observe(phone1);
 </script>
 
 </body>
