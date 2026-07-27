@@ -70,97 +70,157 @@
     /* ═══════════════════════════════════════
        HERO BACKGROUND IMAGE + SCRIM
     ═══════════════════════════════════════ */
+    /* ── Hero band ──
+       Height comes from the image's own proportions (1600:900) — never from the
+       content, never from a fixed vh — so the whole room is always visible and
+       nothing is cropped. Image, scrim and band copy share one grid cell. */
+    .hero-media {
+      display: grid;
+      width: 100%;
+      aspect-ratio: 1600 / 900;
+    }
+    .hero-media > * { grid-column: 1; grid-row: 1; min-width: 0; }
     .hero-img {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover; object-position: 58% center;
+      display: block; width: 100%; height: 100%;
+      object-fit: cover; /* box ratio == image ratio, so this crops nothing */
     }
-    /* Desktop: warm wash strongest behind the headline, clearing toward the window.
-       Measured worst-case headline contrast at these values: 9.2:1 (AA needs 4.5). */
+    /* Soft wash behind the text only — the wood, mirror and flowers stay clear.
+       Elliptical so the corners of the room are barely touched. */
     .hero-scrim {
-      position: absolute; inset: 0;
-      background: linear-gradient(100deg,
-        rgba(253,250,247,0.92) 0%,
-        rgba(253,250,247,0.86) 34%,
-        rgba(253,250,247,0.55) 58%,
-        rgba(253,250,247,0.28) 100%);
+      background: radial-gradient(ellipse 62% 58% at 50% 46%,
+        rgba(253,250,247,0.80) 0%,
+        rgba(253,250,247,0.67) 44%,
+        rgba(253,250,247,0.24) 74%,
+        rgba(253,250,247,0) 100%);
     }
-    /* Mobile / tablet: the mockup stacks under the text, so the whole width has
-       to stay readable — flat wash instead of a directional gradient. */
-    @media (max-width: 1023px) {
-      .hero-img { object-position: 62% center; }
+    @media (max-width: 767px) {
+      /* Short band, text fills more of it — widen the wash but keep it soft. */
       .hero-scrim {
-        background: linear-gradient(180deg,
-          rgba(253,250,247,0.90) 0%,
-          rgba(253,250,247,0.87) 50%,
-          rgba(253,250,247,0.85) 100%);
+        background: radial-gradient(ellipse 94% 56% at 50% 50%,
+          rgba(253,250,247,0.82) 0%,
+          rgba(253,250,247,0.70) 50%,
+          rgba(253,250,247,0.26) 82%,
+          rgba(253,250,247,0) 100%);
       }
+    }
+    .hero-band-content {
+      position: relative; z-index: 2;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 14px 0;
+    }
+    /* The text must stay inside the wash, otherwise its edges fall on bare photo
+       (the dark wood on the left drops contrast to ~3:1). Width is tied to the
+       gradient's extent rather than a fixed rem value. */
+    .hero-band-inner { width: 100%; max-width: 86vw; }
+    @media (min-width: 768px) { .hero-band-inner { max-width: min(760px, 58vw); } }
+    .hero-label {
+      display: inline-block; white-space: nowrap;
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: #2A2825;
+      background: rgba(232,160,168,0.32);
+      border: 1px solid rgba(232,160,168,0.55);
+      border-radius: 999px; padding: 5px 13px;
+      margin-bottom: 14px;
+    }
+    @media (min-width: 768px) { .hero-label { font-size: 11px; padding: 6px 16px; margin-bottom: 20px; } }
+
+    /* Both halves of the split headline share this — same size, same weight,
+       so they read as one sentence broken across the mockup. */
+    .hero-line {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-weight: 400;
+      font-size: clamp(23px, 4.6vw, 52px);
+      line-height: 1.14;
+      letter-spacing: -0.01em;
+      color: #2A2825;
     }
 
     /* ═══════════════════════════════════════
        WHATSAPP SCREEN — used by every mockup
     ═══════════════════════════════════════ */
+    /* Current WhatsApp, iOS light mode. No phone frame — the conversation is a
+       card floating on the section background. */
     .wa-screen {
-      border-radius: 18px; overflow: hidden;
-      background: #ECE5DD;
+      border-radius: 16px; overflow: hidden;
+      background: #EFE7DE;
       display: flex; flex-direction: column;
-      box-shadow: 0 6px 30px rgba(42,40,37,0.09);
-      border: 1px solid rgba(42,40,37,0.06);
+      box-shadow: 0 10px 36px rgba(42,40,37,0.11), 0 2px 8px rgba(42,40,37,0.05);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
     .wa-header {
-      background: #075E54; padding: 10px 14px;
-      display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+      background: #F6F6F6; padding: 9px 13px;
+      display: flex; align-items: center; gap: 9px; flex-shrink: 0;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
     }
-    .wa-back { color: rgba(255,255,255,0.75); flex-shrink: 0; display: flex; }
+    .wa-back { color: #007AFF; flex-shrink: 0; display: flex; }
     .wa-avatar {
       width: 32px; height: 32px; border-radius: 50%;
-      background: #8FCFB8; display: flex; align-items: center; justify-content: center;
-      font-family: 'DM Serif Display', serif; color: #1F5B4E; font-size: 13px; flex-shrink: 0;
+      background: #D9D2CA; display: flex; align-items: center; justify-content: center;
+      color: #6B6259; font-size: 13px; font-weight: 600; flex-shrink: 0;
     }
     .wa-header-text { flex: 1; min-width: 0; }
     .wa-header-text h3 {
-      color: #fff; font-size: 12.5px; font-weight: 600; margin: 0; line-height: 1.25;
+      color: #000; font-size: 14px; font-weight: 600; margin: 0; line-height: 1.25;
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
-    .wa-header-text p { color: rgba(255,255,255,0.7); font-size: 10.5px; margin: 0; }
+    .wa-header-text p { color: #8E8E93; font-size: 11px; margin: 0; line-height: 1.3; }
     .wa-body {
-      flex: 1; padding: 12px 10px;
-      display: flex; flex-direction: column; gap: 7px;
-      background: #ECE5DD;
+      flex: 1; padding: 12px 9px;
+      display: flex; flex-direction: column; gap: 2px;
+      background: #EFE7DE;
     }
     .wa-daystamp {
-      align-self: center; background: rgba(255,255,255,0.6);
-      font-size: 10px; color: #666; padding: 2px 9px; border-radius: 7px;
-      margin-bottom: 2px;
+      align-self: center; background: rgba(255,255,255,0.75);
+      font-size: 11px; color: #667781; padding: 3px 10px; border-radius: 8px;
+      margin-bottom: 6px;
     }
     .wa-bubble {
-      max-width: 85%; padding: 7px 9px;
-      border-radius: 10px; font-size: 12.5px; line-height: 1.5;
-      color: #111B21; box-shadow: 0 1px 0.5px rgba(11,20,26,0.13);
+      position: relative; display: flow-root;
+      max-width: 82%; padding: 6px 9px 6px;
+      border-radius: 7px; font-size: 15px; line-height: 1.33;
+      color: #111B21; box-shadow: 0 1px 0.5px rgba(0,0,0,.13);
     }
-    .wa-bubble.in  { background: #FFFFFF; align-self: flex-start; border-radius: 2px 10px 10px 10px; }
-    .wa-bubble.out { background: #DCF8C6; align-self: flex-end;   border-radius: 10px 2px 10px 10px; }
+    .wa-bubble.in  { background: #FFFFFF; align-self: flex-start; border-bottom-left-radius: 2px; }
+    .wa-bubble.out { background: #D9FDD3; align-self: flex-end;   border-bottom-right-radius: 2px; }
+    /* no tail on continued runs, so restore the full corner */
+    .wa-bubble.in  + .wa-bubble.in  { border-bottom-left-radius: 7px; }
+    .wa-bubble.out + .wa-bubble.out { border-bottom-right-radius: 7px; }
+    /* extra space only when the direction changes (between runs) */
+    .wa-bubble.in + .wa-bubble.out,
+    .wa-bubble.out + .wa-bubble.in { margin-top: 8px; }
+
+    /* Tail on the first message of each run only — hidden when the previous
+       bubble came from the same side. */
+    .wa-bubble::before {
+      content: ''; position: absolute; bottom: 0;
+      width: 0; height: 0; border-style: solid;
+    }
+    .wa-bubble.in::before {
+      left: -6px;
+      border-width: 0 7px 9px 0;
+      border-color: transparent #FFFFFF transparent transparent;
+    }
+    .wa-bubble.out::before {
+      right: -6px;
+      border-width: 0 0 9px 7px;
+      border-color: transparent transparent transparent #D9FDD3;
+    }
+    .wa-bubble.in  + .wa-bubble.in::before,
+    .wa-bubble.out + .wa-bubble.out::before { content: none; }
+
+    /* Timestamp sits inside the bubble, bottom-right, with the text flowing
+       around it — as it does in the real client. */
     .wa-time {
-      font-size: 9.5px; color: #8696A0; margin-top: 2px;
-      text-align: right; display: flex; align-items: center;
-      justify-content: flex-end; gap: 0;
+      float: right; margin: 5px 0 -1px 10px;
+      font-size: 11px; color: #667781; line-height: 1;
+      display: inline-flex; align-items: center; gap: 2px;
     }
-    .wa-bubble.in .wa-time { justify-content: flex-start; }
-
-    /* Double checkmark — tight, overlapping, WhatsApp blue */
     .wa-ticks {
-      width: 14px; height: 9px; color: #53BDEB;
-      margin-left: 3px; flex-shrink: 0; display: block;
+      width: 15px; height: 10px; color: #53BDEB;
+      flex-shrink: 0; display: block;
     }
-
-    /* Hero phone bezel — wraps the same .wa-screen */
-    .phone-frame {
-      width: 100%; max-width: 272px;
-      border-radius: 36px; background: #2A2825; padding: 10px;
-      box-shadow: 0 28px 72px rgba(42,40,37,0.20), 0 8px 24px rgba(42,40,37,0.10);
-    }
-    .phone-frame .wa-screen { border-radius: 28px; min-height: 448px; }
-    .phone-notch { width: 56px; height: 5px; background: #454340; border-radius: 3px; margin: 0 auto 8px; }
 
     /* Hero chat animation */
     .wa-msg { opacity: 0; transform: translateY(6px); }
@@ -293,95 +353,100 @@
 <!-- ═══════════════════════════════════════════
      SECTION 2 — HERO (salon background image)
 ════════════════════════════════════════════ -->
-<section id="hero" class="relative overflow-hidden">
+<section id="hero" class="bg-canvas">
 
-  <!-- EDITABLE: hero background image -->
-  <img src="assets/hero-salon.jpg" alt="" aria-hidden="true" class="hero-img" />
-  <div class="hero-scrim" aria-hidden="true"></div>
-
-  <div class="relative z-10 max-w-6xl mx-auto px-5 md:px-8 py-20 md:py-28 lg:py-32">
-    <div class="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
-
-      <!-- Left: copy -->
-      <div class="reveal">
-        <p class="inline-block text-xs font-semibold tracking-widest uppercase text-ink bg-rose/25 border border-rose/40 rounded-full px-4 py-1.5 mb-8">
-          Kundenbindung für Friseur- und Beauty-Salons
-        </p>
-
-        <!-- EDITABLE: Hero headline -->
-        <h1 class="font-serif text-4xl md:text-5xl leading-[1.12] tracking-tight text-ink mb-7">
-          Du hast hart gearbeitet, um neue Kundinnen zu gewinnen.
-          Gili sorgt dafür, dass sie bleiben — und zu festem Umsatz werden.
+  <!-- ── Beat 1: image band — label + first half of the headline, nothing else ──
+       EDITABLE: hero background image. Full viewport width, natural 1600:900
+       proportions, never cropped. -->
+  <div class="hero-media">
+    <img src="assets/hero-salon.jpg" alt="" aria-hidden="true" class="hero-img" />
+    <div class="hero-scrim" aria-hidden="true"></div>
+    <div class="hero-band-content px-5 md:px-8">
+      <div class="hero-band-inner mx-auto">
+        <!-- EDITABLE: label pill — kept short so it stays on one line at 375px -->
+        <p class="hero-label">Für Friseur- und Beauty-Salons</p>
+        <!-- EDITABLE: headline, first half -->
+        <h1 class="hero-line">
+          Du hast hart gearbeitet, um neue&nbsp;Kundinnen zu gewinnen.
         </h1>
-
-        <!-- EDITABLE: Hero supporting text -->
-        <p class="text-base md:text-lg text-ink/70 leading-relaxed mb-10 max-w-xl">
-          Ein Buchungssystem, das nicht nur Termine vereinbart, sondern deine Kundinnen zurückbringt.
-        </p>
-
-        <div class="flex flex-col sm:flex-row gap-4 mb-10">
-          <a href="#" class="demo-btn inline-flex items-center justify-center gap-2 bg-rose text-ink font-semibold px-7 py-3.5 rounded-xl hover:bg-roseDeep transition-colors text-sm">
-            Kostenlose Demo buchen
-          </a>
-          <a href="#kundenbindung" class="inline-flex items-center justify-center gap-2 text-ink font-semibold bg-canvas/70 border border-line px-7 py-3.5 rounded-xl hover:bg-canvas transition-colors text-sm">
-            Gili kennenlernen
-            <i data-lucide="arrow-down" class="w-4 h-4"></i>
-          </a>
-        </div>
-
-        <p class="text-xs text-muted tracking-wide">
-          Persönlich eingerichtet · 0&nbsp;% Provision · WhatsApp &amp; Website
-        </p>
       </div>
+    </div>
+  </div>
 
-      <!-- Right: WhatsApp booking mockup -->
-      <div class="flex justify-center lg:justify-end reveal" style="transition-delay:0.15s">
-        <div class="phone-frame" id="phone1">
-          <div class="phone-notch"></div>
-          <div class="wa-screen">
-            <div class="wa-header">
-              <span class="wa-back" aria-hidden="true">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-              </span>
-              <div class="wa-avatar">L</div>
-              <div class="wa-header-text">
-                <h3>Salon Lena</h3>
-                <p>online</p>
-              </div>
-            </div>
-            <div class="wa-body" id="chat1">
-              <span class="wa-daystamp">Montag, 28. Juli</span>
+  <div class="max-w-3xl mx-auto px-5 md:px-8 py-12 md:py-16 text-center">
 
-              <div class="wa-msg wa-bubble out">
-                Hallo, ich würde so gerne einen Balayage-Termin buchen. Hätten Sie diese Woche noch Zeit?
-                <div class="wa-time">14:32 <svg class="wa-ticks" viewBox="0 0 15 10" aria-hidden="true"><path d="M1 5.4 L3.6 8 L8.6 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.4 5.4 L8 8 L13 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              </div>
+    <!-- ── Beat 2: the conversation ── -->
+    <div class="reveal">
+      <div class="wa-screen mx-auto text-left" id="phone1" style="max-width:360px;">
+        <div class="wa-header">
+          <span class="wa-back" aria-hidden="true">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </span>
+          <div class="wa-avatar">L</div>
+          <div class="wa-header-text">
+            <h3>Salon Lena</h3>
+            <p>online</p>
+          </div>
+        </div>
+        <div class="wa-body" id="chat1">
+          <span class="wa-daystamp">Montag, 28. Juli</span>
 
-              <div class="wa-msg wa-bubble in">
-                Hallo Lisa&nbsp;✨ Sehr gerne. Wir hätten Donnerstag, 30.&nbsp;Juli um 15:00&nbsp;Uhr frei – passt dir das?
-                <div class="wa-time">14:33</div>
-              </div>
+          <div class="wa-msg wa-bubble out">
+            Hallo, ich würde so gerne einen Balayage-Termin buchen. Hätten Sie diese Woche noch Zeit?
+            <span class="wa-time">14:32 <svg class="wa-ticks" viewBox="0 0 15 10" aria-hidden="true"><path d="M1 5.4 L3.6 8 L8.6 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.4 5.4 L8 8 L13 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
 
-              <div class="wa-msg wa-bubble out">
-                Ja, perfekt&nbsp;😊
-                <div class="wa-time">14:34 <svg class="wa-ticks" viewBox="0 0 15 10" aria-hidden="true"><path d="M1 5.4 L3.6 8 L8.6 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.4 5.4 L8 8 L13 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              </div>
+          <div class="wa-msg wa-bubble in">
+            Hallo Lisa&nbsp;✨ Sehr gerne. Wir hätten Donnerstag, 30.&nbsp;Juli um 15:00&nbsp;Uhr frei – passt dir das?
+            <span class="wa-time">14:33</span>
+          </div>
 
-              <div class="wa-msg wa-bubble in" style="max-width:92%;">
-                Perfekt, Lisa&nbsp;✨ 15:00&nbsp;Uhr passt wunderbar, ich habe den Termin für dich eingetragen.&nbsp;🧡<br>
-                📅 Donnerstag, 30.&nbsp;Juli<br>
-                ⏰ 15:00&nbsp;Uhr<br>
-                ✂️ Balayage<br>
-                📍 Salon Lena, Mariahilfer Str.&nbsp;88, Wien<br>
-                Wir freuen uns auf dich&nbsp;🌸
-                <div class="wa-time">14:35</div>
-              </div>
-            </div>
+          <div class="wa-msg wa-bubble out">
+            Ja, perfekt&nbsp;😊
+            <span class="wa-time">14:34 <svg class="wa-ticks" viewBox="0 0 15 10" aria-hidden="true"><path d="M1 5.4 L3.6 8 L8.6 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.4 5.4 L8 8 L13 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+
+          <div class="wa-msg wa-bubble in" style="max-width:92%;">
+            Perfekt, Lisa&nbsp;✨ 15:00&nbsp;Uhr passt wunderbar, ich habe den Termin für dich eingetragen.&nbsp;🧡<br>
+            📅 Donnerstag, 30.&nbsp;Juli<br>
+            ⏰ 15:00&nbsp;Uhr<br>
+            ✂️ Balayage<br>
+            📍 Salon Lena, Mariahilfer Str.&nbsp;88, Wien<br>
+            Wir freuen uns auf dich&nbsp;🌸
+            <span class="wa-time">14:35</span>
           </div>
         </div>
       </div>
-
     </div>
+
+    <!-- ── Beat 3: headline, second half — same size and weight as the first ── -->
+    <!-- EDITABLE: headline, second half -->
+    <p class="hero-line mt-12 md:mt-16 reveal">
+      Gili sorgt dafür, dass sie bleiben — und zu festem&nbsp;Umsatz werden.
+    </p>
+
+    <!-- ── Beat 4: supporting line, CTAs, trust line ── -->
+    <div class="reveal" style="transition-delay:0.1s">
+      <!-- EDITABLE: Hero supporting text -->
+      <p class="text-base md:text-lg text-ink/70 leading-relaxed mt-6 mb-9 max-w-xl mx-auto">
+        Ein Buchungssystem, das nicht nur Termine vereinbart, sondern deine Kundinnen zurückbringt.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 sm:justify-center mb-8">
+        <a href="#" class="demo-btn inline-flex items-center justify-center gap-2 bg-rose text-ink font-semibold px-7 py-3.5 rounded-xl hover:bg-roseDeep transition-colors text-sm">
+          Kostenlose Demo buchen
+        </a>
+        <a href="#kundenbindung" class="inline-flex items-center justify-center gap-2 text-ink font-semibold bg-canvas border border-line px-7 py-3.5 rounded-xl hover:bg-roseSoft transition-colors text-sm">
+          Gili kennenlernen
+          <i data-lucide="arrow-down" class="w-4 h-4"></i>
+        </a>
+      </div>
+
+      <p class="text-xs text-muted tracking-wide">
+        Persönlich eingerichtet · 0&nbsp;% Provision · WhatsApp &amp; Website
+      </p>
+    </div>
+
   </div>
 </section>
 
@@ -397,12 +462,14 @@
       Stell dir vor, du könntest ihr jetzt schreiben:
     </h2>
 
-    <!-- items stretch: all three screens share a height, so the shorter
-         conversation simply shows empty chat space, as a real screen would -->
-    <div class="grid sm:grid-cols-3 gap-6 md:gap-7 reveal" style="transition-delay:0.1s">
+    <!-- Three across only once there is room for 15px chat text; below that they
+         stack and are capped so the bubbles keep chat-like proportions.
+         Items stretch, so the shorter conversation simply shows empty chat
+         space at the bottom, as a real screen would. -->
+    <div class="grid lg:grid-cols-3 gap-8 lg:gap-7 reveal" style="transition-delay:0.1s">
 
       <!-- Mockup A — invitation to return -->
-      <div class="wa-screen">
+      <div class="wa-screen w-full max-w-[420px] mx-auto lg:max-w-none">
         <div class="wa-header">
           <div class="wa-avatar">L</div>
           <div class="wa-header-text">
@@ -414,17 +481,17 @@
           <span class="wa-daystamp">Dienstag</span>
           <div class="wa-bubble in">
             Hallo Anna&nbsp;🌸 wir haben dich vermisst. Möchtest du nächste Woche wieder vorbeikommen?
-            <div class="wa-time">10:12</div>
+            <span class="wa-time">10:12</span>
           </div>
           <div class="wa-bubble out">
             Ja, sehr gern. Mittwochvormittag wäre perfekt.
-            <div class="wa-time">10:14 <svg class="wa-ticks" viewBox="0 0 15 10" aria-hidden="true"><path d="M1 5.4 L3.6 8 L8.6 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.4 5.4 L8 8 L13 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <span class="wa-time">10:14 <svg class="wa-ticks" viewBox="0 0 15 10" aria-hidden="true"><path d="M1 5.4 L3.6 8 L8.6 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.4 5.4 L8 8 L13 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </div>
         </div>
       </div>
 
       <!-- Mockup B — review request -->
-      <div class="wa-screen">
+      <div class="wa-screen w-full max-w-[420px] mx-auto lg:max-w-none">
         <div class="wa-header">
           <div class="wa-avatar">L</div>
           <div class="wa-header-text">
@@ -436,13 +503,13 @@
           <span class="wa-daystamp">Mittwoch</span>
           <div class="wa-bubble in">
             Hallo Anna, danke für deinen Besuch gestern. Wenn du zufrieden warst, freuen wir uns über eine kurze Google-Bewertung&nbsp;🌿
-            <div class="wa-time">09:05</div>
+            <span class="wa-time">09:05</span>
           </div>
         </div>
       </div>
 
       <!-- Mockup C — promotion -->
-      <div class="wa-screen">
+      <div class="wa-screen w-full max-w-[420px] mx-auto lg:max-w-none">
         <div class="wa-header">
           <div class="wa-avatar">L</div>
           <div class="wa-header-text">
@@ -454,11 +521,11 @@
           <span class="wa-daystamp">Freitag</span>
           <div class="wa-bubble in">
             Hallo Anna&nbsp;🌿 ich wollte dir kurz Bescheid geben: von heute bis Weihnachten gibt es bei uns 10&nbsp;% auf alle Termine. Schreib mir einfach, wenn du vorbeikommen möchtest.
-            <div class="wa-time">14:20</div>
+            <span class="wa-time">14:20</span>
           </div>
           <div class="wa-bubble out">
             Oh, wie schön. Dann komme ich nächste Woche vorbei.
-            <div class="wa-time">14:26 <svg class="wa-ticks" viewBox="0 0 15 10" aria-hidden="true"><path d="M1 5.4 L3.6 8 L8.6 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.4 5.4 L8 8 L13 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <span class="wa-time">14:26 <svg class="wa-ticks" viewBox="0 0 15 10" aria-hidden="true"><path d="M1 5.4 L3.6 8 L8.6 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.4 5.4 L8 8 L13 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </div>
         </div>
       </div>
@@ -564,15 +631,15 @@
           <span class="wa-daystamp">1. August</span>
           <div class="wa-bubble in">
             Hallo Julia, gibt es diesen Monat etwas Neues, das deine Kundinnen wissen sollten?
-            <div class="wa-time">09:30</div>
+            <span class="wa-time">09:30</span>
           </div>
           <div class="wa-bubble out">
             Ja, ab August bieten wir eine neue Haarpflege an.
-            <div class="wa-time">09:41 <svg class="wa-ticks" viewBox="0 0 15 10" aria-hidden="true"><path d="M1 5.4 L3.6 8 L8.6 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.4 5.4 L8 8 L13 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <span class="wa-time">09:41 <svg class="wa-ticks" viewBox="0 0 15 10" aria-hidden="true"><path d="M1 5.4 L3.6 8 L8.6 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.4 5.4 L8 8 L13 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </div>
           <div class="wa-bubble in">
             Perfekt, ich bereite die Nachricht vor und schicke sie an die passenden Kundinnen.
-            <div class="wa-time">09:42</div>
+            <span class="wa-time">09:42</span>
           </div>
         </div>
       </div>
