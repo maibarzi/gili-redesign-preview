@@ -191,6 +191,117 @@
     }
     .tl-step.featured .tl-content h3 { font-size: 16px; }
 
+    /* ─── Relief cards ("Was du nicht mehr tun musst") ─── */
+    .relief-card {
+      background: white; border: 1px solid #E7E2DB;
+      border-radius: 16px; padding: 26px 24px;
+      box-shadow: 0 2px 16px rgba(26,26,24,0.04);
+      display: flex; gap: 16px; align-items: flex-start;
+    }
+    .relief-mark {
+      width: 30px; height: 30px; border-radius: 50%;
+      background: #F4F0E8; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      color: #C4622D; margin-top: 2px;
+    }
+    .relief-card h3 {
+      font-weight: 600; font-size: 15.5px; line-height: 1.4;
+      color: #1A1A18; margin-bottom: 7px;
+    }
+    .relief-card p { color: #8A8580; font-size: 14px; line-height: 1.6; }
+
+    /* ─── Revenue calculator ─── */
+    .calc-panel {
+      background: white; border: 1px solid #E7E2DB;
+      border-radius: 20px; padding: 28px 24px;
+      box-shadow: 0 4px 28px rgba(26,26,24,0.05);
+    }
+    .calc-label {
+      display: block; font-size: 13.5px; font-weight: 500;
+      color: #1A1A18; margin-bottom: 9px;
+    }
+    .calc-field { position: relative; }
+    .calc-input {
+      width: 100%; background: #FAF8F4;
+      border: 1.5px solid #E7E2DB; border-radius: 12px;
+      padding: 12px 14px; font-size: 16px; font-weight: 500;
+      color: #1A1A18; font-family: inherit;
+      transition: border-color 0.2s;
+      -moz-appearance: textfield;
+    }
+    .calc-input::-webkit-outer-spin-button,
+    .calc-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    .calc-input:focus { border-color: #C4622D; outline: none; }
+    .calc-input.has-suffix { padding-right: 34px; }
+    .calc-suffix {
+      position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+      color: #8A8580; font-size: 15px; pointer-events: none;
+    }
+    .scenario-card {
+      background: #FAF8F4; border: 1px solid #E7E2DB;
+      border-radius: 14px; padding: 18px 16px; text-align: center;
+    }
+    .scenario-card.highlight { border-color: #C4622D; background: rgba(196,98,45,0.05); }
+    .scenario-rate {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #8A8580; margin-bottom: 12px;
+    }
+    .scenario-card.highlight .scenario-rate { color: #C4622D; }
+    .people-row {
+      display: flex; flex-wrap: wrap; gap: 3px;
+      justify-content: center; margin-bottom: 14px;
+      max-width: 78px; margin-left: auto; margin-right: auto;
+    }
+    .people-row svg { width: 12px; height: 12px; }
+    .person-on  { color: #C4622D; }
+    .person-off { color: #E7E2DB; }
+    .scenario-value {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px; line-height: 1.1; color: #1A1A18;
+    }
+    .scenario-unit { font-family: 'Instrument Sans', sans-serif; font-size: 11px; color: #8A8580; margin-top: 5px; }
+
+    /* ─── Relationship overview mockup ─── */
+    .overview-panel {
+      background: white; border: 1px solid #E7E2DB;
+      border-radius: 20px; overflow: hidden;
+      box-shadow: 0 8px 40px rgba(26,26,24,0.07);
+      max-width: 520px;
+    }
+    .overview-head {
+      padding: 16px 20px; border-bottom: 1px solid #E7E2DB;
+      display: flex; align-items: center; justify-content: space-between;
+      background: #FAF8F4;
+    }
+    .overview-head h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 16px; color: #1A1A18;
+    }
+    .overview-head span { font-size: 11px; color: #8A8580; }
+    .ov-row {
+      display: flex; align-items: center; gap: 13px;
+      padding: 14px 20px; border-bottom: 1px solid #F1EDE6;
+    }
+    .ov-row:last-child { border-bottom: none; }
+    .ov-avatar {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: #F4F0E8; color: #8A8580; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'DM Serif Display', serif; font-size: 13px;
+    }
+    .ov-name { font-weight: 600; font-size: 14px; color: #1A1A18; line-height: 1.3; }
+    .ov-visit { font-size: 12px; color: #8A8580; margin-top: 2px; }
+    .ov-status {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11.5px; color: #8A8580; text-align: right;
+      flex-shrink: 0; margin-left: auto; max-width: 42%;
+      justify-content: flex-end; line-height: 1.35;
+    }
+    .ov-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .dot-terra { background: #C4622D; }
+    .dot-sage  { background: #A8BEB2; }
+    .dot-soft  { background: #D8D2C8; }
+
     /* ─── FAQ accordion ─── */
     .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
     .faq-answer.open { max-height: 300px; }
@@ -279,7 +390,7 @@
 
         <!-- EDITABLE: Hero supporting text -->
         <p class="text-base md:text-lg text-muted leading-relaxed mb-10 max-w-xl">
-          Gili beantwortet Anfragen über WhatsApp, Instagram und deine Website, vereinbart Termine und bleibt auch nach dem Besuch mit deinen Kundinnen in Kontakt.
+          Jede Kundin, die zurückkommt, ist Umsatz, den du nicht neu gewinnen musst. Gili sorgt dafür, dass das nicht dem Zufall überlassen bleibt.
         </p>
 
         <div class="flex flex-col sm:flex-row gap-4 mb-10">
@@ -352,7 +463,253 @@
 
 
 <!-- ═══════════════════════════════════════════
-     SECTION 3 — AFTER THE APPOINTMENT
+     SECTION 3 — WHAT YOU NO LONGER HAVE TO DO
+     (Broad relief overview — no revenue language here)
+════════════════════════════════════════════ -->
+<section class="py-24 md:py-32">
+  <div class="max-w-5xl mx-auto px-5 md:px-8">
+
+    <h2 class="font-serif text-3xl md:text-4xl lg:text-[2.75rem] leading-tight text-ink mb-14 max-w-4xl reveal">
+      Gili begleitet dich strategisch dabei, dass deine Kundinnen bleiben — und übernimmt die Umsetzung für dich.
+    </h2>
+
+    <div class="grid md:grid-cols-2 gap-5 md:gap-6 reveal" style="transition-delay:0.1s">
+
+      <div class="relief-card">
+        <div class="relief-mark"><i data-lucide="check" class="w-4 h-4"></i></div>
+        <div>
+          <h3>Nicht mehr selbst auf WhatsApp, der Website oder Instagram antworten.</h3>
+          <p>Gili übernimmt jede Anfrage — in deinem Ton.</p>
+        </div>
+      </div>
+
+      <div class="relief-card">
+        <div class="relief-mark"><i data-lucide="check" class="w-4 h-4"></i></div>
+        <div>
+          <h3>Nicht mehr merken, wer zurückkommen sollte.</h3>
+          <p>Gili weiß es — und schreibt ihr auch gleich.</p>
+        </div>
+      </div>
+
+      <!-- Kept deliberately short: the monthly check-in is shown in full further down -->
+      <div class="relief-card">
+        <div class="relief-mark"><i data-lucide="check" class="w-4 h-4"></i></div>
+        <div>
+          <h3>Nicht mehr überlegen, wann eine Aktion sinnvoll wäre.</h3>
+          <p>Gili fragt dich einmal im Monat, ob es etwas Neues gibt.</p>
+        </div>
+      </div>
+
+      <div class="relief-card">
+        <div class="relief-mark"><i data-lucide="check" class="w-4 h-4"></i></div>
+        <div>
+          <h3>Nicht mehr Bewertungen hinterherlaufen.</h3>
+          <p>Gili bittet genau dann darum, wenn die Erfahrung noch frisch ist.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION 4 — REVENUE CALCULATOR
+     Illustrative scenarios only — no claimed statistics.
+     All numbers are computed from the visitor's own inputs.
+════════════════════════════════════════════ -->
+<section id="rechner" class="py-24 md:py-32 bg-cream">
+  <div class="max-w-5xl mx-auto px-5 md:px-8">
+
+    <div class="mb-12 reveal">
+      <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-ink mb-5">
+        Was wiederkehrende Kundinnen deinem Salon wert sind.
+      </h2>
+      <p class="text-muted text-base md:text-lg leading-relaxed max-w-2xl">
+        Eine kurze Beispielrechnung mit deinen eigenen Zahlen — keine Garantie, nur ein Anhaltspunkt.
+      </p>
+    </div>
+
+    <div class="calc-panel reveal" style="transition-delay:0.1s">
+
+      <div class="grid sm:grid-cols-2 gap-5 mb-9">
+        <div>
+          <label class="calc-label" for="calc-clients">Wie viele Kundinnen behandelst du im Schnitt pro Monat?</label>
+          <div class="calc-field">
+            <input type="number" id="calc-clients" class="calc-input" value="80" min="0" max="10000" step="1" inputmode="numeric" />
+          </div>
+        </div>
+        <div>
+          <label class="calc-label" for="calc-price">Was kostet eine Behandlung bei dir im Schnitt?</label>
+          <div class="calc-field">
+            <input type="number" id="calc-price" class="calc-input has-suffix" value="65" min="0" max="10000" step="1" inputmode="numeric" />
+            <span class="calc-suffix">€</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4" id="scenario-grid">
+        <!-- Scenario cards rendered by JS -->
+      </div>
+
+      <p class="text-xs text-muted mt-7 leading-relaxed">
+        Beispielhafte Schätzung basierend auf deinen Angaben.
+      </p>
+
+    </div>
+
+    <div class="mt-10 reveal" style="transition-delay:0.2s">
+      <a href="#" class="demo-btn inline-flex items-center gap-2 bg-terra text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-[#b0561f] transition-colors text-sm">
+        Kostenlose Demo buchen
+        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION 5 — WHAT GILI TAKES OVER
+════════════════════════════════════════════ -->
+<section class="py-24 md:py-32">
+  <div class="max-w-4xl mx-auto px-5 md:px-8">
+
+    <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-ink mb-12 reveal">
+      Was Gili für deinen Salon übernimmt
+    </h2>
+
+    <div class="divide-y divide-border reveal" style="transition-delay:0.1s">
+
+      <!-- Row 1 -->
+      <div class="flex gap-5 py-8 md:py-10">
+        <div class="flex-shrink-0 mt-1">
+          <i data-lucide="message-circle" class="w-5 h-5 text-terra"></i>
+        </div>
+        <div>
+          <h3 class="font-semibold text-ink text-base md:text-lg mb-2">Antworten und Termine vereinbaren</h3>
+          <p class="text-muted text-sm md:text-base leading-relaxed">
+            Gili beantwortet Anfragen über WhatsApp, Instagram und deine Website und vereinbart passende Termine direkt im Gespräch.
+          </p>
+        </div>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="flex gap-5 py-8 md:py-10">
+        <div class="flex-shrink-0 mt-1">
+          <i data-lucide="pen-line" class="w-5 h-5 text-terra"></i>
+        </div>
+        <div>
+          <h3 class="font-semibold text-ink text-base md:text-lg mb-2">Gili spricht in deinem Ton</h3>
+          <p class="text-muted text-sm md:text-base leading-relaxed">
+            Bevor Gili live geht, lernen wir, wie du mit deinen Kundinnen sprichst — herzlich, direkt oder klassisch. Jede Nachricht klingt nach deinem Salon, nicht nach einer Vorlage.
+          </p>
+        </div>
+      </div>
+
+      <!-- Row 3 -->
+      <div class="flex gap-5 py-8 md:py-10">
+        <div class="flex-shrink-0 mt-1">
+          <i data-lucide="heart-handshake" class="w-5 h-5 text-terra"></i>
+        </div>
+        <div>
+          <h3 class="font-semibold text-ink text-base md:text-lg mb-2">Kundenbindung gemeinsam planen</h3>
+          <p class="text-muted text-sm md:text-base leading-relaxed">
+            Gemeinsam entwickeln wir einen Plan dafür, wie dein Salon nach dem Termin mit Kundinnen in Kontakt bleibt. Gili setzt ihn anschließend für dich um.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION 6 — RELATIONSHIP OVERVIEW
+     Visual proof that the overview is personal, not abstract.
+════════════════════════════════════════════ -->
+<section class="py-24 md:py-32 bg-cream">
+  <div class="max-w-6xl mx-auto px-5 md:px-8">
+    <div class="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+
+      <!-- Left: copy -->
+      <div class="reveal">
+        <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-ink mb-7">
+          Du siehst genau, wie es um jede Kundenbeziehung steht.
+        </h2>
+        <p class="text-base md:text-lg text-muted leading-relaxed">
+          In deinem persönlichen Bereich siehst du auf einen Blick, wann jede Kundin zuletzt da war, wann sie sich wieder melden sollte und wie es um den Kontakt steht. Kein Suchen, kein Nachfragen — du hast den Überblick, ohne ihn dir selbst zusammenzustellen.
+        </p>
+      </div>
+
+      <!-- Right: client overview mockup -->
+      <div class="flex justify-center lg:justify-end reveal" style="transition-delay:0.15s">
+        <div class="overview-panel w-full" aria-hidden="true">
+
+          <div class="overview-head">
+            <h3>Deine Kundinnen</h3>
+            <span>Juli 2026</span>
+          </div>
+
+          <div class="ov-row">
+            <div class="ov-avatar">A</div>
+            <div>
+              <div class="ov-name">Anna M.</div>
+              <div class="ov-visit">Letzter Besuch vor 3 Wochen</div>
+            </div>
+            <div class="ov-status"><span class="ov-dot dot-sage"></span>Kontakt aufgenommen,<br>nächster in 2 Wochen</div>
+          </div>
+
+          <div class="ov-row">
+            <div class="ov-avatar">J</div>
+            <div>
+              <div class="ov-name">Julia K.</div>
+              <div class="ov-visit">Letzter Besuch vor 6 Wochen</div>
+            </div>
+            <div class="ov-status"><span class="ov-dot dot-terra"></span>Wartet auf Antwort</div>
+          </div>
+
+          <div class="ov-row">
+            <div class="ov-avatar">S</div>
+            <div>
+              <div class="ov-name">Sara T.</div>
+              <div class="ov-visit">Letzter Besuch gestern</div>
+            </div>
+            <div class="ov-status"><span class="ov-dot dot-sage"></span>Neue Kundin</div>
+          </div>
+
+          <div class="ov-row">
+            <div class="ov-avatar">M</div>
+            <div>
+              <div class="ov-name">Marie L.</div>
+              <div class="ov-visit">Letzter Besuch vor 5 Wochen</div>
+            </div>
+            <div class="ov-status"><span class="ov-dot dot-terra"></span>Einladung geht morgen raus</div>
+          </div>
+
+          <div class="ov-row">
+            <div class="ov-avatar">E</div>
+            <div>
+              <div class="ov-name">Elena R.</div>
+              <div class="ov-visit">Letzter Besuch vor 2 Wochen</div>
+            </div>
+            <div class="ov-status"><span class="ov-dot dot-soft"></span>Termin bereits gebucht</div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION 7 — AFTER THE APPOINTMENT
+     (Moved down from position 3 — proof of the post-visit journey)
 ════════════════════════════════════════════ -->
 <section id="so-funktioniert-es" class="py-24 md:py-32">
   <div class="max-w-6xl mx-auto px-5 md:px-8">
@@ -409,67 +766,23 @@
   </div>
 </section>
 
-<hr class="section-divider" />
-
 
 <!-- ═══════════════════════════════════════════
-     SECTION 4 — WHAT GILI TAKES OVER
+     SECTION 8 — SIGNATURE STATEMENT
+     Deliberately empty: no cards, no icons, no CTA.
 ════════════════════════════════════════════ -->
-<section class="py-24 md:py-32 bg-cream">
-  <div class="max-w-4xl mx-auto px-5 md:px-8">
-
-    <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-ink mb-12 reveal">
-      Was Gili für deinen Salon übernimmt
-    </h2>
-
-    <div class="divide-y divide-border reveal" style="transition-delay:0.1s">
-
-      <!-- Row 1 -->
-      <div class="flex gap-5 py-8 md:py-10">
-        <div class="flex-shrink-0 mt-1">
-          <i data-lucide="message-circle" class="w-5 h-5 text-terra"></i>
-        </div>
-        <div>
-          <h3 class="font-semibold text-ink text-base md:text-lg mb-2">Antworten und Termine vereinbaren</h3>
-          <p class="text-muted text-sm md:text-base leading-relaxed">
-            Gili beantwortet Anfragen über WhatsApp, Instagram und deine Website und vereinbart passende Termine direkt im Gespräch.
-          </p>
-        </div>
-      </div>
-
-      <!-- Row 2 -->
-      <div class="flex gap-5 py-8 md:py-10">
-        <div class="flex-shrink-0 mt-1">
-          <i data-lucide="layout-dashboard" class="w-5 h-5 text-terra"></i>
-        </div>
-        <div>
-          <h3 class="font-semibold text-ink text-base md:text-lg mb-2">Alles an einem Ort behalten</h3>
-          <p class="text-muted text-sm md:text-base leading-relaxed">
-            Gespräche, Termine und Kundendaten werden in deinem persönlichen Dashboard gespeichert. So behältst du jederzeit den Überblick.
-          </p>
-        </div>
-      </div>
-
-      <!-- Row 3 -->
-      <div class="flex gap-5 py-8 md:py-10">
-        <div class="flex-shrink-0 mt-1">
-          <i data-lucide="heart-handshake" class="w-5 h-5 text-terra"></i>
-        </div>
-        <div>
-          <h3 class="font-semibold text-ink text-base md:text-lg mb-2">Kundenbindung gemeinsam planen</h3>
-          <p class="text-muted text-sm md:text-base leading-relaxed">
-            Gemeinsam entwickeln wir einen Plan dafür, wie dein Salon nach dem Termin mit Kundinnen in Kontakt bleibt. Gili setzt ihn anschließend für dich um.
-          </p>
-        </div>
-      </div>
-
-    </div>
+<section class="py-28 md:py-40 lg:py-48">
+  <div class="max-w-3xl mx-auto px-5 md:px-8 text-center reveal">
+    <p class="font-serif text-3xl md:text-4xl lg:text-5xl leading-[1.25] text-ink">
+      Die meisten Systeme beantworten Nachrichten.<br class="hidden md:block" />
+      Gili baut Beziehungen auf.
+    </p>
   </div>
 </section>
 
 
 <!-- ═══════════════════════════════════════════
-     SECTION 5 — PERSONAL GUIDANCE
+     SECTION 9 — PERSONAL GUIDANCE
      (Terracotta — the Gili team relationship)
 ════════════════════════════════════════════ -->
 <section style="background:#C4622D;">
@@ -521,7 +834,7 @@
 
 
 <!-- ═══════════════════════════════════════════
-     SECTION 6 — COLLABORATION TIMELINE
+     SECTION 10 — COLLABORATION TIMELINE
 ════════════════════════════════════════════ -->
 <section id="zusammenarbeit" class="py-24 md:py-32">
   <div class="max-w-3xl mx-auto px-5 md:px-8">
@@ -539,7 +852,7 @@
         <div class="tl-num">1</div>
         <div class="tl-content">
           <h3>Persönliches Erstgespräch</h3>
-          <p>Wir lernen deinen Salon, deine Kundinnen und deine Art der Kommunikation kennen. Gemeinsam legen wir fest, welche Nachrichten zu deinem Salon passen und wann sie verschickt werden sollen.</p>
+          <p>Wir lernen deinen Salon kennen und legen gemeinsam fest, wie Gili mit deinen Kundinnen spricht.</p>
         </div>
       </div>
 
@@ -548,7 +861,7 @@
         <div class="tl-num">2</div>
         <div class="tl-content">
           <h3>Gili geht live</h3>
-          <p>Wir richten alles für dich ein. Gili beginnt, Anfragen zu beantworten, Termine zu vereinbaren und die Kommunikation mit deinen Kundinnen zu übernehmen.</p>
+          <p>Wir richten alles für dich ein — ab dann beantwortet Gili Anfragen und vereinbart Termine.</p>
         </div>
       </div>
 
@@ -557,7 +870,7 @@
         <div class="tl-num" style="border-color:#E7E2DB;">3</div>
         <div class="tl-content">
           <h3>Gili lädt Kundinnen wieder ein</h3>
-          <p>Einen Tag nach dem Besuch erinnert Gili die Kundin an deine Google-Bewertungen. Zum gemeinsam festgelegten Zeitpunkt – zum Beispiel fünf Wochen nach ihrem Besuch – schreibt Gili ihr persönlich und lädt sie zu ihrem nächsten Termin ein.</p>
+          <p>Zum vereinbarten Zeitpunkt nach dem Besuch meldet sich Gili persönlich und lädt zum nächsten Termin ein.</p>
         </div>
       </div>
 
@@ -566,7 +879,7 @@
         <div class="tl-num terra">4</div>
         <div class="tl-content">
           <h3>Einmal im Monat melden wir uns bei dir</h3>
-          <p>Wir fragen, ob es ein neues Angebot, eine neue Leistung, eine neue Mitarbeiterin oder etwas anderes gibt, das deine Kundinnen wissen sollten.</p>
+          <p>Wir fragen nach, was es Neues in deinem Salon gibt.</p>
         </div>
       </div>
 
@@ -575,7 +888,7 @@
         <div class="tl-num terra">5</div>
         <div class="tl-content">
           <h3>Gili setzt es für dich um</h3>
-          <p>Du erzählst uns kurz, was neu ist. Wir bereiten die passende Kommunikation vor, und Gili sendet sie an die passenden Kundinnen.</p>
+          <p>Wir bereiten die passende Nachricht vor und Gili sendet sie an die richtigen Kundinnen.</p>
         </div>
       </div>
 
@@ -595,7 +908,7 @@
 
 
 <!-- ═══════════════════════════════════════════
-     SECTION 7 — PRICING
+     SECTION 11 — PRICING
 ════════════════════════════════════════════ -->
 <section id="preise" class="py-24 md:py-32 bg-cream">
   <div class="max-w-5xl mx-auto px-5 md:px-8">
@@ -689,6 +1002,11 @@
       </div>
 
     </div>
+
+    <p class="text-center text-muted text-sm md:text-base mt-10 reveal" style="transition-delay:0.15s">
+      Schon eine einzige zurückgewonnene Kundin pro Monat gleicht die Kosten in der Regel aus.
+    </p>
+
   </div>
 </section>
 
@@ -696,7 +1014,7 @@
 
 
 <!-- ═══════════════════════════════════════════
-     SECTION 8 — FAQ
+     SECTION 12 — FAQ
 ════════════════════════════════════════════ -->
 <section id="faq" class="py-24 md:py-32">
   <div class="max-w-3xl mx-auto px-5 md:px-8">
@@ -761,7 +1079,7 @@
       </div>
 
       <!-- EDITABLE: Updated for channel consistency with hero -->
-      <div class="faq-item border-t border-border border-b" role="listitem">
+      <div class="faq-item border-t border-border" role="listitem">
         <button class="faq-trigger w-full flex items-center justify-between gap-4 py-6 text-left" aria-expanded="false">
           <span class="font-medium text-ink text-base">Über welche Kanäle kommuniziert Gili?</span>
           <i data-lucide="plus" class="faq-icon w-5 h-5 text-terra flex-shrink-0"></i>
@@ -771,18 +1089,28 @@
         </div>
       </div>
 
+      <div class="faq-item border-t border-border border-b" role="listitem">
+        <button class="faq-trigger w-full flex items-center justify-between gap-4 py-6 text-left" aria-expanded="false">
+          <span class="font-medium text-ink text-base">Rechnet sich Gili für meinen Salon?</span>
+          <i data-lucide="plus" class="faq-icon w-5 h-5 text-terra flex-shrink-0"></i>
+        </button>
+        <div class="faq-answer">
+          <p class="text-muted text-sm leading-relaxed pb-6">Das hängt von deinem Salon ab – aber schon wenige zurückgewonnene Kundinnen im Monat gleichen die Kosten meist aus. Der Rechner weiter oben gibt dir einen ersten Anhaltspunkt.</p>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
 
 <!-- ═══════════════════════════════════════════
-     SECTION 9 — FINAL CTA
+     SECTION 13 — FINAL CTA
 ════════════════════════════════════════════ -->
 <section class="py-24 md:py-32 bg-cream">
   <div class="max-w-3xl mx-auto px-5 md:px-8 text-center reveal">
     <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-ink mb-6">
-      Bereit, aus mehr Kundinnen Stammkundinnen zu machen?
+      Bereit, aus mehr Kundinnen wiederkehrenden Umsatz zu machen?
     </h2>
     <p class="text-muted text-base md:text-lg leading-relaxed mb-10">
       Lerne Gili in einer kostenlosen Demo kennen – persönlich und ohne Verpflichtung.
@@ -798,7 +1126,7 @@
 
 
 <!-- ═══════════════════════════════════════════
-     SECTION 10 — FOOTER
+     SECTION 14 — FOOTER
 ════════════════════════════════════════════ -->
 <footer class="border-t border-border bg-warm py-12 md:py-16">
   <div class="max-w-6xl mx-auto px-5 md:px-8">
@@ -892,6 +1220,60 @@
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); trigger.click(); }
     });
   });
+
+  // ─── Revenue calculator ───
+  // Illustrative scenarios only. Every number shown is derived from the
+  // visitor's own two inputs — no aggregate or claimed statistics.
+  const SCENARIOS = [0.20, 0.30, 0.40, 0.50];
+  const PEOPLE_ICONS = 10;
+
+  const clientsInput  = document.getElementById('calc-clients');
+  const priceInput    = document.getElementById('calc-price');
+  const scenarioGrid  = document.getElementById('scenario-grid');
+
+  const euro = new Intl.NumberFormat('de-DE', {
+    style: 'currency', currency: 'EUR',
+    minimumFractionDigits: 0, maximumFractionDigits: 0
+  });
+
+  function personSvg(on) {
+    return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+      stroke-linecap="round" stroke-linejoin="round" class="${on ? 'person-on' : 'person-off'}">
+      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`;
+  }
+
+  function clampNumber(input, max) {
+    const raw = parseFloat(input.value);
+    if (!isFinite(raw) || raw < 0) return 0;
+    return Math.min(raw, max);
+  }
+
+  function renderScenarios() {
+    const clients = clampNumber(clientsInput, 10000);
+    const price   = clampNumber(priceInput, 10000);
+
+    scenarioGrid.innerHTML = SCENARIOS.map(rate => {
+      const returning = clients * rate;
+      const revenue   = returning * price;
+      const filled    = Math.round(rate * PEOPLE_ICONS);
+
+      const people = Array.from({ length: PEOPLE_ICONS }, (_, i) => personSvg(i < filled)).join('');
+
+      return `
+        <div class="scenario-card${rate === 0.30 ? ' highlight' : ''}">
+          <div class="scenario-rate">${Math.round(rate * 100)} % kommen zurück</div>
+          <div class="people-row">${people}</div>
+          <div class="scenario-value">${euro.format(revenue)}</div>
+          <div class="scenario-unit">pro Monat</div>
+        </div>`;
+    }).join('');
+  }
+
+  if (clientsInput && priceInput && scenarioGrid) {
+    renderScenarios();
+    clientsInput.addEventListener('input', renderScenarios);
+    priceInput.addEventListener('input', renderScenarios);
+  }
 
   // ─── Scroll-reveal ───
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
