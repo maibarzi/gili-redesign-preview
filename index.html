@@ -171,8 +171,6 @@
       display: flex; flex-direction: column; gap: 2px;
       background: #EFE7DE;
     }
-    /* hero only: pin the thread to the bottom and clip the older messages */
-    .iphone-screen .wa-body { justify-content: flex-end; overflow: hidden; }
     .wa-daystamp {
       align-self: center; background: rgba(255,255,255,0.75);
       font-size: 11px; color: #667781; padding: 3px 10px; border-radius: 8px;
@@ -224,122 +222,24 @@
       flex-shrink: 0; display: block;
     }
 
-    /* ═══════════════════════════════════════
-       HERO PHONE — iPhone frame, titanium edge + dynamic island
-    ═══════════════════════════════════════ */
-    .hero-mock-wrap { position: relative; width: 100%; max-width: 330px; margin: 0 auto; text-align: left; }
-    .iphone {
-      position: relative; width: 100%;
-      border-radius: 46px; padding: 9px;
-      background: linear-gradient(150deg,
-        #e6e3de 0%, #b9b5b0 18%, #8d8984 38%,
-        #6f6b66 52%, #a5a19c 72%, #cfcbc6 88%, #8f8b86 100%);
-      box-shadow:
-        0 34px 74px rgba(42,40,37,0.30),
-        0 10px 26px rgba(42,40,37,0.16),
-        inset 0 0 0 1px rgba(255,255,255,0.28);
-    }
-    /* side buttons */
-    .iphone::before, .iphone::after {
-      content: ''; position: absolute; width: 3px; border-radius: 2px;
-      background: linear-gradient(180deg, #a5a19c, #7b7772);
-    }
-    .iphone::before { left: -2px; top: 108px; height: 30px; }
-    .iphone::after  { left: -2px; top: 150px; height: 52px; }
-    .iphone-side-r {
-      position: absolute; right: -2px; top: 132px; width: 3px; height: 74px;
-      border-radius: 2px; background: linear-gradient(180deg, #a5a19c, #7b7772);
-    }
-    /* Fixed iPhone proportions (390×844 viewport ≈ 19.5:9). The frame never
-       grows to fit the thread — the chat is anchored to the bottom and the
-       older messages are clipped at the top, as a real scrolled chat would be. */
-    .iphone-screen {
-      position: relative; border-radius: 38px; overflow: hidden;
-      background: #EFE7DE; display: flex; flex-direction: column;
-      aspect-ratio: 390 / 844;
-    }
-    .iphone-island {
-      position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
-      width: 78px; height: 23px; border-radius: 13px;
-      background: #08080a; z-index: 6;
-    }
-    .wa-statusbar {
-      background: #F6F6F6; padding: 9px 20px 5px;
-      display: flex; align-items: center; justify-content: space-between;
-      font-size: 11.5px; font-weight: 600; color: #000; flex-shrink: 0;
-    }
-    .sb-right { display: inline-flex; align-items: center; gap: 4px; color: #000; }
-
-    /* ── Chat background: warm beige + faint doodle pattern ── */
-    .wa-doodle {
-      background-color: #EFE7DE;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250' viewBox='0 0 250 250'%3E%3Cg fill='none' stroke='%23D5C7B6' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' opacity='0.5'%3E%3Cpath d='M26 40c-5-5-13-3-13 4 0 7 13 15 13 15s13-8 13-15c0-7-8-9-13-4z'/%3E%3Cpath d='M92 20h28a5 5 0 0 1 5 5v14a5 5 0 0 1-5 5h-16l-7 7v-7h-5a5 5 0 0 1-5-5V25a5 5 0 0 1 5-5z'/%3E%3Cpath d='M178 30h7l4-5h13l4 5h7a4 4 0 0 1 4 4v20a4 4 0 0 1-4 4h-35a4 4 0 0 1-4-4V34a4 4 0 0 1 4-4z'/%3E%3Ccircle cx='196' cy='45' r='8'/%3E%3Cpath d='M40 116V90l20-5v26'/%3E%3Ccircle cx='34' cy='118' r='6'/%3E%3Ccircle cx='54' cy='113' r='6'/%3E%3Cpath d='M104 100h27v16a11 11 0 0 1-11 11h-5a11 11 0 0 1-11-11z'/%3E%3Cpath d='M131 106h5a6 6 0 0 1 0 11h-5'/%3E%3Cpath d='M196 96l5 11 12 2-8 8 2 12-11-6-11 6 2-12-8-8 12-2z'/%3E%3Cpath d='M22 186a30 30 0 0 1 30-30'/%3E%3Cpath d='M32 186a20 20 0 0 1 20-20'/%3E%3Ccircle cx='24' cy='188' r='3'/%3E%3Cpath d='M96 168h32v22h-20l-8 7v-7h-4z'/%3E%3Cpath d='M182 162l16 9-16 9-16-9z'/%3E%3Cpath d='M166 180v10l16 9 16-9v-10'/%3E%3Cpath d='M118 224a9 9 0 1 0 18 0'/%3E%3Ccircle cx='127' cy='214' r='16'/%3E%3Ccircle cx='121' cy='210' r='1.5'/%3E%3Ccircle cx='133' cy='210' r='1.5'/%3E%3Cpath d='M212 214h22M212 222h16'/%3E%3Cpath d='M46 232h20a4 4 0 0 0 4-4v-14'/%3E%3C/g%3E%3C/svg%3E");
-      background-repeat: repeat;
-      background-size: 250px 250px;
-    }
-
-    /* ── The story split: booking dimmed, return at full contrast ── */
-    /* flex-shrink:0 — the body is a flex column with a min-height, and without
-       this the groups get compressed and their bubbles overflow the box */
-    .wa-dim, .wa-return, .wa-highlight {
-      display: flex; flex-direction: column; gap: 2px; flex-shrink: 0;
-    }
-    .wa-dim { opacity: 0.7; filter: saturate(0.5); }
-    /* gap above the return half — marks the five-week jump, and below 1024px it
-       gives the annotation clear space to sit in above the divider */
-    .wa-highlight { position: relative; margin-top: 52px; }
-    @media (min-width: 1024px) { .wa-highlight { margin-top: 24px; } }
-    /* the wrappers break the sibling run-gap rules, so restate the 8px change-of-
-       sender gap here — keeps spacing identical to the three "Stell dir vor" cards */
-    .wa-return { margin-top: 8px; }
-
-    /* "Nach 5 Wochen" divider */
+    /* ── "Nach 5 Wochen" divider — the one remaining emphasis ── */
     .wa-divider {
       align-self: center; text-align: center;
       margin: 14px 0 10px; display: flex; flex-direction: column; gap: 2px;
     }
     .wa-divider-main {
-      background: rgba(255,255,255,0.85); color: #4A4640;
+      background: rgba(255,255,255,0.85);
+      color: #A85260;  /* deeper rose: #E8A0A8 measures 2.1:1 here, this is 5.2:1 */
       font-size: 11.5px; font-weight: 600;
       padding: 4px 12px; border-radius: 9px;
     }
     .wa-divider-date { font-size: 10.5px; color: #7C756C; }
 
-    /* ── Annotation: one small arrow + a pill label, read as a single unit ──
-       Positioned outside the phone (the screen clips) and synced to
-       .wa-highlight in JS. */
-    .wa-annot-group {
-      position: absolute; z-index: 7;
-      display: flex; align-items: center; gap: 7px;
-      pointer-events: none;
-      opacity: 0; transition: opacity 0.5s ease;
-    }
-    .annot-on .wa-annot-group { opacity: 1; }
-    .wa-annot-arrow { width: 58px; height: 26px; flex-shrink: 0; }
-    .wa-annot-label {
-      background: #FBEEF0; color: #A85260;
-      font-size: 13px; font-weight: 600; line-height: 1.25;
-      padding: 7px 14px; border-radius: 999px;
-      white-space: nowrap;
-    }
-    /* below 1024px there is no room in the margin — stack it directly above
-       the divider, pill on top, arrow beneath pointing down at it */
-    .wa-annot-group {
-      left: 50%; transform: translateX(-50%);
-      top: calc(var(--annot-top, 50%) - 54px);
-      flex-direction: column-reverse; gap: 1px;
-    }
-    .wa-annot-group .wa-annot-arrow { transform: rotate(-90deg); }
-    @media (min-width: 1024px) {
-      .wa-annot-group {
-        left: calc(100% + 6px); transform: translateY(-50%);
-        top: var(--annot-mid, 50%);
-        flex-direction: row; gap: 7px;
-      }
-      .wa-annot-group .wa-annot-arrow { transform: none; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .wa-annot-group { opacity: 1; transition: none; }
+    /* Shared link under a thread — plain, plausible, nothing elaborate */
+    .wa-link {
+      display: block; margin: 8px 2px 0;
+      font-size: 13px; color: #027EB5; text-decoration: underline;
+      word-break: break-word;
     }
 
     /* Hero chat animation */
@@ -497,91 +397,63 @@
 
     <!-- ── Beat 2: the conversation ── -->
     <div class="reveal">
-      <div class="hero-mock-wrap" id="heroMock">
-        <div class="iphone">
-          <span class="iphone-side-r" aria-hidden="true"></span>
-          <div class="iphone-screen" id="phone1">
-            <div class="iphone-island" aria-hidden="true"></div>
-
-            <div class="wa-statusbar">
-              <span class="sb-time">11:08</span>
-              <span class="sb-right" aria-hidden="true">
-                <svg width="16" height="10" viewBox="0 0 16 10" fill="currentColor"><rect x="0" y="6.5" width="2.6" height="3.5" rx="0.7"/><rect x="4.2" y="4.5" width="2.6" height="5.5" rx="0.7"/><rect x="8.4" y="2.4" width="2.6" height="7.6" rx="0.7"/><rect x="12.6" y="0.4" width="2.6" height="9.6" rx="0.7"/></svg>
-                <svg width="15" height="11" viewBox="0 0 15 11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 3.6a9.4 9.4 0 0 1 13 0"/><path d="M3.6 6.2a5.8 5.8 0 0 1 7.8 0"/><circle cx="7.5" cy="9.2" r="1.1" fill="currentColor" stroke="none"/></svg>
-                <svg width="23" height="11" viewBox="0 0 23 11" fill="none"><rect x="0.6" y="0.6" width="19" height="9.8" rx="3" stroke="currentColor" stroke-opacity="0.4"/><rect x="2.2" y="2.2" width="14.5" height="6.6" rx="1.8" fill="currentColor"/><path d="M21.4 4v3" stroke="currentColor" stroke-opacity="0.4" stroke-width="1.6" stroke-linecap="round"/></svg>
-              </span>
-            </div>
-
-            <div class="wa-header">
-              <span class="wa-back" aria-hidden="true">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-              </span>
-              <div class="wa-avatar">F</div>
-              <div class="wa-header-text">
-                <h3>FLORENCE BEAUTY SALON</h3>
-                <p>online</p>
-              </div>
-            </div>
-
-            <div class="wa-body wa-doodle" id="chat1">
-
-              <!-- The original booking — dimmed. Trimmed from the top and clipped
-                   by the fixed frame, so the thread reads as mid-conversation. -->
-              <div class="wa-dim">
-                <div class="wa-msg wa-bubble in" style="max-width:92%;">
-                  Perfekt, Lilian&nbsp;✨<br>
-                  15:30&nbsp;Uhr am Montag passt wunderbar, ich habe den Termin für dich eingetragen.&nbsp;❤️<br>
-                  📅 Montag, 21.&nbsp;Dezember 2026<br>
-                  ⏰ 15:30&nbsp;Uhr<br>
-                  ✂️ Waschen, Schneiden &amp; Föhnen (lang)<br>
-                  📍 Florence Beauty Studio, Giligasse&nbsp;8, 1010&nbsp;Wien<br>
-                  Wir freuen uns auf dich&nbsp;🌸
-                  <span class="wa-time">10:10</span>
-                </div>
-              </div>
-
-              <!-- The return — full contrast, and the one annotated moment -->
-              <div class="wa-highlight">
-                <div class="wa-divider wa-msg">
-                  <span class="wa-divider-main">🌸 Nach 5 Wochen</span>
-                  <span class="wa-divider-date">25. Januar 2027</span>
-                </div>
-
-                <div class="wa-msg wa-bubble in">
-                  Hallo Lilian&nbsp;🌻<br>
-                  Wir vermissen dich ein bisschen&nbsp;😊<br>
-                  Hättest du diese Woche Lust auf einen neuen Termin?<br>
-                  Florence Beauty Studio
-                  <span class="wa-time">09:05</span>
-                </div>
-              </div>
-
-              <div class="wa-return">
-                <div class="wa-msg wa-bubble out">
-                  Oh ja, sehr gerne&nbsp;😊<br>
-                  Nächste Woche wäre super.. am liebsten vormittags
-                  <span class="wa-time">11:08 <svg class="wa-ticks" viewBox="0 0 15 10" aria-hidden="true"><path d="M1 5.4 L3.6 8 L8.6 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.4 5.4 L8 8 L13 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                </div>
-
-                <div class="wa-msg wa-bubble in">
-                  Klar&nbsp;🌸<br>
-                  Ich habe nächste Woche Montag um 10:00 und Dienstag um 11:00 frei — was passt dir besser?
-                  <span class="wa-time">11:08</span>
-                </div>
-              </div>
-
-            </div>
+      <!-- Plain card, identical to the three "Stell dir vor" mockups below:
+           same .wa-screen shell, same header, same flat run of bubbles in
+           .wa-body. No wrappers around the bubbles — those broke the sibling
+           run-gap/tail rules and the float-based timestamps. -->
+      <div class="wa-screen w-full max-w-[420px] mx-auto text-left" id="phone1">
+        <div class="wa-header">
+          <div class="wa-avatar">F</div>
+          <div class="wa-header-text">
+            <h3>FLORENCE BEAUTY SALON</h3>
+            <p>online</p>
           </div>
         </div>
+        <div class="wa-body" id="chat1">
+          <span class="wa-daystamp">Montag, 21. Dezember</span>
 
-        <!-- one annotation only: a small arrow + its pill label -->
-        <span class="wa-annot-group">
-          <svg class="wa-annot-arrow" viewBox="0 0 58 26" fill="none" aria-hidden="true">
-            <path d="M55 6C41 3 22 6 9.5 14.5" stroke="#E8A0A8" stroke-width="2.2" stroke-linecap="round"/>
-            <path d="M18.5 10.5 9 14.5l4 8.5" stroke="#E8A0A8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span class="wa-annot-label">Sie kommt zurück — ganz von selbst.</span>
-        </span>
+          <div class="wa-msg wa-bubble out">
+            Cool, 15:00&nbsp;Uhr wäre super, noch lieber wäre mir 15:30
+            <span class="wa-time">10:10 <svg class="wa-ticks" viewBox="0 0 15 10" aria-hidden="true"><path d="M1 5.4 L3.6 8 L8.6 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.4 5.4 L8 8 L13 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+
+          <div class="wa-msg wa-bubble in">
+            Perfekt, Lilian&nbsp;✨<br>
+            15:30&nbsp;Uhr am Montag passt wunderbar, ich habe den Termin für dich eingetragen.&nbsp;❤️<br>
+            📅 Montag, 21.&nbsp;Dezember 2026<br>
+            ⏰ 15:30&nbsp;Uhr<br>
+            ✂️ Waschen, Schneiden &amp; Föhnen (lang)<br>
+            📍 Florence Beauty Salon, Giligasse&nbsp;8, 1010&nbsp;Wien<br>
+            Wir freuen uns auf dich&nbsp;🌸
+            <span class="wa-time">10:10</span>
+          </div>
+
+          <!-- EDITABLE: the one remaining emphasis on the page -->
+          <div class="wa-divider wa-msg">
+            <span class="wa-divider-main">🌸 Nach 5 Wochen</span>
+            <span class="wa-divider-date">25. Januar 2027</span>
+          </div>
+
+          <div class="wa-msg wa-bubble in">
+            Hallo Lilian&nbsp;🌻<br>
+            Wir vermissen dich ein bisschen&nbsp;😊<br>
+            Hättest du diese Woche Lust auf einen neuen Termin?<br>
+            Florence Beauty Salon
+            <span class="wa-time">09:05</span>
+          </div>
+
+          <div class="wa-msg wa-bubble out">
+            Oh ja, sehr gerne&nbsp;😊<br>
+            Nächste Woche wäre super.. am liebsten vormittags
+            <span class="wa-time">11:08 <svg class="wa-ticks" viewBox="0 0 15 10" aria-hidden="true"><path d="M1 5.4 L3.6 8 L8.6 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.4 5.4 L8 8 L13 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+
+          <div class="wa-msg wa-bubble in">
+            Klar&nbsp;🌸<br>
+            Ich habe nächste Woche Montag um 10:00 und Dienstag um 11:00 frei — was passt dir besser?
+            <span class="wa-time">11:08</span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -624,8 +496,8 @@
   <div class="max-w-6xl mx-auto px-5 md:px-8">
 
     <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-ink mb-14 max-w-4xl reveal">
-      Der Termin ist vorbei. Deine Kundin geht zurück in ihren Alltag.<br class="hidden md:block" />
-      Stell dir vor, du könntest ihr jetzt schreiben:
+      Bleib in Kontakt mit deinen Kundinnen —<br class="hidden md:block" />
+      auch nach dem Termin.
     </h2>
 
     <!-- Three across only once there is room for 15px chat text; below that they
@@ -671,6 +543,11 @@
             Hallo Anna, danke für deinen Besuch gestern. Wenn du zufrieden warst, freuen wir uns über eine kurze Google-Bewertung&nbsp;🌿
             <span class="wa-time">09:05</span>
           </div>
+          <div class="wa-bubble out">
+            Danke euch, war wie immer toll <span style="white-space:nowrap;">😊👍</span>
+            <span class="wa-time">09:21 <svg class="wa-ticks" viewBox="0 0 15 10" aria-hidden="true"><path d="M1 5.4 L3.6 8 L8.6 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.4 5.4 L8 8 L13 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+          <a class="wa-link" href="#" onclick="return false;">google.com/florence-beauty</a>
         </div>
       </div>
 
@@ -708,17 +585,22 @@
   <div class="max-w-4xl mx-auto px-5 md:px-8">
 
     <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-ink mb-12 reveal">
-      Wie beginnt die Kundenbindung mit Gili?
+      Wie Gili deine Kundinnen an dich bindet
     </h2>
+
+    <!-- EDITABLE: section supporting line -->
+    <p class="text-muted text-base md:text-lg leading-relaxed max-w-2xl mb-12 -mt-6 reveal">
+      Nicht nur ein Buchungssystem. Ein Team aus Beraterinnen, das die Kommunikation mit deinen Kundinnen für dich aufbaut.
+    </p>
 
     <div class="divide-y divide-line reveal" style="transition-delay:0.1s">
 
       <div class="flex gap-5 py-8 md:py-10">
         <div class="flex-shrink-0 mt-1"><i data-lucide="messages-square" class="w-5 h-5 text-mint"></i></div>
         <div>
-          <h3 class="font-semibold text-ink text-base md:text-lg mb-2">Wir lernen deinen Salon kennen</h3>
+          <h3 class="font-semibold text-ink text-base md:text-lg mb-2">Ein persönliches Gespräch mit deinen Kundenberaterinnen</h3>
           <p class="text-muted text-sm md:text-base leading-relaxed">
-            Gemeinsam legen wir fest, nach wie vielen Wochen deine Kundinnen wieder eingeladen werden, welche Angebote zu ihnen passen und wie dein Salon mit ihnen spricht.
+            Wir lernen deinen Salon kennen und entwickeln gemeinsam deinen Kommunikationsplan: alle paar Wochen eine Einladung zum nächsten Termin, passende Aktionen, und was sonst zu deinem Salon passt.
           </p>
         </div>
       </div>
@@ -755,7 +637,7 @@
   <div class="max-w-4xl mx-auto px-5 md:px-8">
 
     <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-ink mb-12 reveal">
-      Wie sieht Kundenbindung im Alltag aus?
+      Was du nicht mehr tun musst
     </h2>
 
     <div class="space-y-8 mb-16 reveal" style="transition-delay:0.1s">
@@ -1274,39 +1156,15 @@
     });
   }
 
-  // ─── Hero annotation ───
-  // The marker ellipse is drawn over .wa-highlight, but the label sits outside
-  // the phone (the screen clips), so its vertical position is synced here.
-  const heroMock  = document.getElementById('heroMock');
-  const highlight = document.querySelector('.wa-highlight');
-
-  function placeAnnotLabel() {
-    if (!heroMock || !highlight) return;
-    const wrap = heroMock.getBoundingClientRect();
-    const hl   = highlight.getBoundingClientRect();
-    const top  = hl.top - wrap.top;
-    heroMock.style.setProperty('--annot-top', top + 'px');
-    heroMock.style.setProperty('--annot-h',   hl.height + 'px');
-    heroMock.style.setProperty('--annot-mid', (top + hl.height / 2) + 'px');
-  }
-
   const phone1Observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
       phone1Observer.unobserve(entry.target);
       animateChat('chat1', 250);
-      placeAnnotLabel();
-      // let the thread land before the annotation is drawn
-      const msgCount = document.querySelectorAll('#chat1 .wa-msg').length;
-      const delay = prefersReducedMotion ? 0 : 250 + msgCount * 650;
-      setTimeout(() => heroMock && heroMock.classList.add('annot-on'), delay);
     });
   }, { threshold: 0.25 });
   const phone1 = document.getElementById('phone1');
   if (phone1) phone1Observer.observe(phone1);
-
-  window.addEventListener('resize', placeAnnotLabel);
-  window.addEventListener('load', placeAnnotLabel);
 </script>
 
 </body>
