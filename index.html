@@ -137,14 +137,38 @@
       color: #2A2825;
     }
 
+    /* "WhatsApp" as a word, in a WhatsApp-family green that is actually legible:
+       the brand #25D366 measures 1.9:1 on this background. #25D366 is kept for
+       the icon glyph itself, where it reads fine as a large filled shape. */
+    .wa-green { color: #0E7A40; }
+
     /* ── Channel row under the hero ──
        WhatsApp is the only live channel; the other two are explicitly pending. */
-    .channel { display: flex; flex-direction: column; align-items: center; gap: 9px; }
-    .channel svg { width: 26px; height: 26px; display: block; }
-    .channel-label {
-      font-size: 11px; color: #8A8580; letter-spacing: 0.02em; line-height: 1;
+    .channel {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 11px; text-align: center; flex: 1 1 0; min-width: 0;
     }
-    .channel.soon svg { opacity: 0.4; }
+    .channel svg { width: 38px; height: 38px; display: block; }
+    .channel-name {
+      font-size: 15px; font-weight: 700; line-height: 1.25; color: #2A2825;
+    }
+    /* compound selector: .channel-name is declared after .wa-green and would
+       otherwise win on source order */
+    .channel-name.wa-green { color: #0E7A40; }
+    .channel-label {
+      font-size: 12px; color: #8A8580; letter-spacing: 0.02em; line-height: 1.2;
+      margin-top: -5px;
+    }
+    .channel.soon svg { opacity: 0.38; }
+    .channel.soon .channel-name { color: #8A8580; }
+    /* "Deine Website" wraps to two lines on narrow screens — reserve the second
+       line so the "Coming soon" labels stay on one baseline */
+    @media (max-width: 639px) { .channel-name { min-height: 2.5em; } }
+    @media (min-width: 640px) {
+      .channel svg { width: 44px; height: 44px; }
+      .channel-name { font-size: 17px; }
+      .channel-label { font-size: 13px; }
+    }
 
     /* ═══════════════════════════════════════
        WHATSAPP SCREEN — used by every mockup
@@ -244,10 +268,11 @@
     }
     .wa-divider-date { font-size: 10.5px; color: #7C756C; }
 
-    /* Shared link under a thread — plain, plausible, nothing elaborate */
+    /* Shared link inside a message bubble — plain, plausible, nothing elaborate.
+       Inherits the bubble's 15px so it sits on its own line as part of the text. */
     .wa-link {
-      display: block; margin: 8px 2px 0;
-      font-size: 13px; color: #027EB5; text-decoration: underline;
+      display: inline-block; margin-top: 3px;
+      color: #027EB5; text-decoration: underline;
       word-break: break-word;
     }
 
@@ -490,7 +515,7 @@
       </div>
 
       <p class="text-xs text-muted tracking-wide">
-        Persönlich eingerichtet · 0&nbsp;% Provision · Direkt über WhatsApp
+        Persönlich eingerichtet · 0&nbsp;% Provision · Direkt über <span class="wa-green">WhatsApp</span>
       </p>
     </div>
 
@@ -503,34 +528,37 @@
      WhatsApp is live. Instagram and Website are not built yet and are
      labelled as such — they must never read as active anywhere on the page.
 ════════════════════════════════════════════ -->
-<section class="pb-14 md:pb-16 -mt-2">
-  <div class="max-w-3xl mx-auto px-5 md:px-8">
-    <div class="flex items-start justify-center gap-11 sm:gap-16 reveal">
+<section class="py-14 md:py-20">
+  <div class="max-w-2xl mx-auto px-5 md:px-8">
+    <div class="flex items-start justify-center gap-4 sm:gap-10 reveal">
 
-      <!-- WhatsApp — live, no label -->
+      <!-- WhatsApp — live -->
       <div class="channel">
-        <svg viewBox="0 0 24 24" fill="#25D366" aria-label="WhatsApp" role="img">
+        <svg viewBox="0 0 24 24" fill="#25D366" aria-hidden="true" focusable="false">
           <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.13-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.84-.2-.49-.4-.42-.56-.43h-.47c-.16 0-.43.06-.65.31-.22.25-.85.84-.85 2.03 0 1.2.87 2.35.99 2.51.12.16 1.71 2.61 4.15 3.66.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.68-1.18.2-.58.2-1.08.15-1.18-.06-.11-.22-.17-.47-.29Z"/>
         </svg>
+        <span class="channel-name wa-green">WhatsApp</span>
       </div>
 
       <!-- Instagram — pending -->
       <div class="channel soon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#2A2825" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-label="Instagram" role="img">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#2A2825" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
           <rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/>
           <circle cx="12" cy="12" r="4"/>
           <circle cx="17.4" cy="6.6" r="1.1" fill="#2A2825" stroke="none"/>
         </svg>
+        <span class="channel-name">Instagram</span>
         <span class="channel-label">Coming soon</span>
       </div>
 
       <!-- Website — pending -->
       <div class="channel soon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#2A2825" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-label="Website" role="img">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#2A2825" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
           <circle cx="12" cy="12" r="9.5"/>
           <path d="M2.5 12h19"/>
           <path d="M12 2.5a14.5 14.5 0 0 1 0 19 14.5 14.5 0 0 1 0-19Z"/>
         </svg>
+        <span class="channel-name">Deine Website</span>
         <span class="channel-label">Coming soon</span>
       </div>
 
@@ -546,8 +574,7 @@
   <div class="max-w-6xl mx-auto px-5 md:px-8">
 
     <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-ink mb-14 max-w-4xl reveal">
-      Bleib in Kontakt mit deinen Kundinnen —<br class="hidden md:block" />
-      auch nach dem Termin.
+      Bleib in Kontakt mit deinen Kundinnen — über <span class="wa-green">WhatsApp</span>.
     </h2>
 
     <!-- Three across only once there is room for 15px chat text; below that they
@@ -590,14 +617,14 @@
         <div class="wa-body">
           <span class="wa-daystamp">Mittwoch</span>
           <div class="wa-bubble in">
-            Hallo Anna, danke für deinen Besuch gestern. Wenn du zufrieden warst, freuen wir uns über eine kurze Google-Bewertung&nbsp;🌿
+            Hallo Anna, danke für deinen Besuch gestern. Wenn du zufrieden warst, freuen wir uns über eine kurze Google-Bewertung&nbsp;🌿<br>
+            <a class="wa-link" href="#" onclick="return false;">google.business/florence-beauty</a>
             <span class="wa-time">09:05</span>
           </div>
           <div class="wa-bubble out">
             Danke euch, war wie immer toll <span style="white-space:nowrap;">😊👍</span>
             <span class="wa-time">09:21 <svg class="wa-ticks" viewBox="0 0 15 10" aria-hidden="true"><path d="M1 5.4 L3.6 8 L8.6 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.4 5.4 L8 8 L13 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </div>
-          <a class="wa-link" href="#" onclick="return false;">google.com/florence-beauty</a>
         </div>
       </div>
 
@@ -655,7 +682,7 @@
         <div>
           <h3 class="font-semibold text-ink text-base md:text-lg mb-2">Gili geht live</h3>
           <p class="text-muted text-sm md:text-base leading-relaxed">
-            Anfragen über WhatsApp werden im Gespräch zu bestätigten Terminen.
+            Anfragen über <span class="wa-green">WhatsApp</span> werden im Gespräch zu bestätigten Terminen.
           </p>
         </div>
       </div>
@@ -727,20 +754,12 @@
             <span class="wa-time">09:30</span>
           </div>
           <div class="wa-bubble out">
-            Ja, ab August bieten wir eine neue Haarpflege an.
+            Ja, ich fahre in den Urlaub zwischen dem 12. und dem 26.&nbsp;August.
             <span class="wa-time">09:41 <svg class="wa-ticks" viewBox="0 0 15 10" aria-hidden="true"><path d="M1 5.4 L3.6 8 L8.6 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.4 5.4 L8 8 L13 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </div>
           <div class="wa-bubble in">
-            Perfekt, ich bereite die Nachricht vor und schicke sie an die passenden Kundinnen.
-            <span class="wa-time">09:42</span>
-          </div>
-          <div class="wa-bubble out">
-            Ja, ich fahre in den Urlaub zwischen dem 12. und dem 26.&nbsp;August.
-            <span class="wa-time">09:44 <svg class="wa-ticks" viewBox="0 0 15 10" aria-hidden="true"><path d="M1 5.4 L3.6 8 L8.6 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.4 5.4 L8 8 L13 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </div>
-          <div class="wa-bubble in">
             Perfekt, danke für die Info. Schönen Urlaub.
-            <span class="wa-time">09:45</span>
+            <span class="wa-time">09:42</span>
           </div>
         </div>
       </div>
