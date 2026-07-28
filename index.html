@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gili – Ein Buchungssystem, das deine Kundinnen zurückbringt</title>
-  <meta name="description" content="Gili vereinbart Termine über WhatsApp und deine Website – und sorgt dafür, dass deine Kundinnen wiederkommen." />
+  <meta name="description" content="Gili vereinbart Termine über WhatsApp – und sorgt dafür, dass deine Kundinnen wiederkommen." />
 
   <!-- Open Graph -->
   <meta property="og:title" content="Gili – Ein Buchungssystem, das deine Kundinnen zurückbringt" />
-  <meta property="og:description" content="Gili beantwortet Anfragen über WhatsApp und deine Website, vereinbart Termine und bringt deine Kundinnen zurück." />
+  <meta property="og:description" content="Gili beantwortet Anfragen über WhatsApp, vereinbart Termine und bringt deine Kundinnen zurück." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://gili.live" />
 
@@ -136,6 +136,15 @@
       letter-spacing: -0.01em;
       color: #2A2825;
     }
+
+    /* ── Channel row under the hero ──
+       WhatsApp is the only live channel; the other two are explicitly pending. */
+    .channel { display: flex; flex-direction: column; align-items: center; gap: 9px; }
+    .channel svg { width: 26px; height: 26px; display: block; }
+    .channel-label {
+      font-size: 11px; color: #8A8580; letter-spacing: 0.02em; line-height: 1;
+    }
+    .channel.soon svg { opacity: 0.4; }
 
     /* ═══════════════════════════════════════
        WHATSAPP SCREEN — used by every mockup
@@ -430,7 +439,7 @@
 
           <!-- EDITABLE: the one remaining emphasis on the page -->
           <div class="wa-divider wa-msg">
-            <span class="wa-divider-main">🌸 Nach 5 Wochen</span>
+            <span class="wa-divider-main">🌸 5 Wochen nach dem Termin</span>
             <span class="wa-divider-date">25. Januar 2027</span>
           </div>
 
@@ -467,7 +476,7 @@
     <div class="reveal" style="transition-delay:0.1s">
       <!-- EDITABLE: Hero supporting text -->
       <p class="text-base md:text-lg text-ink/70 leading-relaxed mt-6 mb-9 max-w-xl mx-auto">
-        Ein Buchungssystem, das nicht nur Termine vereinbart, sondern deine Kundinnen zurückbringt.
+        Nicht nur ein Buchungssystem. Ein Team aus Beraterinnen, das die Kommunikation mit deinen Kundinnen für dich aufbaut.
       </p>
 
       <div class="flex flex-col sm:flex-row gap-4 sm:justify-center mb-8">
@@ -481,10 +490,51 @@
       </div>
 
       <p class="text-xs text-muted tracking-wide">
-        Persönlich eingerichtet · 0&nbsp;% Provision · WhatsApp &amp; Website
+        Persönlich eingerichtet · 0&nbsp;% Provision · Direkt über WhatsApp
       </p>
     </div>
 
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION 2b — CHANNELS
+     WhatsApp is live. Instagram and Website are not built yet and are
+     labelled as such — they must never read as active anywhere on the page.
+════════════════════════════════════════════ -->
+<section class="pb-14 md:pb-16 -mt-2">
+  <div class="max-w-3xl mx-auto px-5 md:px-8">
+    <div class="flex items-start justify-center gap-11 sm:gap-16 reveal">
+
+      <!-- WhatsApp — live, no label -->
+      <div class="channel">
+        <svg viewBox="0 0 24 24" fill="#25D366" aria-label="WhatsApp" role="img">
+          <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.13-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.84-.2-.49-.4-.42-.56-.43h-.47c-.16 0-.43.06-.65.31-.22.25-.85.84-.85 2.03 0 1.2.87 2.35.99 2.51.12.16 1.71 2.61 4.15 3.66.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.68-1.18.2-.58.2-1.08.15-1.18-.06-.11-.22-.17-.47-.29Z"/>
+        </svg>
+      </div>
+
+      <!-- Instagram — pending -->
+      <div class="channel soon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#2A2825" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-label="Instagram" role="img">
+          <rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.4" cy="6.6" r="1.1" fill="#2A2825" stroke="none"/>
+        </svg>
+        <span class="channel-label">Coming soon</span>
+      </div>
+
+      <!-- Website — pending -->
+      <div class="channel soon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#2A2825" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-label="Website" role="img">
+          <circle cx="12" cy="12" r="9.5"/>
+          <path d="M2.5 12h19"/>
+          <path d="M12 2.5a14.5 14.5 0 0 1 0 19 14.5 14.5 0 0 1 0-19Z"/>
+        </svg>
+        <span class="channel-label">Coming soon</span>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -588,11 +638,6 @@
       Wie Gili deine Kundinnen an dich bindet
     </h2>
 
-    <!-- EDITABLE: section supporting line -->
-    <p class="text-muted text-base md:text-lg leading-relaxed max-w-2xl mb-12 -mt-6 reveal">
-      Nicht nur ein Buchungssystem. Ein Team aus Beraterinnen, das die Kommunikation mit deinen Kundinnen für dich aufbaut.
-    </p>
-
     <div class="divide-y divide-line reveal" style="transition-delay:0.1s">
 
       <div class="flex gap-5 py-8 md:py-10">
@@ -600,7 +645,7 @@
         <div>
           <h3 class="font-semibold text-ink text-base md:text-lg mb-2">Ein persönliches Gespräch mit deinen Kundenberaterinnen</h3>
           <p class="text-muted text-sm md:text-base leading-relaxed">
-            Wir lernen deinen Salon kennen und entwickeln gemeinsam deinen Kommunikationsplan: alle paar Wochen eine Einladung zum nächsten Termin, passende Aktionen, und was sonst zu deinem Salon passt.
+            Wir bauen dir gemeinsam einen Kommunikationsplan: alle paar Wochen eine Einladung zum nächsten Termin, passende Aktionen, und was sonst zu deinem Salon passt.
           </p>
         </div>
       </div>
@@ -610,7 +655,7 @@
         <div>
           <h3 class="font-semibold text-ink text-base md:text-lg mb-2">Gili geht live</h3>
           <p class="text-muted text-sm md:text-base leading-relaxed">
-            Anfragen über WhatsApp und deine Website werden im Gespräch zu bestätigten Terminen.
+            Anfragen über WhatsApp werden im Gespräch zu bestätigten Terminen.
           </p>
         </div>
       </div>
@@ -689,6 +734,14 @@
             Perfekt, ich bereite die Nachricht vor und schicke sie an die passenden Kundinnen.
             <span class="wa-time">09:42</span>
           </div>
+          <div class="wa-bubble out">
+            Ja, ich fahre in den Urlaub zwischen dem 12. und dem 26.&nbsp;August.
+            <span class="wa-time">09:44 <svg class="wa-ticks" viewBox="0 0 15 10" aria-hidden="true"><path d="M1 5.4 L3.6 8 L8.6 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.4 5.4 L8 8 L13 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+          <div class="wa-bubble in">
+            Perfekt, danke für die Info. Schönen Urlaub.
+            <span class="wa-time">09:45</span>
+          </div>
         </div>
       </div>
       <p class="wa-caption">So schreibt Gili mit dir.</p>
@@ -710,8 +763,9 @@
       <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-ink mb-5">
         Wie viel mehr du aus deinen Stammkundinnen herausholen kannst
       </h2>
-      <p class="text-muted text-base md:text-lg leading-relaxed max-w-2xl italic">
-        Eine kurze Rechnung mit deinen eigenen Zahlen — keine Garantie, nur ein Anhaltspunkt.
+      <!-- not italic: this is now an instruction, not a caveat -->
+      <p class="text-muted text-base md:text-lg leading-relaxed max-w-2xl">
+        Gib deine durchschnittliche Kundinnenzahl pro Monat und deinen durchschnittlichen Behandlungspreis ein.
       </p>
     </div>
 
@@ -943,7 +997,7 @@
           <i data-lucide="plus" class="faq-icon w-5 h-5 text-mintDeep flex-shrink-0"></i>
         </button>
         <div class="faq-answer">
-          <p class="text-muted text-sm leading-relaxed pb-6">Gili beantwortet Anfragen über WhatsApp und deine Website – dort, wo deine Kundinnen bereits erreichbar sind. Die Kommunikation läuft immer im Namen deines Salons.</p>
+          <p class="text-muted text-sm leading-relaxed pb-6">Gili beantwortet Anfragen über WhatsApp — dort, wo deine Kundinnen bereits erreichbar sind. Die Kommunikation läuft immer im Namen deines Salons. Instagram und eine direkte Website-Anbindung sind in Vorbereitung.</p>
         </div>
       </div>
 
