@@ -139,10 +139,8 @@
       color: #2A2825;
     }
 
-    /* "WhatsApp" as a word, in a WhatsApp-family green that is actually legible:
-       the brand #25D366 measures 1.9:1 on this background. #25D366 is kept for
-       the icon glyph itself, where it reads fine as a large filled shape. */
-    .wa-green { color: #0E7A40; }
+    /* Official WhatsApp green for every visible mention of the channel. */
+    .wa-green { color: #25D366; }
 
     /* ── Channel row under the hero ──
        WhatsApp is the only live channel; the other two are explicitly pending. */
@@ -156,7 +154,7 @@
     }
     /* compound selector: .channel-name is declared after .wa-green and would
        otherwise win on source order */
-    .channel-name.wa-green { color: #0E7A40; }
+    .channel-name.wa-green { color: #25D366; }
     .channel-label {
       font-size: 12px; color: #8A8580; letter-spacing: 0.02em; line-height: 1.2;
       margin-top: -5px;
@@ -504,7 +502,7 @@
       <!-- EDITABLE: Hero supporting text -->
       <p class="text-base md:text-lg text-ink/70 leading-relaxed mt-6 mb-9 max-w-xl mx-auto">
         <strong class="block text-ink font-semibold tracking-wide mb-3">Nicht nur ein Buchungssystem.</strong>
-        Gili vereinbart Termine direkt über <span class="font-semibold text-[#25D366]">WhatsApp</span>.
+        Gili vereinbart Termine direkt über <span class="font-semibold wa-green">WhatsApp</span>.
         Gemeinsam entwickeln wir deinen Kommunikationsplan: wann Gili ein Angebot verschickt, wann sie eine Kundin zum nächsten Termin einlädt – und wie daraus eine Beziehung entsteht, die Kundinnen zurückbringt.
         <span class="block mt-4 font-medium text-ink">Alles im Namen deines Salons.</span>
       </p>
@@ -579,7 +577,7 @@
   <div class="max-w-6xl mx-auto px-5 md:px-8">
 
     <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-ink mb-14 max-w-4xl reveal">
-      Bleib in Kontakt mit deinen Kundinnen — über <span class="text-[#25D366]">WhatsApp</span>.
+      Bleib in Kontakt mit deinen Kundinnen — über <span class="wa-green">WhatsApp</span>.
     </h2>
 
     <!-- Three across only once there is room for 15px chat text; below that they
@@ -1025,7 +1023,7 @@
           <i data-lucide="plus" class="faq-icon w-5 h-5 text-mintDeep flex-shrink-0"></i>
         </button>
         <div class="faq-answer">
-          <p class="text-muted text-sm leading-relaxed pb-6">Gili beantwortet Anfragen über WhatsApp — dort, wo deine Kundinnen bereits erreichbar sind. Die Kommunikation läuft immer im Namen deines Salons. Instagram und eine direkte Website-Anbindung sind in Vorbereitung.</p>
+          <p class="text-muted text-sm leading-relaxed pb-6">Gili beantwortet Anfragen über <span class="wa-green">WhatsApp</span> — dort, wo deine Kundinnen bereits erreichbar sind. Die Kommunikation läuft immer im Namen deines Salons. Instagram und eine direkte Website-Anbindung sind in Vorbereitung.</p>
         </div>
       </div>
 
