@@ -1070,9 +1070,9 @@
         <a href="mailto:hallo@gili.live" class="text-muted text-sm hover:text-ink transition-colors">hallo@gili.live</a>
       </div>
       <nav aria-label="Rechtliches" class="flex gap-6 text-sm text-muted">
-        <!-- EDITABLE: Replace # with actual Impressum and Datenschutz URLs -->
-        <a href="#" class="hover:text-ink transition-colors">Impressum</a>
-        <a href="#" class="hover:text-ink transition-colors">Datenschutz</a>
+        <a href="impressum.html" class="hover:text-ink transition-colors">Impressum</a>
+        <a href="datenschutz.html" class="hover:text-ink transition-colors">Datenschutz</a>
+        <a href="#" class="cookie-settings-link hover:text-ink transition-colors">Cookie-Einstellungen</a>
       </nav>
     </div>
     <p class="mt-10 text-xs text-muted">© <span id="current-year"></span> Gili. Alle Rechte vorbehalten.</p>
@@ -1239,6 +1239,8 @@
   const phone1 = document.getElementById('phone1');
   if (phone1) phone1Observer.observe(phone1);
 </script>
+
+<script src="assets/cookie-consent.js"></script>
 
 </body>
 </html>

@@ -1,15 +1,18 @@
-# CLAUDE.md — Gili Landing Page Preview
+# CLAUDE.md — Gili Landing Page (gili.live)
 
 ## Project overview
 
-This is a standalone preview landing page for Gili, a fully managed client-retention service for hair and beauty salons. It is **completely separate** from any existing Gili website or deployment.
+This repository is the production codebase for the Gili landing page at gili.live, a fully managed client-retention service for hair and beauty salons.
 
 ## Safety rules — DO NOT
 
-- Do not connect this project to any existing Netlify site or GitHub repository
-- Do not modify any DNS records or connect a custom domain
-- Do not overwrite or redeploy to gili-beauty.netlify.app or any other existing Gili site
-- Do not add any new pages — this is a single-page project
+- Do not connect this project to any existing Netlify site or GitHub repository other than the one that serves gili.live
+- Do not modify any DNS records or connect a custom domain without explicit instruction
+- Do not overwrite or redeploy to gili-beauty.netlify.app or any other Gili site that is not gili.live
+- Do not add any new pages beyond the single-page marketing site, **except** for the following approved exceptions:
+  - `/impressum.html` — legal notice (Impressum)
+  - `/datenschutz.html` — privacy policy (Datenschutz), including cookie-consent disclosures
+  - Any future page must be explicitly approved the same way before being added
 
 ---
 
@@ -146,7 +149,14 @@ Every section answers a distinct question. Do not repeat the same promise.
 - `<!-- EDITABLE: Pricing details -->` — update pricing numbers
 - `<!-- EDITABLE: Summer offer banner -->` — update or remove seasonal offer
 - `<!-- EDITABLE: Contact email -->` — update if email changes
-- `<!-- EDITABLE: Replace # with actual Impressum and Datenschutz URLs -->`
+- Footer legal links point to `impressum.html` and `datenschutz.html`
+
+## Legal pages and cookie consent
+
+- `impressum.html` and `datenschutz.html` reuse the same nav/footer markup as `index.html` and must be kept in visual sync with it
+- `assets/cookie-consent.js` is shared by all three pages — it renders the cookie banner and gates Google Analytics / Meta Pixel loading behind explicit consent
+- `GA_MEASUREMENT_ID` and `META_PIXEL_ID` at the top of `assets/cookie-consent.js` are placeholders — update with real IDs before they can actually load
+- If tracking providers change (new pixel, new analytics tool, etc.), update `datenschutz.html` section 5 (Drittanbieter) to match — the privacy policy must always reflect what actually runs on the site
 
 ---
 
