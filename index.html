@@ -872,86 +872,94 @@
       <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-ink mb-4">
         Transparent. Ohne versteckte Kosten.
       </h2>
-      <!-- EDITABLE: Summer offer banner — remove when offer ends -->
       <div class="inline-flex items-center gap-2 bg-rose/25 border border-rose/40 rounded-full px-5 py-2 mt-4">
-        <i data-lucide="sun" class="w-4 h-4 text-ink"></i>
-        <span class="text-ink font-semibold text-sm">Einführungsangebot: Der erste Monat ist kostenlos.</span>
+        <i data-lucide="sparkles" class="w-4 h-4 text-ink"></i>
+        <span class="text-ink font-semibold text-sm">Aktuelles Einführungsangebot</span>
       </div>
     </div>
 
     <div class="grid md:grid-cols-2 gap-6 mt-12 reveal" style="transition-delay:0.1s">
 
-      <!-- SOLO -->
-      <div class="border border-line rounded-2xl p-8 bg-canvas">
-        <div class="mb-6">
-          <h3 class="font-serif text-2xl text-ink mb-1">Solo</h3>
-          <p class="text-muted text-sm">Für Saloninhaberinnen, die allein arbeiten</p>
+      <!-- EXPIRED SUMMER OFFER -->
+      <div class="border border-line rounded-2xl p-8 bg-canvas/70 relative overflow-hidden">
+        <div class="mb-5">
+          <span class="inline-flex items-center gap-1.5 bg-ink/5 border border-line text-muted text-xs font-semibold px-3 py-1.5 rounded-full">
+            <i data-lucide="clock-3" class="w-3.5 h-3.5"></i>
+            Seit 30. Juli 2026 nicht mehr verfügbar
+          </span>
         </div>
-        <!-- EDITABLE: Pricing details -->
+        <div class="mb-6">
+          <h3 class="font-serif text-2xl text-ink mb-1">Sommer-Startprogramm</h3>
+          <p class="text-muted text-sm">Dieses Angebot ist beendet.</p>
+        </div>
         <div class="space-y-4 mb-8">
-          <div class="flex justify-between items-baseline border-b border-line pb-4">
-            <span class="text-ink text-sm font-medium">Einmalige Einrichtung</span>
-            <span class="font-serif text-xl text-ink">180&nbsp;€</span>
+          <div class="flex justify-between items-end gap-4 border-b border-line pb-4">
+            <span class="text-ink text-sm font-medium leading-snug">Einmalige Einrichtung<br />+ Kommunikationsplan</span>
+            <span class="text-right whitespace-nowrap">
+              <span class="text-muted text-sm line-through mr-1">140&nbsp;€</span>
+              <span class="font-semibold text-mintDeep">kostenlos</span>
+            </span>
           </div>
           <div class="flex justify-between items-baseline border-b border-line pb-4">
-            <span class="text-ink text-sm font-medium">Monat&nbsp;1</span>
+            <span class="text-ink text-sm font-medium">Monat&nbsp;1–2</span>
             <span class="font-semibold text-mintDeep text-lg">kostenlos</span>
           </div>
-          <div class="flex justify-between items-baseline border-b border-line pb-4">
-            <span class="text-ink text-sm font-medium">Monat&nbsp;2–3</span>
+          <div class="flex justify-between items-baseline">
+            <span class="text-ink text-sm font-medium">Ab Monat&nbsp;3</span>
             <span class="font-serif text-xl text-ink">70&nbsp;€&nbsp;<span class="text-muted text-sm font-sans">/ Monat</span></span>
           </div>
-          <div class="flex justify-between items-baseline">
-            <span class="text-ink text-sm font-medium">Ab Monat&nbsp;4</span>
-            <span class="font-serif text-xl text-ink">88&nbsp;€&nbsp;<span class="text-muted text-sm font-sans">/ Monat</span></span>
-          </div>
         </div>
-        <a href="#" class="whatsapp-cta block text-center bg-rose text-ink font-semibold px-6 py-3.5 rounded-xl hover:bg-roseDeep transition-colors text-sm mb-5">
-          Kostenlos kennenlernen
-        </a>
+        <div class="block text-center bg-ink/5 border border-line text-muted font-semibold px-6 py-3.5 rounded-xl text-sm mb-5" aria-disabled="true">
+          Angebot beendet
+        </div>
         <ul class="space-y-2">
-          <li class="flex items-center gap-2 text-xs text-muted"><i data-lucide="check" class="w-3.5 h-3.5 text-mint flex-shrink-0"></i>Monatlich kündbar</li>
-          <li class="flex items-center gap-2 text-xs text-muted"><i data-lucide="check" class="w-3.5 h-3.5 text-mint flex-shrink-0"></i>0&nbsp;% Provision auf Buchungen</li>
-          <li class="flex items-center gap-2 text-xs text-muted"><i data-lucide="check" class="w-3.5 h-3.5 text-mint flex-shrink-0"></i>Persönliche Einrichtung inklusive</li>
-          <li class="flex items-center gap-2 text-xs text-muted"><i data-lucide="check" class="w-3.5 h-3.5 text-mint flex-shrink-0"></i>Laufende Begleitung inklusive</li>
+          <li class="flex items-center gap-2 text-xs text-muted"><i data-lucide="check" class="w-3.5 h-3.5 text-muted flex-shrink-0"></i>Monatlich kündbar</li>
+          <li class="flex items-center gap-2 text-xs text-muted"><i data-lucide="check" class="w-3.5 h-3.5 text-muted flex-shrink-0"></i>0&nbsp;% Provision auf Buchungen</li>
+          <li class="flex items-center gap-2 text-xs text-muted"><i data-lucide="check" class="w-3.5 h-3.5 text-muted flex-shrink-0"></i>Laufende Begleitung inklusive</li>
         </ul>
       </div>
 
-      <!-- TEAM -->
+      <!-- CURRENT INTRODUCTORY OFFER -->
       <div class="border-2 border-rose rounded-2xl p-8 bg-canvas relative overflow-hidden">
         <div class="absolute top-4 right-4">
-          <span class="bg-rose text-ink text-xs font-semibold px-3 py-1 rounded-full">Team</span>
+          <span class="bg-rose text-ink text-xs font-semibold px-3 py-1 rounded-full">Aktuell</span>
         </div>
         <div class="mb-6">
-          <h3 class="font-serif text-2xl text-ink mb-1">Team</h3>
-          <p class="text-muted text-sm">Ab 2 Stylistinnen</p>
+          <h3 class="font-serif text-2xl text-ink mb-1 pr-20">Gili Startprogramm</h3>
+          <p class="text-muted text-sm">Für Salons, die jetzt mit Gili starten</p>
         </div>
-        <!-- EDITABLE: Pricing details -->
         <div class="space-y-4 mb-8">
-          <div class="flex justify-between items-baseline border-b border-line pb-4">
-            <span class="text-ink text-sm font-medium">Einmalige Einrichtung</span>
-            <span class="font-serif text-xl text-ink">240&nbsp;€</span>
+          <div class="flex justify-between items-end gap-4 border-b border-line pb-4">
+            <span class="text-ink text-sm font-medium leading-snug">Einmalige Einrichtung<br />+ Kommunikationsplan</span>
+            <span class="text-right whitespace-nowrap">
+              <span class="text-muted text-sm line-through mr-1">140&nbsp;€</span>
+              <span class="font-semibold text-mintDeep">kostenlos</span>
+            </span>
           </div>
           <div class="flex justify-between items-baseline border-b border-line pb-4">
             <span class="text-ink text-sm font-medium">Monat&nbsp;1</span>
             <span class="font-semibold text-mintDeep text-lg">kostenlos</span>
           </div>
           <div class="flex justify-between items-baseline border-b border-line pb-4">
-            <span class="text-ink text-sm font-medium">Monat&nbsp;2–3</span>
-            <span class="font-serif text-xl text-ink">ab&nbsp;67&nbsp;€&nbsp;<span class="text-muted text-sm font-sans">/ Stylistin</span></span>
+            <span class="text-ink text-sm font-medium">Ab Monat&nbsp;2</span>
+            <span class="font-serif text-xl text-ink">97&nbsp;€&nbsp;<span class="text-muted text-sm font-sans">/ Monat</span></span>
           </div>
           <div class="flex justify-between items-baseline">
-            <span class="text-ink text-sm font-medium">Ab Monat&nbsp;4</span>
-            <span class="font-serif text-xl text-ink">ab&nbsp;60&nbsp;€&nbsp;<span class="text-muted text-sm font-sans">/ Stylistin</span></span>
+            <span class="text-ink text-sm font-medium">Jede weitere Stylistin</span>
+            <span class="font-serif text-xl text-ink">+25&nbsp;€&nbsp;<span class="text-muted text-sm font-sans">/ Monat</span></span>
           </div>
+        </div>
+        <div class="bg-roseSoft border border-rose/35 rounded-xl px-4 py-3.5 mb-5">
+          <p class="text-ink text-sm font-semibold mb-1">Neue Funktionen inklusive</p>
+          <p class="text-muted text-xs leading-relaxed">Instagram-DM-Chat &amp; Website-Chat – automatisch dabei, sobald verfügbar.</p>
         </div>
         <a href="#" class="whatsapp-cta block text-center bg-rose text-ink font-semibold px-6 py-3.5 rounded-xl hover:bg-roseDeep transition-colors text-sm mb-5">
           Kostenlos kennenlernen
         </a>
         <ul class="space-y-2">
+          <li class="flex items-center gap-2 text-xs text-muted"><i data-lucide="check" class="w-3.5 h-3.5 text-mint flex-shrink-0"></i>Terminvereinbarung direkt über <span class="text-[#128C7E] font-semibold">WhatsApp</span></li>
           <li class="flex items-center gap-2 text-xs text-muted"><i data-lucide="check" class="w-3.5 h-3.5 text-mint flex-shrink-0"></i>Monatlich kündbar</li>
           <li class="flex items-center gap-2 text-xs text-muted"><i data-lucide="check" class="w-3.5 h-3.5 text-mint flex-shrink-0"></i>0&nbsp;% Provision auf Buchungen</li>
-          <li class="flex items-center gap-2 text-xs text-muted"><i data-lucide="check" class="w-3.5 h-3.5 text-mint flex-shrink-0"></i>Persönliche Einrichtung inklusive</li>
           <li class="flex items-center gap-2 text-xs text-muted"><i data-lucide="check" class="w-3.5 h-3.5 text-mint flex-shrink-0"></i>Laufende Begleitung inklusive</li>
         </ul>
       </div>
@@ -959,7 +967,7 @@
     </div>
 
     <p class="text-center text-muted text-xs md:text-sm mt-6 max-w-3xl mx-auto reveal" style="transition-delay:0.12s">
-      Alle Preisangaben richten sich an Unternehmerinnen und Unternehmer und verstehen sich als Nettopreise. Eine gesetzlich geschuldete Umsatzsteuer wird zusätzlich verrechnet. Das Einführungsangebot gilt für Neukundinnen einmalig pro Betrieb; der kostenlose erste Monat beginnt nach der Einrichtung.
+      Alle Preisangaben richten sich an Unternehmerinnen und Unternehmer und verstehen sich als Nettopreise. Eine gesetzlich geschuldete Umsatzsteuer wird zusätzlich verrechnet. Das Sommer-Startprogramm ist seit dem 30. Juli 2026 nicht mehr verfügbar. Für das aktuelle Einführungsangebot gelten die oben genannten Konditionen.
     </p>
 
     <p class="text-center text-muted text-sm md:text-base mt-10 reveal" style="transition-delay:0.15s">
