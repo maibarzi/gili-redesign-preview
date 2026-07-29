@@ -1087,7 +1087,7 @@
 
 
 <!-- Pilot interest form. Netlify detects this form at deploy time. -->
-<div id="pilot-popup" class="privacy-overlay privacy-hidden" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="pilot-title">
+<div id="pilot-popup" class="privacy-overlay privacy-hidden" data-modal-lock="true" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="pilot-title">
   <div class="privacy-dialog pilot-dialog">
     <div class="privacy-dialog-inner">
       <button type="button" class="privacy-close" data-close-pilot aria-label="Fenster schließen">×</button>
@@ -1115,22 +1115,30 @@
 </div>
 
 <!-- First-layer consent notice -->
-<div id="cookie-banner" class="privacy-overlay privacy-hidden" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="cookie-title">
-  <div class="privacy-dialog">
-    <div class="privacy-dialog-inner">
-      <h2 id="cookie-title">Deine Privatsphäre</h2>
-      <p>Wir verwenden optionale Cookies und ähnliche Technologien, um die Website zu verbessern und unsere Werbung zu messen. Du entscheidest, was erlaubt ist. Mehr dazu in unserer <a class="privacy-link" href="/datenschutz">Datenschutzerklärung</a>.</p>
-      <div class="privacy-actions">
-        <button type="button" class="privacy-btn privacy-btn-primary" data-consent-all>Alle akzeptieren</button>
-        <button type="button" class="privacy-btn" data-consent-reject>Nur notwendige</button>
-        <button type="button" class="privacy-btn" data-cookie-settings>Einstellungen</button>
+<div id="cookie-banner" class="cookie-banner privacy-hidden" aria-hidden="true" role="region" aria-labelledby="cookie-title">
+  <div class="cookie-banner-card">
+    <div class="cookie-banner-copy">
+      <span class="cookie-banner-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M12 21c4-2.2 7-5.7 7-10V6.2L12 3 5 6.2V11c0 4.3 3 7.8 7 10Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+          <path d="m9.2 12 1.8 1.8 3.9-4.1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <div>
+        <h2 id="cookie-title">Deine Privatsphäre, deine Wahl</h2>
+        <p>Optionale Cookies helfen uns, Gili zu verbessern und Werbung zu messen. Du kannst frei entscheiden. Mehr in unserer <a class="privacy-link" href="/datenschutz">Datenschutzerklärung</a>.</p>
       </div>
+    </div>
+    <div class="cookie-banner-actions">
+      <button type="button" class="privacy-btn cookie-choice-accept" data-consent-all>Alle akzeptieren</button>
+      <button type="button" class="privacy-btn cookie-choice-necessary" data-consent-reject>Nur notwendige</button>
+      <button type="button" class="privacy-btn cookie-settings-btn" data-cookie-settings>Einstellungen anpassen</button>
     </div>
   </div>
 </div>
 
 <!-- Detailed consent settings -->
-<div id="cookie-settings" class="privacy-overlay privacy-hidden" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+<div id="cookie-settings" class="privacy-overlay privacy-hidden" data-modal-lock="true" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="settings-title">
   <div class="privacy-dialog">
     <div class="privacy-dialog-inner">
       <button type="button" class="privacy-close" data-close-settings aria-label="Einstellungen schließen">×</button>

@@ -123,8 +123,10 @@
     if (!modal) return;
     modal.classList.toggle("privacy-hidden", !visible);
     modal.setAttribute("aria-hidden", String(!visible));
-    document.body.classList.toggle("privacy-locked", visible);
-    if (visible) {
+    const lockingModalIsVisible = Array.from(document.querySelectorAll('[data-modal-lock="true"]'))
+      .some((element) => !element.classList.contains("privacy-hidden"));
+    document.body.classList.toggle("privacy-locked", lockingModalIsVisible);
+    if (visible && modal.dataset.modalLock === "true") {
       const focusTarget = modal.querySelector("button, input, a");
       if (focusTarget) window.setTimeout(() => focusTarget.focus(), 0);
     }
