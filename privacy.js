@@ -249,12 +249,13 @@
 
   function initInteractionTracking() {
     document.addEventListener("click", function (event) {
-      const demoLink = event.target.closest(".demo-btn, #nav-cta, #nav-cta-mobile");
-      if (!demoLink) return;
-      trackStatisticsEvent("demo_cta_click", {
-        link_text: (demoLink.textContent || "").trim().slice(0, 100)
+      const whatsappLink = event.target.closest(".whatsapp-cta, #nav-cta, #nav-cta-mobile");
+      if (!whatsappLink) return;
+      trackStatisticsEvent("whatsapp_cta_click", {
+        link_text: (whatsappLink.textContent || "").trim().slice(0, 100)
       });
-      if (window.clarity) window.clarity("set", "demo_cta", "clicked");
+      trackMarketingEvent("Contact", { contact_method: "whatsapp" });
+      if (window.clarity) window.clarity("set", "whatsapp_cta", "clicked");
     });
   }
 

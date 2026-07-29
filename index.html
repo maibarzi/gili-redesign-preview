@@ -377,14 +377,14 @@
         <a href="#faq"           class="hover:text-ink transition-colors">FAQ</a>
       </nav>
 
-      <!-- EDITABLE: primary CTA links to DEMO_URL -->
+      <!-- EDITABLE: primary CTA links to WhatsApp -->
       <a href="#" id="nav-cta" class="hidden md:inline-flex items-center gap-2 bg-rose text-ink text-sm font-semibold px-5 py-2.5 rounded-xl hover:bg-roseDeep transition-colors">
-        Kostenlose Demo buchen
+        Auf WhatsApp schreiben
       </a>
 
       <div class="flex md:hidden items-center gap-3">
         <a href="#" id="nav-cta-mobile" class="inline-flex items-center bg-rose text-ink text-xs font-semibold px-4 py-2 rounded-xl hover:bg-roseDeep transition-colors">
-          Demo buchen
+          Auf WhatsApp schreiben
         </a>
         <button id="menu-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobile-menu" class="p-1 text-ink">
           <i data-lucide="menu" class="w-5 h-5"></i>
@@ -508,11 +508,11 @@
       </p>
 
       <div class="flex flex-col sm:flex-row gap-4 sm:justify-center mb-8">
-        <a href="#" class="demo-btn inline-flex items-center justify-center gap-2 bg-rose text-ink font-semibold px-7 py-3.5 rounded-xl hover:bg-roseDeep transition-colors text-sm">
-          Kostenlose Demo buchen
+        <a href="#" class="whatsapp-cta inline-flex items-center justify-center gap-2 bg-rose text-ink font-semibold px-7 py-3.5 rounded-xl hover:bg-roseDeep transition-colors text-sm">
+          Gili auf WhatsApp kennenlernen
         </a>
         <a href="#kundenbindung" class="inline-flex items-center justify-center gap-2 text-ink font-semibold bg-canvas border border-line px-7 py-3.5 rounded-xl hover:bg-roseSoft transition-colors text-sm">
-          Gili kennenlernen
+          So funktioniert Gili
           <i data-lucide="arrow-down" class="w-4 h-4"></i>
         </a>
       </div>
@@ -820,8 +820,8 @@
     </div>
 
     <div class="mt-10 reveal" style="transition-delay:0.2s">
-      <a href="#" class="demo-btn inline-flex items-center gap-2 bg-rose text-ink font-semibold px-7 py-3.5 rounded-xl hover:bg-roseDeep transition-colors text-sm">
-        Kostenlose Demo buchen
+      <a href="#" class="whatsapp-cta inline-flex items-center gap-2 bg-rose text-ink font-semibold px-7 py-3.5 rounded-xl hover:bg-roseDeep transition-colors text-sm">
+        Mein Potenzial besprechen
         <i data-lucide="arrow-right" class="w-4 h-4"></i>
       </a>
     </div>
@@ -888,8 +888,8 @@
             <span class="font-serif text-xl text-ink">88&nbsp;€&nbsp;<span class="text-muted text-sm font-sans">/ Monat</span></span>
           </div>
         </div>
-        <a href="#" class="demo-btn block text-center bg-rose text-ink font-semibold px-6 py-3.5 rounded-xl hover:bg-roseDeep transition-colors text-sm mb-5">
-          Kostenlose Demo buchen
+        <a href="#" class="whatsapp-cta block text-center bg-rose text-ink font-semibold px-6 py-3.5 rounded-xl hover:bg-roseDeep transition-colors text-sm mb-5">
+          Kostenlos kennenlernen
         </a>
         <ul class="space-y-2">
           <li class="flex items-center gap-2 text-xs text-muted"><i data-lucide="check" class="w-3.5 h-3.5 text-mint flex-shrink-0"></i>Monatlich kündbar</li>
@@ -927,8 +927,8 @@
             <span class="font-serif text-xl text-ink">ab&nbsp;60&nbsp;€&nbsp;<span class="text-muted text-sm font-sans">/ Stylistin</span></span>
           </div>
         </div>
-        <a href="#" class="demo-btn block text-center bg-rose text-ink font-semibold px-6 py-3.5 rounded-xl hover:bg-roseDeep transition-colors text-sm mb-5">
-          Kostenlose Demo buchen
+        <a href="#" class="whatsapp-cta block text-center bg-rose text-ink font-semibold px-6 py-3.5 rounded-xl hover:bg-roseDeep transition-colors text-sm mb-5">
+          Kostenlos kennenlernen
         </a>
         <ul class="space-y-2">
           <li class="flex items-center gap-2 text-xs text-muted"><i data-lucide="check" class="w-3.5 h-3.5 text-mint flex-shrink-0"></i>Monatlich kündbar</li>
@@ -1051,11 +1051,11 @@
       Bereit, aus mehr Kundinnen wiederkehrenden Umsatz zu machen?
     </h2>
     <p class="text-muted text-base md:text-lg leading-relaxed mb-10">
-      Lerne Gili in einer kostenlosen Demo kennen – persönlich und ohne Verpflichtung.
+      Lerne Gili persönlich und unverbindlich über WhatsApp kennen.
     </p>
     <!-- EDITABLE: Final CTA -->
-    <a href="#" class="demo-btn inline-flex items-center gap-2 bg-rose text-ink font-semibold px-8 py-4 rounded-xl hover:bg-roseDeep transition-colors text-base mb-5">
-      Kostenlose Demo buchen
+    <a href="#" class="whatsapp-cta inline-flex items-center gap-2 bg-rose text-ink font-semibold px-8 py-4 rounded-xl hover:bg-roseDeep transition-colors text-base mb-5">
+      Schreib uns auf WhatsApp
       <i data-lucide="arrow-right" class="w-5 h-5"></i>
     </a>
     <p class="text-xs text-muted tracking-wide">Keine Kreditkarte · Keine Verpflichtung</p>
@@ -1174,11 +1174,13 @@
 <script src="/tracking-config.js"></script>
 <script src="/privacy.js"></script>
 <script>
-  // ─── EDITABLE: Set demo booking URL ───
-  const DEMO_URL = "#";
+  // ─── EDITABLE: WhatsApp contact URL with a pre-filled message ───
+  const WHATSAPP_URL = "https://wa.me/436604088773?text=Hallo%20Gili%2C%20ich%20m%C3%B6chte%20mehr%20dar%C3%BCber%20erfahren%2C%20wie%20Gili%20meinen%20Salon%20unterst%C3%BCtzen%20kann.%20%F0%9F%8C%B8";
 
-  document.querySelectorAll('.demo-btn, #nav-cta, #nav-cta-mobile').forEach(el => {
-    el.href = DEMO_URL;
+  document.querySelectorAll('.whatsapp-cta, #nav-cta, #nav-cta-mobile').forEach(el => {
+    el.href = WHATSAPP_URL;
+    el.target = "_blank";
+    el.rel = "noopener noreferrer";
   });
 
   document.getElementById('current-year').textContent = new Date().getFullYear();
@@ -1189,7 +1191,7 @@
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       const target = this.getAttribute('href');
-      if (target === '#' || target === DEMO_URL) return;
+      if (target === '#') return;
       const el = document.querySelector(target);
       if (!el) return;
       e.preventDefault();
