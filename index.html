@@ -11,11 +11,13 @@
   <meta property="og:description" content="Gili beantwortet Anfragen über WhatsApp, vereinbart Termine und bringt deine Kundinnen zurück." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://gili.live" />
+  <link rel="canonical" href="https://gili.live/" />
+  <link rel="stylesheet" href="/privacy.css" />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&amp;family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap" rel="stylesheet" />
 
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -854,7 +856,7 @@
       <!-- EDITABLE: Summer offer banner — remove when offer ends -->
       <div class="inline-flex items-center gap-2 bg-rose/25 border border-rose/40 rounded-full px-5 py-2 mt-4">
         <i data-lucide="sun" class="w-4 h-4 text-ink"></i>
-        <span class="text-ink font-semibold text-sm">Sommerangebot: Der erste Monat ist kostenlos.</span>
+        <span class="text-ink font-semibold text-sm">Einführungsangebot: Der erste Monat ist kostenlos.</span>
       </div>
     </div>
 
@@ -936,6 +938,10 @@
       </div>
 
     </div>
+
+    <p class="text-center text-muted text-xs md:text-sm mt-6 max-w-3xl mx-auto reveal" style="transition-delay:0.12s">
+      Alle Preisangaben richten sich an Unternehmerinnen und Unternehmer und verstehen sich als Nettopreise. Eine gesetzlich geschuldete Umsatzsteuer wird zusätzlich verrechnet. Das Einführungsangebot gilt für Neukundinnen einmalig pro Betrieb; der kostenlose erste Monat beginnt nach der Einrichtung.
+    </p>
 
     <p class="text-center text-muted text-sm md:text-base mt-10 reveal" style="transition-delay:0.15s">
       Schon eine einzige zurückgewonnene Kundin pro Monat gleicht die Kosten in der Regel aus.
@@ -1069,10 +1075,10 @@
         <!-- EDITABLE: Contact email -->
         <a href="mailto:hallo@gili.live" class="text-muted text-sm hover:text-ink transition-colors">hallo@gili.live</a>
       </div>
-      <nav aria-label="Rechtliches" class="flex gap-6 text-sm text-muted">
-        <a href="impressum.html" class="hover:text-ink transition-colors">Impressum</a>
-        <a href="datenschutz.html" class="hover:text-ink transition-colors">Datenschutz</a>
-        <a href="#" class="cookie-settings-link hover:text-ink transition-colors">Cookie-Einstellungen</a>
+      <nav aria-label="Rechtliches" class="flex flex-wrap gap-6 text-sm text-muted">
+        <a href="/impressum" class="hover:text-ink transition-colors">Impressum</a>
+        <a href="/datenschutz" class="hover:text-ink transition-colors">Datenschutz</a>
+        <button type="button" data-cookie-settings class="hover:text-ink transition-colors">Cookie-Einstellungen</button>
       </nav>
     </div>
     <p class="mt-10 text-xs text-muted">© <span id="current-year"></span> Gili. Alle Rechte vorbehalten.</p>
@@ -1080,9 +1086,84 @@
 </footer>
 
 
+<!-- Pilot interest form. Netlify detects this form at deploy time. -->
+<div id="pilot-popup" class="privacy-overlay privacy-hidden" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="pilot-title">
+  <div class="privacy-dialog pilot-dialog">
+    <div class="privacy-dialog-inner">
+      <button type="button" class="privacy-close" data-close-pilot aria-label="Fenster schließen">×</button>
+      <h2 id="pilot-title">Teste Gili als Erste</h2>
+      <p>Pilot für Instagram-DMs &amp; Website-Chat. Jetzt vormerken.</p>
+
+      <form id="pilot-form" class="pilot-form" name="pilot-interest" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="pilot-interest" />
+        <p class="privacy-hidden">
+          <label>Dieses Feld nicht ausfüllen: <input name="bot-field" /></label>
+        </p>
+        <label class="pilot-label">
+          E-Mail
+          <input class="pilot-input" type="email" name="email" autocomplete="email" required placeholder="deine@email.at" />
+        </label>
+        <label class="pilot-consent">
+          <input type="checkbox" name="marketing_consent" value="ja" />
+          <span>Ich möchte per E-Mail über den Gili-Pilot, Produktneuigkeiten und Angebote informiert werden. Jederzeit widerrufbar. <a class="privacy-link" href="/datenschutz">Datenschutz</a></span>
+        </label>
+        <button type="submit" class="privacy-btn privacy-btn-primary">Vormerken</button>
+        <div id="pilot-status" class="pilot-status" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- First-layer consent notice -->
+<div id="cookie-banner" class="privacy-overlay privacy-hidden" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="cookie-title">
+  <div class="privacy-dialog">
+    <div class="privacy-dialog-inner">
+      <h2 id="cookie-title">Deine Privatsphäre</h2>
+      <p>Wir verwenden optionale Cookies und ähnliche Technologien, um die Website zu verbessern und unsere Werbung zu messen. Du entscheidest, was erlaubt ist. Mehr dazu in unserer <a class="privacy-link" href="/datenschutz">Datenschutzerklärung</a>.</p>
+      <div class="privacy-actions">
+        <button type="button" class="privacy-btn privacy-btn-primary" data-consent-all>Alle akzeptieren</button>
+        <button type="button" class="privacy-btn" data-consent-reject>Nur notwendige</button>
+        <button type="button" class="privacy-btn" data-cookie-settings>Einstellungen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Detailed consent settings -->
+<div id="cookie-settings" class="privacy-overlay privacy-hidden" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+  <div class="privacy-dialog">
+    <div class="privacy-dialog-inner">
+      <button type="button" class="privacy-close" data-close-settings aria-label="Einstellungen schließen">×</button>
+      <h2 id="settings-title">Cookie-Einstellungen</h2>
+      <p>Notwendige Funktionen sind immer aktiv. Statistik und Marketing starten erst nach deiner Einwilligung.</p>
+      <div class="privacy-options">
+        <label class="privacy-option">
+          <input type="checkbox" checked disabled />
+          <span><strong>Notwendig</strong>Speichert deine Auswahl und ermöglicht sichere Formulare.</span>
+        </label>
+        <label class="privacy-option">
+          <input id="consent-statistics" type="checkbox" />
+          <span><strong>Statistik</strong>Google Analytics und Microsoft Clarity helfen uns, Besuche und Nutzung zu verstehen.</span>
+        </label>
+        <label class="privacy-option">
+          <input id="consent-marketing" type="checkbox" />
+          <span><strong>Marketing</strong>Der Meta Pixel misst Kampagnen und kann personalisierte Werbung ermöglichen.</span>
+        </label>
+      </div>
+      <div class="privacy-actions">
+        <button type="button" class="privacy-btn privacy-btn-primary" data-consent-save>Auswahl speichern</button>
+        <button type="button" class="privacy-btn" data-consent-all>Alle akzeptieren</button>
+        <button type="button" class="privacy-btn" data-consent-reject>Nur notwendige</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ═══════════════════════════════════════════
      JAVASCRIPT
 ════════════════════════════════════════════ -->
+<script src="/tracking-config.js"></script>
+<script src="/privacy.js"></script>
 <script>
   // ─── EDITABLE: Set demo booking URL ───
   const DEMO_URL = "#";
@@ -1239,8 +1320,6 @@
   const phone1 = document.getElementById('phone1');
   if (phone1) phone1Observer.observe(phone1);
 </script>
-
-<script src="assets/cookie-consent.js"></script>
 
 </body>
 </html>

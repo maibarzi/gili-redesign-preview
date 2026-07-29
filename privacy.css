@@ -1,0 +1,205 @@
+.privacy-hidden {
+  display: none !important;
+}
+
+.privacy-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(42, 40, 37, 0.48);
+}
+
+.privacy-dialog {
+  width: min(100%, 560px);
+  max-height: min(90vh, 760px);
+  overflow: auto;
+  border: 1px solid #EFE7E1;
+  border-radius: 18px;
+  background: #FDFAF7;
+  box-shadow: 0 24px 70px rgba(42, 40, 37, 0.2);
+}
+
+.privacy-dialog-inner {
+  padding: 26px;
+}
+
+.privacy-dialog h2 {
+  margin: 0 0 10px;
+  color: #2A2825;
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.privacy-dialog p {
+  margin: 0;
+  color: #6F6A65;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.privacy-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.privacy-btn {
+  min-height: 44px;
+  border: 1px solid #E3D9D1;
+  border-radius: 11px;
+  padding: 10px 16px;
+  background: #FFFFFF;
+  color: #2A2825;
+  font: 600 14px/1.2 "Instrument Sans", system-ui, sans-serif;
+  cursor: pointer;
+}
+
+.privacy-btn:hover {
+  border-color: #C9BBB1;
+}
+
+.privacy-btn-primary {
+  border-color: #E8A0A8;
+  background: #E8A0A8;
+}
+
+.privacy-btn-primary:hover {
+  border-color: #DE9099;
+  background: #DE9099;
+}
+
+.privacy-link {
+  color: #2E7D64;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.privacy-options {
+  display: grid;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.privacy-option {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  align-items: start;
+  border: 1px solid #EFE7E1;
+  border-radius: 12px;
+  padding: 14px;
+  background: #FFFFFF;
+}
+
+.privacy-option input {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: #2E7D64;
+}
+
+.privacy-option strong {
+  display: block;
+  margin-bottom: 3px;
+  color: #2A2825;
+  font-size: 14px;
+}
+
+.privacy-option span {
+  display: block;
+  color: #7B756F;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.privacy-close {
+  float: right;
+  border: 0;
+  padding: 4px;
+  background: transparent;
+  color: #6F6A65;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.pilot-dialog {
+  width: min(100%, 520px);
+}
+
+.pilot-form {
+  display: grid;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.pilot-label {
+  display: grid;
+  gap: 7px;
+  color: #2A2825;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.pilot-input {
+  width: 100%;
+  min-height: 48px;
+  border: 1.5px solid #E3D9D1;
+  border-radius: 11px;
+  padding: 11px 13px;
+  background: #FFFFFF;
+  color: #2A2825;
+  font: 16px "Instrument Sans", system-ui, sans-serif;
+}
+
+.pilot-input:focus {
+  border-color: #2E7D64;
+  outline: none;
+}
+
+.pilot-consent {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 9px;
+  align-items: start;
+  color: #6F6A65;
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.pilot-consent input {
+  width: 17px;
+  height: 17px;
+  margin-top: 1px;
+  accent-color: #2E7D64;
+}
+
+.pilot-status {
+  min-height: 20px;
+  color: #2E7D64;
+  font-size: 13px;
+}
+
+body.privacy-locked {
+  overflow: hidden;
+}
+
+@media (max-width: 540px) {
+  .privacy-dialog-inner {
+    padding: 22px 18px;
+  }
+
+  .privacy-actions {
+    display: grid;
+  }
+
+  .privacy-btn {
+    width: 100%;
+  }
+}

@@ -1,20 +1,31 @@
-# Gili – Landing Page Preview
+# Gili – Production Landing Page
 
-Preview landing page for Gili, a client-retention service for hair and beauty salons.
-
-This is a standalone preview project. It is completely separate from any existing Gili deployment.
+Production landing page for Gili, a client-retention service for hair and beauty salons.
 
 ## Stack
 
-- Single `index.html` file
+- Static HTML, CSS and JavaScript with no build step
 - Tailwind CSS via CDN
 - Lucide Icons via CDN
 - Google Fonts (DM Serif Display + Instrument Sans)
 - Vanilla JavaScript
+- Netlify Forms for pilot registrations
+- Consent-first loading for Google Analytics, Microsoft Clarity and Meta Pixel
 
 ## Deployment
 
-Deployed to Netlify as a preview site. No custom domain connected.
+Deployed through the Netlify project `gili-redesign-preview-0726`.
+
+- Production: https://gili.live
+- Netlify URL: https://gili-redesign-preview-0726.netlify.app
+- Former site: https://gili-beauty.netlify.app
+
+Tracking IDs are configured in `tracking-config.js` and load only after the
+visitor grants the matching consent category.
+
+- Google Analytics: `G-8F4KKHPGNC`
+- Microsoft Clarity: `xu34q4l3em`
+- Meta Pixel: `2060114271547057`
 
 ## Key edit points
 

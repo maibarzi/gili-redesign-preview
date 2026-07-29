@@ -1,0 +1,252 @@
+:root {
+  color-scheme: light;
+  --canvas: #FDFAF7;
+  --rose: #E8A0A8;
+  --ink: #2A2825;
+  --muted: #6F6A65;
+  --line: #EFE7E1;
+  --mint-deep: #2E7D64;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: "Instrument Sans", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+.legal-nav,
+.legal-footer {
+  border-color: var(--line);
+  border-style: solid;
+  border-width: 0;
+}
+
+.legal-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  border-bottom-width: 1px;
+  background: rgba(253, 250, 247, 0.96);
+}
+
+.legal-nav-inner,
+.legal-footer-inner,
+.legal-main {
+  width: min(100% - 40px, 860px);
+  margin-inline: auto;
+}
+
+.legal-nav-inner {
+  display: flex;
+  min-height: 64px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.legal-logo {
+  text-decoration: none;
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: 26px;
+}
+
+.legal-back {
+  color: var(--muted);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.legal-back:hover,
+.legal-footer a:hover {
+  color: var(--ink);
+}
+
+.legal-main {
+  padding-block: 72px 96px;
+}
+
+.legal-kicker {
+  margin: 0 0 12px;
+  color: var(--mint-deep);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.legal-main h1,
+.legal-main h2 {
+  font-family: "DM Serif Display", Georgia, serif;
+  font-weight: 400;
+}
+
+.legal-main h1 {
+  margin: 0 0 18px;
+  font-size: clamp(40px, 7vw, 62px);
+  line-height: 1.06;
+}
+
+.legal-intro {
+  max-width: 680px;
+  margin: 0 0 52px;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.legal-section {
+  padding-block: 28px;
+  border-top: 1px solid var(--line);
+}
+
+.legal-section h2 {
+  margin: 0 0 14px;
+  font-size: 27px;
+  line-height: 1.2;
+}
+
+.legal-section h3 {
+  margin: 22px 0 8px;
+  font-size: 16px;
+}
+
+.legal-section p,
+.legal-section li {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.72;
+}
+
+.legal-section p {
+  margin: 0 0 12px;
+}
+
+.legal-section ul {
+  margin: 10px 0 14px;
+  padding-left: 22px;
+}
+
+.legal-section a {
+  color: var(--mint-deep);
+  text-underline-offset: 2px;
+}
+
+.legal-card {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 20px;
+  background: #FFFFFF;
+}
+
+.legal-form {
+  display: grid;
+  gap: 16px;
+  max-width: 620px;
+  margin-top: 22px;
+}
+
+.legal-form label {
+  display: grid;
+  gap: 7px;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.legal-form input,
+.legal-form textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 14px;
+  background: #FFFFFF;
+  color: var(--ink);
+  font: inherit;
+}
+
+.legal-form input:focus,
+.legal-form textarea:focus {
+  border-color: var(--mint-deep);
+  outline: 2px solid rgba(46, 125, 100, 0.14);
+  outline-offset: 1px;
+}
+
+.legal-form textarea {
+  min-height: 130px;
+  resize: vertical;
+}
+
+.legal-form button {
+  justify-self: start;
+  border: 0;
+  border-radius: 10px;
+  padding: 12px 18px;
+  background: var(--rose);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.legal-form button:hover {
+  filter: brightness(0.96);
+}
+
+.legal-form .legal-form-note {
+  margin: 0;
+  font-size: 13px;
+}
+
+.legal-footer {
+  border-top-width: 1px;
+}
+
+.legal-footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding-block: 30px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.legal-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.legal-footer button {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .legal-main {
+    padding-block: 48px 72px;
+  }
+
+  .legal-back {
+    font-size: 13px;
+  }
+}
