@@ -141,6 +141,21 @@
 
     /* Official WhatsApp green for every visible mention of the channel. */
     .wa-green { color: #25D366; }
+    .cta-wa-mark {
+      width: 1.65em;
+      height: 1.65em;
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: inset 0 0 0 1px rgba(37, 211, 102, 0.18);
+    }
+    .cta-wa-mark svg {
+      width: 1.08em;
+      height: 1.08em;
+      fill: #25D366;
+    }
 
     /* ── Channel row under the hero ──
        WhatsApp is the only live channel; the other two are explicitly pending. */
@@ -379,12 +394,14 @@
 
       <!-- EDITABLE: primary CTA links to WhatsApp -->
       <a href="#" id="nav-cta" class="hidden md:inline-flex items-center gap-2 bg-rose text-ink text-sm font-semibold px-5 py-2.5 rounded-xl hover:bg-roseDeep transition-colors">
-        Auf <span class="wa-green">WhatsApp</span> schreiben
+        <span class="cta-wa-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.13-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.84-.2-.49-.4-.42-.56-.43h-.47c-.16 0-.43.06-.65.31-.22.25-.85.84-.85 2.03 0 1.2.87 2.35.99 2.51.12.16 1.71 2.61 4.15 3.66.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.68-1.18.2-.58.2-1.08.15-1.18-.06-.11-.22-.17-.47-.29Z"/></svg></span>
+        <span>Auf WhatsApp schreiben</span>
       </a>
 
       <div class="flex md:hidden items-center gap-3">
-        <a href="#" id="nav-cta-mobile" class="inline-flex items-center bg-rose text-ink text-xs font-semibold px-4 py-2 rounded-xl hover:bg-roseDeep transition-colors">
-          Auf&nbsp;<span class="wa-green">WhatsApp</span>&nbsp;schreiben
+        <a href="#" id="nav-cta-mobile" class="inline-flex items-center gap-1.5 bg-rose text-ink text-xs font-semibold px-3 py-2 rounded-xl hover:bg-roseDeep transition-colors">
+          <span class="cta-wa-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.13-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.84-.2-.49-.4-.42-.56-.43h-.47c-.16 0-.43.06-.65.31-.22.25-.85.84-.85 2.03 0 1.2.87 2.35.99 2.51.12.16 1.71 2.61 4.15 3.66.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.68-1.18.2-.58.2-1.08.15-1.18-.06-.11-.22-.17-.47-.29Z"/></svg></span>
+          <span>Auf WhatsApp schreiben</span>
         </a>
         <button id="menu-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobile-menu" class="p-1 text-ink">
           <i data-lucide="menu" class="w-5 h-5"></i>
@@ -509,7 +526,8 @@
 
       <div class="flex flex-col sm:flex-row gap-4 sm:justify-center mb-8">
         <a href="#" class="whatsapp-cta inline-flex items-center justify-center gap-2 bg-rose text-ink font-semibold px-7 py-3.5 rounded-xl hover:bg-roseDeep transition-colors text-sm">
-          Gili auf <span class="wa-green">WhatsApp</span> kennenlernen
+          <span class="cta-wa-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.13-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.84-.2-.49-.4-.42-.56-.43h-.47c-.16 0-.43.06-.65.31-.22.25-.85.84-.85 2.03 0 1.2.87 2.35.99 2.51.12.16 1.71 2.61 4.15 3.66.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.68-1.18.2-.58.2-1.08.15-1.18-.06-.11-.22-.17-.47-.29Z"/></svg></span>
+          <span>Gili auf WhatsApp kennenlernen</span>
         </a>
         <a href="#kundenbindung" class="inline-flex items-center justify-center gap-2 text-ink font-semibold bg-canvas border border-line px-7 py-3.5 rounded-xl hover:bg-roseSoft transition-colors text-sm">
           So funktioniert Gili
@@ -1055,7 +1073,8 @@
     </p>
     <!-- EDITABLE: Final CTA -->
     <a href="#" class="whatsapp-cta inline-flex items-center gap-2 bg-rose text-ink font-semibold px-8 py-4 rounded-xl hover:bg-roseDeep transition-colors text-base mb-5">
-      Schreib uns auf <span class="wa-green">WhatsApp</span>
+      <span class="cta-wa-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.13-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.84-.2-.49-.4-.42-.56-.43h-.47c-.16 0-.43.06-.65.31-.22.25-.85.84-.85 2.03 0 1.2.87 2.35.99 2.51.12.16 1.71 2.61 4.15 3.66.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.68-1.18.2-.58.2-1.08.15-1.18-.06-.11-.22-.17-.47-.29Z"/></svg></span>
+      <span>Schreib uns auf WhatsApp</span>
       <i data-lucide="arrow-right" class="w-5 h-5"></i>
     </a>
     <p class="text-xs text-muted tracking-wide">Keine Kreditkarte · Keine Verpflichtung</p>
