@@ -3,21 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- Auto-redirect French-language visitors landing on the root page to /fr/, once per visitor -->
-  <script>
-  (function () {
-    if (localStorage.getItem('lang-choice')) return;
-    if (document.cookie.indexOf('lang-choice=') !== -1) return;
-    var p = location.pathname;
-    if (p !== '/' && p !== '/index.html') return;
-    if (new URLSearchParams(location.search).get('nolang') === '1') return;
-    if (navigator.language && navigator.language.toLowerCase().indexOf('fr') === 0) {
-      location.replace('/fr/');
-    }
-  })();
-  </script>
-
   <title>Gili – Ein Buchungssystem, das deine Kundinnen zurückbringt</title>
   <meta name="description" content="Gili vereinbart Termine über WhatsApp – und sorgt dafür, dass deine Kundinnen wiederkommen." />
 
@@ -1231,6 +1216,20 @@
   </div>
 </div>
 
+<!-- Language choice — shown once on first visit to the German root page -->
+<div id="lang-modal" class="privacy-overlay privacy-hidden" data-modal-lock="true" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="lang-modal-title">
+  <div class="privacy-dialog">
+    <div class="privacy-dialog-inner">
+      <h2 id="lang-modal-title">Wähle deine Sprache · Choisis ta langue</h2>
+      <p>Gili gibt es auf Deutsch und auf Französisch.</p>
+      <div class="privacy-actions">
+        <button type="button" class="privacy-btn privacy-btn-primary" data-lang-choice="de">Deutsch</button>
+        <button type="button" class="privacy-btn privacy-btn-primary" data-lang-choice="fr">Français</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ═══════════════════════════════════════════
      JAVASCRIPT
 ════════════════════════════════════════════ -->
@@ -1246,12 +1245,32 @@
     el.rel = "noopener noreferrer";
   });
 
-  // Manual language switch — remember the choice so the auto-redirect never fires again
+  // Language choice — modal on first visit, flag reused by nav switcher links
+  const langModal = document.getElementById('lang-modal');
+  function setLangChoice() { localStorage.setItem('lang-choice', '1'); }
+  function showLangModal() {
+    langModal.classList.remove('privacy-hidden');
+    langModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('privacy-locked');
+  }
+  function hideLangModal() {
+    langModal.classList.add('privacy-hidden');
+    langModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('privacy-locked');
+  }
   document.querySelectorAll('[data-lang-link]').forEach(el => {
+    el.addEventListener('click', setLangChoice);
+  });
+  document.querySelectorAll('[data-lang-choice]').forEach(el => {
     el.addEventListener('click', () => {
-      localStorage.setItem('lang-choice', '1');
+      setLangChoice();
+      if (el.dataset.langChoice === 'fr') { location.href = '/fr/'; return; }
+      hideLangModal();
     });
   });
+  if (!localStorage.getItem('lang-choice') && langModal) {
+    showLangModal();
+  }
 
   document.getElementById('current-year').textContent = new Date().getFullYear();
 
