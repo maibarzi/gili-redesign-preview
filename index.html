@@ -3,6 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Auto-redirect French-language visitors landing on the root page to /fr/, once per visitor -->
+  <script>
+  (function () {
+    if (localStorage.getItem('lang-choice')) return;
+    if (document.cookie.indexOf('lang-choice=') !== -1) return;
+    var p = location.pathname;
+    if (p !== '/' && p !== '/index.html') return;
+    if (new URLSearchParams(location.search).get('nolang') === '1') return;
+    if (navigator.language && navigator.language.toLowerCase().indexOf('fr') === 0) {
+      location.replace('/fr/');
+    }
+  })();
+  </script>
+
   <title>Gili – Ein Buchungssystem, das deine Kundinnen zurückbringt</title>
   <meta name="description" content="Gili vereinbart Termine über WhatsApp – und sorgt dafür, dass deine Kundinnen wiederkommen." />
 
@@ -12,6 +27,8 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://gili.live" />
   <link rel="canonical" href="https://gili.live/" />
+  <link rel="alternate" hreflang="de" href="https://gili.live/" />
+  <link rel="alternate" hreflang="fr" href="https://gili.live/fr/" />
   <link rel="stylesheet" href="/privacy.css" />
 
   <!-- Google Fonts -->
@@ -398,6 +415,7 @@
         <a href="#rechner"       class="hover:text-ink transition-colors">Rechner</a>
         <a href="#preise"        class="hover:text-ink transition-colors">Preise</a>
         <a href="#faq"           class="hover:text-ink transition-colors">FAQ</a>
+        <a href="/fr/" class="lang-switch hover:text-ink transition-colors" data-lang-link aria-label="Passer au français">FR</a>
       </nav>
 
       <!-- EDITABLE: primary CTA links to WhatsApp -->
@@ -423,6 +441,7 @@
         <a href="#rechner"       class="hover:text-ink transition-colors mobile-nav-link">Rechner</a>
         <a href="#preise"        class="hover:text-ink transition-colors mobile-nav-link">Preise</a>
         <a href="#faq"           class="hover:text-ink transition-colors mobile-nav-link">FAQ</a>
+        <a href="/fr/" class="lang-switch hover:text-ink transition-colors mobile-nav-link" data-lang-link aria-label="Passer au français">FR</a>
       </nav>
     </div>
   </div>
@@ -1225,6 +1244,13 @@
     el.href = WHATSAPP_URL;
     el.target = "_blank";
     el.rel = "noopener noreferrer";
+  });
+
+  // Manual language switch — remember the choice so the auto-redirect never fires again
+  document.querySelectorAll('[data-lang-link]').forEach(el => {
+    el.addEventListener('click', () => {
+      localStorage.setItem('lang-choice', '1');
+    });
   });
 
   document.getElementById('current-year').textContent = new Date().getFullYear();
