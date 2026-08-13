@@ -14,6 +14,7 @@
   <link rel="canonical" href="https://gili.live/" />
   <link rel="alternate" hreflang="de" href="https://gili.live/" />
   <link rel="alternate" hreflang="fr" href="https://gili.live/fr/" />
+  <link rel="alternate" hreflang="en" href="https://gili.live/en/" />
   <link rel="stylesheet" href="/privacy.css" />
 
   <!-- Google Fonts -->
@@ -401,6 +402,7 @@
         <a href="#preise"        class="hover:text-ink transition-colors">Preise</a>
         <a href="#faq"           class="hover:text-ink transition-colors">FAQ</a>
         <a href="/fr/" class="lang-switch hover:text-ink transition-colors" data-lang-link aria-label="Passer au français">FR</a>
+        <a href="/en/" class="lang-switch hover:text-ink transition-colors" data-lang-link aria-label="Switch to English">EN</a>
       </nav>
 
       <!-- EDITABLE: primary CTA links to WhatsApp -->
@@ -427,6 +429,7 @@
         <a href="#preise"        class="hover:text-ink transition-colors mobile-nav-link">Preise</a>
         <a href="#faq"           class="hover:text-ink transition-colors mobile-nav-link">FAQ</a>
         <a href="/fr/" class="lang-switch hover:text-ink transition-colors mobile-nav-link" data-lang-link aria-label="Passer au français">FR</a>
+        <a href="/en/" class="lang-switch hover:text-ink transition-colors mobile-nav-link" data-lang-link aria-label="Switch to English">EN</a>
       </nav>
     </div>
   </div>
@@ -1220,11 +1223,12 @@
 <div id="lang-modal" class="privacy-overlay privacy-hidden" data-modal-lock="true" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="lang-modal-title">
   <div class="privacy-dialog">
     <div class="privacy-dialog-inner">
-      <h2 id="lang-modal-title">Wähle deine Sprache · Choisis ta langue</h2>
-      <p>Gili gibt es auf Deutsch und auf Französisch.</p>
+      <h2 id="lang-modal-title">Wähle deine Sprache · Choisis ta langue · Choose your language</h2>
+      <p>Gili gibt es auf Deutsch, Französisch und Englisch.</p>
       <div class="privacy-actions">
         <button type="button" class="privacy-btn privacy-btn-primary" data-lang-choice="de">Deutsch</button>
         <button type="button" class="privacy-btn privacy-btn-primary" data-lang-choice="fr">Français</button>
+        <button type="button" class="privacy-btn privacy-btn-primary" data-lang-choice="en">English</button>
       </div>
     </div>
   </div>
@@ -1265,6 +1269,7 @@
     el.addEventListener('click', () => {
       setLangChoice();
       if (el.dataset.langChoice === 'fr') { location.href = '/fr/'; return; }
+      if (el.dataset.langChoice === 'en') { location.href = '/en/'; return; }
       hideLangModal();
     });
   });
