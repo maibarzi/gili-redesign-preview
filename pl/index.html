@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gili – System rezerwacji, dzięki któremu Pani klientki wracają</title>
+  <meta name="description" content="Gili umawia wizyty przez WhatsApp — i dba o to, by Pani klientki wracały." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Gili – System rezerwacji, dzięki któremu Pani klientki wracają" />
+  <meta property="og:description" content="Gili odpowiada na zapytania przez WhatsApp, umawia wizyty i sprawia, że Pani klientki wracają." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://gili.live/pl/" />
+  <link rel="canonical" href="https://gili.live/pl/" />
+  <link rel="alternate" hreflang="de" href="https://gili.live/" />
+  <link rel="alternate" hreflang="fr" href="https://gili.live/fr/" />
+  <link rel="alternate" hreflang="en" href="https://gili.live/en/" />
+  <link rel="alternate" hreflang="es" href="https://gili.live/es/" />
+  <link rel="alternate" hreflang="pl" href="https://gili.live/pl/" />
+  <link rel="stylesheet" href="/privacy.css" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&amp;family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            /* ─── EDITABLE: brand palette ─── */
+            canvas:   '#FDFAF7',  /* page background — warm off-white */
+            rose:     '#E8A0A8',  /* primary accent — action & emotion */
+            roseSoft: '#FBEEF0',  /* soft pink section background */
+            roseDeep: '#DE9099',  /* rose hover state */
+            mint:     '#8FCFB8',  /* secondary accent — icon fills, status dots */
+            mintSoft: '#E7F4EF',  /* soft mint section background */
+            mintDeep: '#2E7D64',  /* mint for TEXT only (contrast-safe) */
+            ink:      '#2A2825',  /* text — warm charcoal */
+            muted:    '#8A8580',  /* secondary text */
+            line:     '#EFE7E1',  /* hairlines & borders */
+          },
+          fontFamily: {
+            serif: ['"DM Serif Display"', 'Georgia', 'serif'],
+            sans:  ['"Instrument Sans"', 'system-ui', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <style>
+    /* ─── Base ─── */
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: #FDFAF7; color: #2A2825;
+      font-family: 'Instrument Sans', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    }
+    * { box-sizing: border-box; }
+    img, svg { max-width: 100%; }
+
+    /* ─── Scroll-reveal ─── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ═══════════════════════════════════════
+       HERO BACKGROUND IMAGE + SCRIM
+    ═══════════════════════════════════════ */
+    /* ── Hero band ──
+       Height comes from the image's own proportions (1600:900) — never from the
+       content, never from a fixed vh — so the whole room is always visible and
+       nothing is cropped. Image, scrim and band copy share one grid cell. */
+    .hero-media {
+      display: grid;
+      width: 100%;
+      aspect-ratio: 1600 / 900;
+    }
+    .hero-media > * { grid-column: 1; grid-row: 1; min-width: 0; }
+    .hero-img {
+      display: block; width: 100%; height: 100%;
+      object-fit: cover; /* box ratio == image ratio, so this crops nothing */
+    }
+    /* Soft wash behind the text only — the wood, mirror and flowers stay clear.
+       Elliptical so the corners of the room are barely touched. */
+    .hero-scrim {
+      background: radial-gradient(ellipse 62% 58% at 50% 46%,
+        rgba(253,250,247,0.80) 0%,
+        rgba(253,250,247,0.67) 44%,
+        rgba(253,250,247,0.24) 74%,
+        rgba(253,250,247,0) 100%);
+    }
+    @media (max-width: 767px) {
+      /* The salon photo places her in the right third of the frame — the wash
+         and the text column both shift left off-center so neither the scrim
+         nor the headline ever sits on top of her. */
+      .hero-scrim {
+        background: radial-gradient(ellipse 68% 60% at 34% 50%,
+          rgba(253,250,247,0.85) 0%,
+          rgba(253,250,247,0.72) 48%,
+          rgba(253,250,247,0.28) 80%,
+          rgba(253,250,247,0) 100%);
+      }
+    }
+    .hero-band-content {
+      position: relative; z-index: 2;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 14px 0;
+    }
+    /* The text must stay inside the wash, otherwise its edges fall on bare photo
+       (the dark wood on the left drops contrast to ~3:1). Width is tied to the
+       gradient's extent rather than a fixed rem value. */
+    .hero-band-inner { width: 100%; max-width: 86vw; margin-left: auto; margin-right: auto; }
+    @media (min-width: 768px) { .hero-band-inner { max-width: min(760px, 58vw); } }
+    @media (max-width: 767px) {
+      /* She sits in the right third of the frame — pull the text column left
+         off-center so it never lands on her instead of the wash. */
+      .hero-band-content { align-items: flex-start; text-align: left; }
+      .hero-band-inner { max-width: 64vw; margin-left: 0; }
+    }
+    .hero-label {
+      display: inline-block; white-space: nowrap;
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: #2A2825;
+      background: rgba(232,160,168,0.32);
+      border: 1px solid rgba(232,160,168,0.55);
+      border-radius: 999px; padding: 5px 13px;
+      margin-bottom: 14px;
+    }
+    @media (min-width: 768px) { .hero-label { font-size: 11px; padding: 6px 16px; margin-bottom: 20px; } }
+
+    /* Both halves of the split headline share this — same size, same weight,
+       so they read as one sentence broken across the mockup. */
+    .hero-line {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-weight: 400;
+      font-size: clamp(23px, 4.6vw, 52px);
+      line-height: 1.14;
+      letter-spacing: -0.01em;
+      color: #2A2825;
+    }
+
+    /* Official WhatsApp green for every visible mention of the channel. */
+    .wa-green { color: #25D366; }
+    .cta-wa-mark {
+      width: 1.65em;
+      height: 1.65em;
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: inset 0 0 0 1px rgba(37, 211, 102, 0.18);
+    }
+    .cta-wa-mark svg {
+      width: 1.08em;
+      height: 1.08em;
+      fill: #25D366;
+    }
+
+    /* ── Channel row under the hero ──
+       WhatsApp is the only live channel; the other two are explicitly pending. */
+    .channel {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 11px; text-align: center; flex: 1 1 0; min-width: 0;
+    }
+    .channel svg { width: 38px; height: 38px; display: block; }
+    .channel-name {
+      font-size: 15px; font-weight: 700; line-height: 1.25; color: #2A2825;
+    }
+    /* compound selector: .channel-name is declared after .wa-green and would
+       otherwise win on source order */
+    .channel-name.wa-green { color: #25D366; }
+    .channel-label {
+      font-size: 12px; color: #8A8580; letter-spacing: 0.02em; line-height: 1.2;
+      margin-top: -5px;
+    }
+    .channel.soon svg { opacity: 0.38; }
+    .channel.soon .channel-name { color: #8A8580; }
+    /* "Deine Website" wraps to two lines on narrow screens — reserve the second
+       line so the "Coming soon" labels stay on one baseline */
+    @media (max-width: 639px) { .channel-name { min-height: 2.5em; } }
+    @media (min-width: 640px) {
+      .channel svg { width: 44px; height: 44px; }
+      .channel-name { font-size: 17px; }
+      .channel-label { font-size: 13px; }
+    }
+
+    /* ═══════════════════════════════════════
+       WHATSAPP SCREEN — used by every mockup
+    ═══════════════════════════════════════ */
+    /* Current WhatsApp, iOS light mode. No phone frame — the conversation is a
+       card floating on the section background. */
+    .wa-screen {
+      border-radius: 16px; overflow: hidden;
+      background: #EFE7DE;
+      display: flex; flex-direction: column;
+      box-shadow: 0 10px 36px rgba(42,40,37,0.11), 0 2px 8px rgba(42,40,37,0.05);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    .wa-header {
+      background: #F6F6F6; padding: 9px 13px;
+      display: flex; align-items: center; gap: 9px; flex-shrink: 0;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .wa-back { color: #007AFF; flex-shrink: 0; display: flex; }
+    .wa-avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: #D9D2CA; display: flex; align-items: center; justify-content: center;
+      color: #6B6259; font-size: 13px; font-weight: 600; flex-shrink: 0;
+    }
+    .wa-header-text { flex: 1; min-width: 0; }
+    .wa-header-text h3 {
+      color: #000; font-size: 14px; font-weight: 600; margin: 0; line-height: 1.25;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .wa-header-text p { color: #8E8E93; font-size: 11px; margin: 0; line-height: 1.3; }
+    .wa-body {
+      flex: 1; min-height: 0; padding: 12px 9px;
+      display: flex; flex-direction: column; gap: 2px;
+      background: #EFE7DE;
+    }
+    .wa-daystamp {
+      align-self: center; background: rgba(255,255,255,0.75);
+      font-size: 11px; color: #667781; padding: 3px 10px; border-radius: 8px;
+      margin-bottom: 6px;
+    }
+    .wa-bubble {
+      position: relative; display: flow-root;
+      max-width: 82%; padding: 6px 9px 6px;
+      border-radius: 7px; font-size: 15px; line-height: 1.33;
+      color: #111B21; box-shadow: 0 1px 0.5px rgba(0,0,0,.13);
+    }
+    .wa-bubble.in  { background: #FFFFFF; align-self: flex-start; border-bottom-left-radius: 2px; }
+    .wa-bubble.out { background: #D9FDD3; align-self: flex-end;   border-bottom-right-radius: 2px; }
+    /* no tail on continued runs, so restore the full corner */
+    .wa-bubble.in  + .wa-bubble.in  { border-bottom-left-radius: 7px; }
+    .wa-bubble.out + .wa-bubble.out { border-bottom-right-radius: 7px; }
+    /* extra space only when the direction changes (between runs) */
+    .wa-bubble.in + .wa-bubble.out,
+    .wa-bubble.out + .wa-bubble.in { margin-top: 8px; }
+
+    /* Tail on the first message of each run only — hidden when the previous
+       bubble came from the same side. */
+    .wa-bubble::before {
+      content: ''; position: absolute; bottom: 0;
+      width: 0; height: 0; border-style: solid;
+    }
+    .wa-bubble.in::before {
+      left: -6px;
+      border-width: 0 7px 9px 0;
+      border-color: transparent #FFFFFF transparent transparent;
+    }
+    .wa-bubble.out::before {
+      right: -6px;
+      border-width: 0 0 9px 7px;
+      border-color: transparent transparent transparent #D9FDD3;
+    }
+    .wa-bubble.in  + .wa-bubble.in::before,
+    .wa-bubble.out + .wa-bubble.out::before { content: none; }
+
+    /* Timestamp sits inside the bubble, bottom-right, with the text flowing
+       around it — as it does in the real client. */
+    .wa-time {
+      float: right; margin: 5px 0 -1px 10px;
+      font-size: 11px; color: #667781; line-height: 1;
+      display: inline-flex; align-items: center; gap: 2px;
+    }
+    .wa-ticks {
+      width: 15px; height: 10px; color: #53BDEB;
+      flex-shrink: 0; display: block;
+    }
+
+    /* ── "Nach 5 Wochen" divider — the one remaining emphasis ── */
+    .wa-divider {
+      align-self: center; text-align: center;
+      margin: 14px 0 10px; display: flex; flex-direction: column; gap: 2px;
+    }
+    .wa-divider-main {
+      background: rgba(255,255,255,0.85);
+      color: #A85260;  /* deeper rose: #E8A0A8 measures 2.1:1 here, this is 5.2:1 */
+      font-size: 11.5px; font-weight: 600;
+      padding: 4px 12px; border-radius: 9px;
+    }
+    .wa-divider-date { font-size: 10.5px; color: #7C756C; }
+
+    /* Shared link inside a message bubble — plain, plausible, nothing elaborate.
+       Inherits the bubble's 15px so it sits on its own line as part of the text. */
+    .wa-link {
+      display: inline-block; margin-top: 3px;
+      color: #027EB5; text-decoration: underline;
+      word-break: break-word;
+    }
+
+    /* Hero chat animation */
+    .wa-msg { opacity: 0; transform: translateY(6px); }
+    @media (prefers-reduced-motion: no-preference) {
+      .wa-msg.show { animation: msgIn 0.3s ease forwards; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .wa-msg { opacity: 1; transform: none; }
+    }
+    @keyframes msgIn { to { opacity: 1; transform: none; } }
+
+    /* Caption under a mockup */
+    .wa-caption {
+      text-align: center; font-size: 12.5px; color: #8A8580;
+      margin-top: 14px; font-style: italic;
+    }
+
+    /* ─── Numbered points (Alltag section) ─── */
+    .point-num {
+      width: 30px; height: 30px; border-radius: 50%;
+      background: #E7F4EF; color: #2E7D64;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 13px; flex-shrink: 0;
+    }
+
+    /* ─── Revenue calculator ─── */
+    .calc-panel {
+      background: #FFFFFF; border: 1px solid #EFE7E1;
+      border-radius: 20px; padding: 28px 24px;
+      box-shadow: 0 4px 28px rgba(42,40,37,0.05);
+    }
+    .calc-label { display: block; font-size: 13.5px; font-weight: 500; color: #2A2825; margin-bottom: 9px; }
+    .calc-field { position: relative; }
+    .calc-input {
+      width: 100%; background: #FDFAF7;
+      border: 1.5px solid #EFE7E1; border-radius: 12px;
+      padding: 12px 14px; font-size: 16px; font-weight: 500;
+      color: #2A2825; font-family: inherit;
+      transition: border-color 0.2s; -moz-appearance: textfield;
+    }
+    .calc-input::-webkit-outer-spin-button,
+    .calc-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    .calc-input:focus { border-color: #2E7D64; outline: none; }
+    .calc-input.has-suffix { padding-right: 34px; }
+    .calc-suffix { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: #8A8580; font-size: 15px; pointer-events: none; }
+    .scenario-card {
+      background: #E7F4EF; border: 1px solid rgba(143,207,184,0.45);
+      border-radius: 14px; padding: 18px 14px; text-align: center;
+    }
+    .scenario-rate {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: #2E7D64; margin-bottom: 12px;
+    }
+    .people-row {
+      display: flex; flex-wrap: wrap; gap: 3px; justify-content: center;
+      margin: 0 auto 14px; max-width: 78px;
+    }
+    .people-row svg { width: 12px; height: 12px; }
+    /* filled silhouettes — thin strokes were unreadable at 12px */
+    .person-on  { color: #8FCFB8; }
+    .person-off { color: #C3D6CD; opacity: 0.55; }
+    .scenario-value { font-family: 'DM Serif Display', serif; font-size: 22px; line-height: 1.1; color: #2E7D64; }
+    .scenario-unit { font-size: 11px; color: #8A8580; margin-top: 5px; }
+
+    /* ─── FAQ accordion ─── */
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+    .faq-answer.open { max-height: 320px; }
+    .faq-icon { transition: transform 0.3s ease; flex-shrink: 0; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    @media (prefers-reduced-motion: reduce) {
+      .faq-answer, .faq-icon, #mobile-menu { transition: none; }
+    }
+
+    /* ─── Mobile menu ─── */
+    #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    #mobile-menu.open { max-height: 460px; }
+
+    /* ─── Language dropdown (nav) ─── */
+    .lang-dropdown { position: relative; }
+    .lang-dropdown-trigger {
+      display: inline-flex; align-items: center;
+      background: none; border: none; padding: 2px; margin: 0;
+      font-size: 17px; line-height: 1; cursor: pointer; color: inherit;
+      border-radius: 6px;
+    }
+    .lang-dropdown-menu {
+      position: absolute; top: calc(100% + 12px); right: 0;
+      background: #FDFAF7; border: 1px solid #EFE7E1; border-radius: 12px;
+      box-shadow: 0 10px 28px rgba(42,40,37,0.10), 0 2px 8px rgba(42,40,37,0.05);
+      padding: 6px; min-width: 116px;
+      display: none; flex-direction: column; gap: 1px; z-index: 60;
+    }
+    .lang-dropdown.open .lang-dropdown-menu { display: flex; }
+    .lang-dropdown-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 7px 10px; border-radius: 8px;
+      font-size: 14px; font-weight: 500; color: #2A2825; text-decoration: none;
+    }
+    .lang-dropdown-item:hover { background: rgba(42,40,37,0.05); }
+
+    /* Mobile variant — reveals inline in the mobile-nav flow instead of an
+       absolutely positioned overlay, so it never gets clipped by
+       #mobile-menu's max-height/overflow-hidden open animation. */
+    .lang-dropdown-trigger-mobile {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: none; border: none; padding: 0; margin: 0;
+      font: inherit; font-size: 17px; color: inherit; cursor: pointer;
+    }
+    .lang-dropdown-mobile-menu {
+      display: none; flex-direction: column; gap: 2px;
+      margin-top: 10px; padding-left: 2px;
+    }
+    .lang-dropdown-mobile.open .lang-dropdown-mobile-menu { display: flex; }
+
+    /* ─── Focus ─── */
+    :focus-visible { outline: 2px solid #2E7D64; outline-offset: 3px; border-radius: 4px; }
+  </style>
+</head>
+
+<body>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 1 — STICKY NAVIGATION
+════════════════════════════════════════════ -->
+<header id="nav" class="sticky top-0 z-50 bg-canvas/95 backdrop-blur-sm border-b border-line">
+  <div class="max-w-6xl mx-auto px-5 md:px-8">
+    <div class="flex items-center justify-between h-16">
+
+      <a href="#" class="font-serif text-2xl tracking-tight text-ink" aria-label="Gili – Strona główna">
+        Gili<span style="color:#E8A0A8">.</span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-muted" aria-label="Nawigacja główna">
+        <a href="#kundenbindung" class="hover:text-ink transition-colors">Lojalność klientek</a>
+        <a href="#rechner"       class="hover:text-ink transition-colors">Kalkulator</a>
+        <a href="#preise"        class="hover:text-ink transition-colors">Cennik</a>
+        <a href="#faq"           class="hover:text-ink transition-colors">FAQ</a>
+        <div class="lang-dropdown">
+          <button type="button" class="lang-dropdown-trigger" aria-haspopup="true" aria-expanded="false" aria-label="Zmień język">
+            <span aria-hidden="true">🇵🇱</span>
+          </button>
+          <div class="lang-dropdown-menu" role="menu">
+            <a href="/" class="lang-dropdown-item" role="menuitem" data-lang-link aria-label="Przełącz na niemiecki"><span aria-hidden="true">🇩🇪</span> DE</a>
+            <a href="/fr/" class="lang-dropdown-item" role="menuitem" data-lang-link aria-label="Przełącz na francuski"><span aria-hidden="true">🇫🇷</span> FR</a>
+            <a href="/en/" class="lang-dropdown-item" role="menuitem" data-lang-link aria-label="Przełącz na angielski"><span aria-hidden="true">🇬🇧</span> EN</a>
+            <a href="/es/" class="lang-dropdown-item" role="menuitem" data-lang-link aria-label="Przełącz na hiszpański"><span aria-hidden="true">🇪🇸</span> ES</a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- EDITABLE: primary CTA links to WhatsApp -->
+      <a href="#" id="nav-cta" class="hidden md:inline-flex items-center gap-2 bg-rose text-ink text-sm font-semibold px-5 py-2.5 rounded-xl hover:bg-roseDeep transition-colors">
+        <span class="cta-wa-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.13-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.84-.2-.49-.4-.42-.56-.43h-.47c-.16 0-.43.06-.65.31-.22.25-.85.84-.85 2.03 0 1.2.87 2.35.99 2.51.12.16 1.71 2.61 4.15 3.66.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.68-1.18.2-.58.2-1.08.15-1.18-.06-.11-.22-.17-.47-.29Z"/></svg></span>
+        <span>Napisz do nas na WhatsApp</span>
+      </a>
+
+      <div class="flex md:hidden items-center gap-3">
+        <a href="#" id="nav-cta-mobile" class="inline-flex items-center gap-1.5 bg-rose text-ink text-xs font-semibold px-3 py-2 rounded-xl hover:bg-roseDeep transition-colors">
+          <span class="cta-wa-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.13-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.84-.2-.49-.4-.42-.56-.43h-.47c-.16 0-.43.06-.65.31-.22.25-.85.84-.85 2.03 0 1.2.87 2.35.99 2.51.12.16 1.71 2.61 4.15 3.66.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.68-1.18.2-.58.2-1.08.15-1.18-.06-.11-.22-.17-.47-.29Z"/></svg></span>
+          <span>Napisz do nas na WhatsApp</span>
+        </a>
+        <button id="menu-toggle" aria-label="Otwórz menu" aria-expanded="false" aria-controls="mobile-menu" class="p-1 text-ink">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobile-menu" role="navigation" aria-label="Nawigacja mobilna">
+      <nav class="py-4 border-t border-line flex flex-col gap-4 text-sm font-medium text-muted">
+        <a href="#kundenbindung" class="hover:text-ink transition-colors mobile-nav-link">Lojalność klientek</a>
+        <a href="#rechner"       class="hover:text-ink transition-colors mobile-nav-link">Kalkulator</a>
+        <a href="#preise"        class="hover:text-ink transition-colors mobile-nav-link">Cennik</a>
+        <a href="#faq"           class="hover:text-ink transition-colors mobile-nav-link">FAQ</a>
+        <div class="lang-dropdown-mobile">
+          <button type="button" class="lang-dropdown-trigger-mobile" aria-haspopup="true" aria-expanded="false" aria-label="Zmień język">
+            <span aria-hidden="true">🇵🇱</span>
+          </button>
+          <div class="lang-dropdown-mobile-menu" role="menu">
+            <a href="/" class="lang-dropdown-item mobile-nav-link" role="menuitem" data-lang-link aria-label="Przełącz na niemiecki"><span aria-hidden="true">🇩🇪</span> DE</a>
+            <a href="/fr/" class="lang-dropdown-item mobile-nav-link" role="menuitem" data-lang-link aria-label="Przełącz na francuski"><span aria-hidden="true">🇫🇷</span> FR</a>
+            <a href="/en/" class="lang-dropdown-item mobile-nav-link" role="menuitem" data-lang-link aria-label="Przełącz na angielski"><span aria-hidden="true">🇬🇧</span> EN</a>
+            <a href="/es/" class="lang-dropdown-item mobile-nav-link" role="menuitem" data-lang-link aria-label="Przełącz na hiszpański"><span aria-hidden="true">🇪🇸</span> ES</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION 2 — HERO (salon background image)
+════════════════════════════════════════════ -->
+<section id="hero" class="bg-canvas">
+
+  <!-- ── Beat 1: image band — label + first half of the headline, nothing else ──
+       EDITABLE: hero background image. Full viewport width, natural 1600:900
+       proportions, never cropped. -->
+  <div class="hero-media">
+    <img src="/assets/hero-salon.jpg" alt="" aria-hidden="true" class="hero-img" />
+    <div class="hero-scrim" aria-hidden="true"></div>
+    <div class="hero-band-content px-5 md:px-8">
+      <div class="hero-band-inner">
+        <!-- EDITABLE: label pill — kept short so it stays on one line at 375px -->
+        <p class="hero-label">Dla salonów fryzjerskich i kosmetycznych</p>
+        <!-- EDITABLE: headline, first half -->
+        <h1 class="hero-line">
+          Ciężko pracowała Pani, aby zdobyć nowe&nbsp;klientki
+        </h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-3xl mx-auto px-5 md:px-8 py-12 md:py-16 text-center">
+
+    <!-- ── Beat 2: the conversation ── -->
+    <div class="reveal">
+      <!-- Plain card, identical to the three "Stell dir vor" mockups below:
+           same .wa-screen shell, same header, same flat run of bubbles in
+           .wa-body. No wrappers around the bubbles — those broke the sibling
+           run-gap/tail rules and the float-based timestamps. -->
+      <div class="wa-screen w-full max-w-[420px] mx-auto text-left" id="phone1">
+        <div class="wa-header">
+          <div class="wa-avatar">F</div>
+          <div class="wa-header-text">
+            <h3>FLORENCE BEAUTY SALON</h3>
+            <p>online</p>
+          </div>
+        </div>
+        <div class="wa-body" id="chat1">
+          <span class="wa-daystamp">Poniedziałek, 21 grudnia</span>
+
+          <div class="wa-msg wa-bubble out">
+            Super, 15:00 byłoby świetnie, ale 15:30 pasowałoby mi jeszcze lepiej
+            <span class="wa-time">10:10 <svg class="wa-ticks" viewBox="0 0 15 10" aria-hidden="true"><path d="M1 5.4 L3.6 8 L8.6 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.4 5.4 L8 8 L13 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+
+          <div class="wa-msg wa-bubble in">
+            Wspaniale, Lilian&nbsp;✨<br>
+            Poniedziałek o 15:30 pasuje doskonale, zarezerwowałam już dla Pani ten termin.&nbsp;❤️<br>
+            📅 Poniedziałek, 21 grudnia 2026<br>
+            ⏰ 15:30<br>
+            ✂️ Mycie, strzyżenie i modelowanie (długie włosy)<br>
+            📍 Florence Beauty Salon, Giligasse&nbsp;8, 1010&nbsp;Wiedeń<br>
+            Czekamy na Panią&nbsp;🌸
+            <span class="wa-time">10:10</span>
+          </div>
+
+          <!-- EDITABLE: the one remaining emphasis on the page -->
+          <div class="wa-divider wa-msg">
+            <span class="wa-divider-main">🌸 5 tygodni po wizycie</span>
+            <span class="wa-divider-date">25 stycznia 2027</span>
+          </div>
+
+          <div class="wa-msg wa-bubble in">
+            Dzień dobry, Lilian&nbsp;🌻<br>
+            Trochę za Panią tęsknimy&nbsp;😊<br>
+            Czy miałaby Pani ochotę zarezerwować nowy termin w tym tygodniu?<br>
+            Florence Beauty Salon
+            <span class="wa-time">09:05</span>
+          </div>
+
+          <div class="wa-msg wa-bubble out">
+            Ależ tak, bardzo chętnie&nbsp;😊<br>
+            Przyszły tydzień byłby świetny.. najlepiej rano
+            <span class="wa-time">11:08 <svg class="wa-ticks" viewBox="0 0 15 10" aria-hidden="true"><path d="M1 5.4 L3.6 8 L8.6 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.4 5.4 L8 8 L13 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+
+          <div class="wa-msg wa-bubble in">
+            Oczywiście&nbsp;🌸<br>
+            W przyszłym tygodniu mam wolne miejsca w poniedziałek o 10:00 i we wtorek o 11:00 — co pasuje Pani lepiej?
+            <span class="wa-time">11:08</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Beat 3: headline, second half — same size and weight as the first ── -->
+    <!-- EDITABLE: headline, second half -->
+    <p class="hero-line mt-12 md:mt-16 reveal">
+      Gili sprawia, że wracają — i stają się stałym&nbsp;przychodem
+    </p>
+
+    <!-- ── Beat 4: supporting line, CTAs, trust line ── -->
+    <div class="reveal" style="transition-delay:0.1s">
+      <!-- EDITABLE: Hero supporting text -->
+      <p class="text-base md:text-lg text-ink/70 leading-relaxed mt-6 mb-9 max-w-xl mx-auto">
+        <strong class="block text-ink font-semibold tracking-wide mb-3">Coś więcej niż system rezerwacji.</strong>
+        Gili umawia wizyty bezpośrednio przez <span class="font-semibold wa-green">WhatsApp</span>.
+        Wspólnie tworzymy Pani plan komunikacji: kiedy Gili wysyła ofertę, kiedy zaprasza klientkę na kolejną wizytę — i jak z tego powstaje relacja, dzięki której klientki wracają.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 sm:justify-center mb-8">
+        <a href="#" class="whatsapp-cta inline-flex items-center justify-center gap-2 bg-rose text-ink font-semibold px-7 py-3.5 rounded-xl hover:bg-roseDeep transition-colors text-sm">
+          <span class="cta-wa-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.13-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.84-.2-.49-.4-.42-.56-.43h-.47c-.16 0-.43.06-.65.31-.22.25-.85.84-.85 2.03 0 1.2.87 2.35.99 2.51.12.16 1.71 2.61 4.15 3.66.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.68-1.18.2-.58.2-1.08.15-1.18-.06-.11-.22-.17-.47-.29Z"/></svg></span>
+          <span>Poznaj Gili na WhatsApp</span>
+        </a>
+        <a href="#kundenbindung" class="inline-flex items-center justify-center gap-2 text-ink font-semibold bg-canvas border border-line px-7 py-3.5 rounded-xl hover:bg-roseSoft transition-colors text-sm">
+          Jak działa Gili
+          <i data-lucide="arrow-down" class="w-4 h-4"></i>
+        </a>
+      </div>
+
+      <p class="text-xs text-muted tracking-wide">
+        Skonfigurowane osobiście · 0&nbsp;% prowizji · Bezpośrednio przez <span class="wa-green">WhatsApp</span>
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION 2b — CHANNELS
+     WhatsApp is live. Instagram and Website are not built yet and are
+     labelled as such — they must never read as active anywhere on the page.
+════════════════════════════════════════════ -->
+<section class="py-14 md:py-20">
+  <div class="max-w-2xl mx-auto px-5 md:px-8">
+    <div class="flex items-start justify-center gap-4 sm:gap-10 reveal">
+
+      <!-- WhatsApp — live -->
+      <div class="channel">
+        <svg viewBox="0 0 24 24" fill="#25D366" aria-hidden="true" focusable="false">
+          <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.13-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.84-.2-.49-.4-.42-.56-.43h-.47c-.16 0-.43.06-.65.31-.22.25-.85.84-.85 2.03 0 1.2.87 2.35.99 2.51.12.16 1.71 2.61 4.15 3.66.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.68-1.18.2-.58.2-1.08.15-1.18-.06-.11-.22-.17-.47-.29Z"/>
+        </svg>
+        <span class="channel-name wa-green">WhatsApp</span>
+      </div>
+
+      <!-- Instagram — pending -->
+      <div class="channel soon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#2A2825" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.4" cy="6.6" r="1.1" fill="#2A2825" stroke="none"/>
+        </svg>
+        <span class="channel-name">Czat na Instagramie</span>
+        <span class="channel-label">Wkrótce</span>
+      </div>
+
+      <!-- Website — pending -->
+      <div class="channel soon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#2A2825" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="9.5"/>
+          <path d="M2.5 12h19"/>
+          <path d="M12 2.5a14.5 14.5 0 0 1 0 19 14.5 14.5 0 0 1 0-19Z"/>
+        </svg>
+        <span class="channel-name">Czat na Pani stronie</span>
+        <span class="channel-label">Wkrótce</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION 3 — "STELL DIR VOR" + THREE MOCKUPS
+════════════════════════════════════════════ -->
+<section class="py-24 md:py-32 bg-mintSoft">
+  <div class="max-w-6xl mx-auto px-5 md:px-8">
+
+    <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-ink mb-4 max-w-4xl reveal">
+      Gili utrzymuje kontakt z Pani klientkami — automatycznie, przez <span class="wa-green">WhatsApp</span>.
+    </h2>
+    <p class="font-medium text-ink mb-14 max-w-4xl reveal" style="transition-delay:0.1s">Zawsze w imieniu Pani salonu.</p>
+
+    <!-- Three across only once there is room for 15px chat text; below that they
+         stack and are capped so the bubbles keep chat-like proportions.
+         Items stretch, so the shorter conversation simply shows empty chat
+         space at the bottom, as a real screen would. -->
+    <div class="grid lg:grid-cols-3 gap-8 lg:gap-7 reveal" style="transition-delay:0.1s">
+
+      <!-- Mockup A — invitation to return -->
+      <div class="wa-screen w-full max-w-[420px] mx-auto lg:max-w-none">
+        <div class="wa-header">
+          <div class="wa-avatar">F</div>
+          <div class="wa-header-text">
+            <h3>FLORENCE BEAUTY SALON</h3>
+            <p>online</p>
+          </div>
+        </div>
+        <div class="wa-body">
+          <span class="wa-daystamp">Wtorek</span>
+          <div class="wa-bubble in">
+            Dzień dobry, Anno&nbsp;🌸 tęsknimy za Panią. Czy miałaby Pani ochotę wrócić w przyszłym tygodniu?
+            <span class="wa-time">10:12</span>
+          </div>
+          <div class="wa-bubble out">
+            Tak, bardzo chętnie. Środowy poranek byłby idealny.
+            <span class="wa-time">10:14 <svg class="wa-ticks" viewBox="0 0 15 10" aria-hidden="true"><path d="M1 5.4 L3.6 8 L8.6 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.4 5.4 L8 8 L13 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mockup B — review request -->
+      <div class="wa-screen w-full max-w-[420px] mx-auto lg:max-w-none">
+        <div class="wa-header">
+          <div class="wa-avatar">F</div>
+          <div class="wa-header-text">
+            <h3>FLORENCE BEAUTY SALON</h3>
+            <p>online</p>
+          </div>
+        </div>
+        <div class="wa-body">
+          <span class="wa-daystamp">Środa</span>
+          <div class="wa-bubble in">
+            Dzień dobry, Anno, dziękujemy za wczorajszą wizytę. Jeśli była Pani zadowolona, będzie nam bardzo miło, jeśli zostawi Pani krótką opinię w Google&nbsp;🌿<br>
+            <a class="wa-link" href="#" onclick="return false;">google.business/florence-beauty</a>
+            <span class="wa-time">09:05</span>
+          </div>
+          <div class="wa-bubble out">
+            Dziękuję, jak zawsze było wspaniale <span style="white-space:nowrap;">😊👍</span>
+            <span class="wa-time">09:21 <svg class="wa-ticks" viewBox="0 0 15 10" aria-hidden="true"><path d="M1 5.4 L3.6 8 L8.6 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.4 5.4 L8 8 L13 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mockup C — promotion -->
+      <div class="wa-screen w-full max-w-[420px] mx-auto lg:max-w-none">
+        <div class="wa-header">
+          <div class="wa-avatar">F</div>
+          <div class="wa-header-text">
+            <h3>FLORENCE BEAUTY SALON</h3>
+            <p>online</p>
+          </div>
+        </div>
+        <div class="wa-body">
+          <span class="wa-daystamp">Piątek</span>
+          <div class="wa-bubble in">
+            Dzień dobry, Anno&nbsp;🌿 chciałam tylko dać Pani znać: od dziś do Świąt mamy 10&nbsp;% zniżki na wszystkie wizyty. Proszę napisać, jeśli chciałaby Pani wpaść.
+            <span class="wa-time">14:20</span>
+          </div>
+          <div class="wa-bubble out">
+            Ojej, jak miło. W takim razie wpadnę w przyszłym tygodniu.
+            <span class="wa-time">14:26 <svg class="wa-ticks" viewBox="0 0 15 10" aria-hidden="true"><path d="M1 5.4 L3.6 8 L8.6 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.4 5.4 L8 8 L13 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION 4 — HOW IT STARTS
+════════════════════════════════════════════ -->
+<section id="kundenbindung" class="py-24 md:py-32">
+  <div class="max-w-4xl mx-auto px-5 md:px-8">
+
+    <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-ink mb-12 reveal">
+      Jak Gili buduje lojalność Pani klientek
+    </h2>
+
+    <div class="divide-y divide-line reveal" style="transition-delay:0.1s">
+
+      <div class="flex gap-5 py-8 md:py-10">
+        <div class="flex-shrink-0 mt-1"><i data-lucide="messages-square" class="w-5 h-5 text-mint"></i></div>
+        <div>
+          <h3 class="font-semibold text-ink text-base md:text-lg mb-2">Osobista rozmowa z naszym zespołem</h3>
+          <p class="text-muted text-sm md:text-base leading-relaxed">
+            Wspólnie tworzymy Pani plan komunikacji: zaproszenie na kolejną wizytę co kilka tygodni, odpowiednie promocje i wszystko inne, co pasuje do Pani salonu.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex gap-5 py-8 md:py-10">
+        <div class="flex-shrink-0 mt-1"><i data-lucide="calendar-check" class="w-5 h-5 text-mint"></i></div>
+        <div>
+          <h3 class="font-semibold text-ink text-base md:text-lg mb-2">Gili rusza do pracy</h3>
+          <p class="text-muted text-sm md:text-base leading-relaxed">
+            Zapytania przez <span class="wa-green">WhatsApp</span> stają się w rozmowie potwierdzonymi wizytami.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex gap-5 py-8 md:py-10">
+        <div class="flex-shrink-0 mt-1"><i data-lucide="layout-list" class="w-5 h-5 text-mint"></i></div>
+        <div>
+          <h3 class="font-semibold text-ink text-base md:text-lg mb-2">Widzi Pani, jak wygląda sytuacja każdej klientki</h3>
+          <p class="text-muted text-sm md:text-base leading-relaxed">
+            W swoim osobistym panelu widzi Pani, kiedy każda klientka była ostatnio, kiedy powinna się znów odezwać, i jak wygląda ta relacja — wszystko na jeden rzut oka.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION 5 — DAY TO DAY (+ Gili↔owner mockup)
+════════════════════════════════════════════ -->
+<section class="py-24 md:py-32 bg-roseSoft">
+  <div class="max-w-4xl mx-auto px-5 md:px-8">
+
+    <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-ink mb-12 reveal">
+      Czego nie musi już Pani robić
+    </h2>
+
+    <div class="space-y-8 mb-16 reveal" style="transition-delay:0.1s">
+
+      <div class="flex gap-5">
+        <div class="point-num">1</div>
+        <div>
+          <h3 class="font-semibold text-ink text-base md:text-lg mb-2">
+            Gili prowadzi dalej rozmowę — dokładnie tak, jak wspólnie to Pani ustaliła.
+          </h3>
+          <p class="text-muted text-sm md:text-base leading-relaxed">
+            Zaproszenie na kolejną wizytę kilka tygodni po wizycie, oferta, którą chce Pani wysłać, lub informacja, że Pani salon jest na urlopie.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex gap-5">
+        <div class="point-num">2</div>
+        <div>
+          <h3 class="font-semibold text-ink text-base md:text-lg">
+            Raz w miesiącu Gili odzywa się do Pani i pyta, co słychać.
+          </h3>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Monthly check-in — Gili writing to the salon owner -->
+    <div class="reveal" style="transition-delay:0.2s">
+      <div class="wa-screen mx-auto" style="max-width:380px;">
+        <div class="wa-header">
+          <div class="wa-avatar">G</div>
+          <div class="wa-header-text">
+            <h3>Gili</h3>
+            <p>online</p>
+          </div>
+        </div>
+        <div class="wa-body">
+          <span class="wa-daystamp">1 sierpnia</span>
+          <div class="wa-bubble in">
+            Dzień dobry, Pani Julio, czy jest coś nowego w tym miesiącu, o czym powinny wiedzieć Pani klientki?
+            <span class="wa-time">09:30</span>
+          </div>
+          <div class="wa-bubble out">
+            Tak, będę na urlopie między 12 a 26&nbsp;sierpnia.
+            <span class="wa-time">09:41 <svg class="wa-ticks" viewBox="0 0 15 10" aria-hidden="true"><path d="M1 5.4 L3.6 8 L8.6 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.4 5.4 L8 8 L13 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+          <div class="wa-bubble in">
+            Doskonale, dziękuję za informację. Udanego urlopu.
+            <span class="wa-time">09:42</span>
+          </div>
+        </div>
+      </div>
+      <p class="wa-caption">Tak Gili rozmawia z Panią.</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION 6 — REVENUE CALCULATOR
+     Illustrative scenarios only. Every figure is computed
+     from the visitor's own two inputs — no claimed data.
+════════════════════════════════════════════ -->
+<section id="rechner" class="py-24 md:py-32">
+  <div class="max-w-5xl mx-auto px-5 md:px-8">
+
+    <div class="mb-12 reveal">
+      <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-ink mb-5">
+        Ile więcej może Pani zyskać na stałych klientkach
+      </h2>
+      <!-- not italic: this is now an instruction, not a caveat -->
+      <p class="text-muted text-base md:text-lg leading-relaxed max-w-2xl">
+        Proszę podać średnią liczbę klientek miesięcznie oraz średnią cenę zabiegu.
+      </p>
+    </div>
+
+    <div class="calc-panel reveal" style="transition-delay:0.1s">
+
+      <div class="grid sm:grid-cols-2 gap-5 mb-9">
+        <div>
+          <label class="calc-label" for="calc-clients">Ile klientek obsługuje Pani średnio w miesiącu?</label>
+          <div class="calc-field">
+            <input type="number" id="calc-clients" class="calc-input" value="80" min="0" max="10000" step="1" inputmode="numeric" />
+          </div>
+        </div>
+        <div>
+          <label class="calc-label" for="calc-price">Ile kosztuje u Pani zabieg średnio?</label>
+          <div class="calc-field">
+            <input type="number" id="calc-price" class="calc-input has-suffix" value="65" min="0" max="10000" step="1" inputmode="numeric" />
+            <span class="calc-suffix">€</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4" id="scenario-grid">
+        <!-- Scenario cards rendered by JS -->
+      </div>
+
+      <p class="text-xs text-muted mt-7 leading-relaxed">
+        Orientacyjne wyliczenie na podstawie podanych danych.
+      </p>
+
+    </div>
+
+    <div class="mt-10 reveal" style="transition-delay:0.2s">
+      <a href="#" class="whatsapp-cta inline-flex items-center gap-2 bg-rose text-ink font-semibold px-7 py-3.5 rounded-xl hover:bg-roseDeep transition-colors text-sm">
+        Omówmy mój potencjał
+        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION 7 — SIGNATURE STATEMENT
+     Deliberately empty: no cards, no icons, no CTA.
+════════════════════════════════════════════ -->
+<section class="py-28 md:py-40 lg:py-48 bg-roseSoft">
+  <div class="max-w-3xl mx-auto px-5 md:px-8 text-center reveal">
+    <p class="font-serif text-3xl md:text-4xl lg:text-5xl leading-[1.28] text-ink">
+      Większość systemów odpowiada na wiadomości.<br class="hidden md:block" />
+      Gili buduje relacje.
+    </p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION 8 — PRICING
+════════════════════════════════════════════ -->
+<section id="preise" class="py-24 md:py-32 bg-mintSoft">
+  <div class="max-w-5xl mx-auto px-5 md:px-8">
+
+    <div class="text-center mb-4 reveal">
+      <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-ink mb-4">
+        Przejrzyście. Bez ukrytych kosztów.
+      </h2>
+      <div class="inline-flex items-center gap-2 bg-rose/25 border border-rose/40 rounded-full px-5 py-2 mt-4">
+        <i data-lucide="sparkles" class="w-4 h-4 text-ink"></i>
+        <span class="text-ink font-semibold text-sm">Aktualna oferta startowa · do 1 września 2026</span>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6 mt-12 reveal" style="transition-delay:0.1s">
+
+      <!-- EXPIRED SUMMER OFFER -->
+      <div class="border border-line rounded-2xl p-8 bg-canvas/70 relative overflow-hidden">
+        <div class="mb-5">
+          <span class="inline-flex items-center gap-1.5 bg-ink/5 border border-line text-muted text-xs font-semibold px-3 py-1.5 rounded-full">
+            <i data-lucide="clock-3" class="w-3.5 h-3.5"></i>
+            Niedostępne od 25 lipca 2026
+          </span>
+        </div>
+        <div class="mb-6">
+          <h3 class="font-serif text-2xl text-ink mb-1">Letni Program Startowy</h3>
+          <p class="text-muted text-sm">Ta oferta się zakończyła.</p>
+        </div>
+        <div class="space-y-4 mb-8">
+          <div class="flex justify-between items-end gap-4 border-b border-line pb-4">
+            <span class="text-ink text-sm font-medium leading-snug">Jednorazowa konfiguracja<br />+ plan komunikacji</span>
+            <span class="text-right whitespace-nowrap">
+              <span class="text-muted text-sm line-through mr-1">140&nbsp;€</span>
+              <span class="font-semibold text-mintDeep">gratis</span>
+            </span>
+          </div>
+          <div class="flex justify-between items-baseline border-b border-line pb-4">
+            <span class="text-ink text-sm font-medium">Miesiąc&nbsp;1–2</span>
+            <span class="font-semibold text-mintDeep text-lg">gratis</span>
+          </div>
+          <div class="flex justify-between items-baseline border-b border-line pb-4">
+            <span class="text-ink text-sm font-medium">Od miesiąca&nbsp;3</span>
+            <span class="font-serif text-xl text-ink">70&nbsp;€&nbsp;<span class="text-muted text-sm font-sans">/ miesiąc</span></span>
+          </div>
+          <div class="flex justify-between items-baseline">
+            <span class="text-ink text-sm font-medium">Każda dodatkowa stylistka</span>
+            <span class="font-serif text-xl text-ink">+20&nbsp;€&nbsp;<span class="text-muted text-sm font-sans">/ miesiąc</span></span>
+          </div>
+        </div>
+        <div class="block text-center bg-ink/5 border border-line text-muted font-semibold px-6 py-3.5 rounded-xl text-sm mb-5" aria-disabled="true">
+          Oferta zakończona
+        </div>
+        <ul class="space-y-2">
+          <li class="flex items-center gap-2 text-xs text-muted"><i data-lucide="check" class="w-3.5 h-3.5 text-muted flex-shrink-0"></i>Rezerwacja wizyt bezpośrednio przez <span class="text-[#128C7E] font-semibold">WhatsApp</span></li>
+          <li class="flex items-center gap-2 text-xs text-muted"><i data-lucide="check" class="w-3.5 h-3.5 text-muted flex-shrink-0"></i>Rezygnacja w każdej chwili, miesięcznie</li>
+          <li class="flex items-center gap-2 text-xs text-muted"><i data-lucide="check" class="w-3.5 h-3.5 text-muted flex-shrink-0"></i>0&nbsp;% prowizji od rezerwacji</li>
+          <li class="flex items-center gap-2 text-xs text-muted"><i data-lucide="check" class="w-3.5 h-3.5 text-muted flex-shrink-0"></i>Stałe wsparcie w cenie</li>
+        </ul>
+      </div>
+
+      <!-- CURRENT INTRODUCTORY OFFER -->
+      <div class="border-2 border-rose rounded-2xl p-8 bg-canvas relative overflow-hidden">
+        <div class="absolute top-4 right-4">
+          <span class="bg-rose text-ink text-xs font-semibold px-3 py-1 rounded-full">Aktualna</span>
+        </div>
+        <div class="mb-6">
+          <h3 class="font-serif text-2xl text-ink mb-1 pr-20">Program Startowy Gili</h3>
+          <p class="text-muted text-sm">Dla salonów, które zaczynają z Gili teraz</p>
+        </div>
+        <div class="space-y-4 mb-8">
+          <div class="flex justify-between items-end gap-4 border-b border-line pb-4">
+            <span class="text-ink text-sm font-medium leading-snug">Jednorazowa konfiguracja<br />+ plan komunikacji</span>
+            <span class="text-right whitespace-nowrap">
+              <span class="text-muted text-sm line-through mr-1">140&nbsp;€</span>
+              <span class="font-semibold text-mintDeep">gratis</span>
+            </span>
+          </div>
+          <div class="flex justify-between items-baseline border-b border-line pb-4">
+            <span class="text-ink text-sm font-medium">Miesiąc&nbsp;1</span>
+            <span class="font-semibold text-mintDeep text-lg">gratis</span>
+          </div>
+          <div class="flex justify-between items-baseline border-b border-line pb-4">
+            <span class="text-ink text-sm font-medium">Od miesiąca&nbsp;2</span>
+            <span class="font-serif text-xl text-ink">88&nbsp;€&nbsp;<span class="text-muted text-sm font-sans">/ miesiąc</span></span>
+          </div>
+          <div class="flex justify-between items-baseline">
+            <span class="text-ink text-sm font-medium">Każda dodatkowa stylistka</span>
+            <span class="font-serif text-xl text-ink">+25&nbsp;€&nbsp;<span class="text-muted text-sm font-sans">/ miesiąc</span></span>
+          </div>
+        </div>
+        <div class="bg-roseSoft border border-rose/35 rounded-xl px-4 py-3.5 mb-5">
+          <p class="text-ink text-sm font-semibold mb-1">Nowe funkcje w cenie</p>
+          <p class="text-muted text-xs leading-relaxed">Czat na Instagramie i czat na stronie — dołączane automatycznie, gdy tylko będą dostępne.</p>
+        </div>
+        <a href="#" class="whatsapp-cta block text-center bg-rose text-ink font-semibold px-6 py-3.5 rounded-xl hover:bg-roseDeep transition-colors text-sm mb-5">
+          Wypróbuj za darmo
+        </a>
+        <ul class="space-y-2">
+          <li class="flex items-center gap-2 text-xs text-muted"><i data-lucide="check" class="w-3.5 h-3.5 text-mint flex-shrink-0"></i>Rezerwacja wizyt bezpośrednio przez <span class="text-[#128C7E] font-semibold">WhatsApp</span></li>
+          <li class="flex items-center gap-2 text-xs text-muted leading-relaxed">
+            <i data-lucide="check" class="w-3.5 h-3.5 text-mint flex-shrink-0"></i>
+            <span>Przyszłe funkcje <span class="inline-block bg-rose/35 text-ink font-semibold px-1.5 py-0.5 rounded">Instagram</span> i <span class="inline-block bg-[#F5E6A8] text-ink font-semibold px-1.5 py-0.5 rounded">strony</span> w cenie</span>
+          </li>
+          <li class="flex items-center gap-2 text-xs text-muted"><i data-lucide="check" class="w-3.5 h-3.5 text-mint flex-shrink-0"></i>Rezygnacja w każdej chwili, miesięcznie</li>
+          <li class="flex items-center gap-2 text-xs text-muted"><i data-lucide="check" class="w-3.5 h-3.5 text-mint flex-shrink-0"></i>0&nbsp;% prowizji od rezerwacji</li>
+          <li class="flex items-center gap-2 text-xs text-muted"><i data-lucide="check" class="w-3.5 h-3.5 text-mint flex-shrink-0"></i>Stałe wsparcie w cenie</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <p class="text-center text-muted text-xs md:text-sm mt-6 max-w-3xl mx-auto reveal" style="transition-delay:0.12s">
+      Wszystkie ceny są przeznaczone dla przedsiębiorczyń i przedsiębiorców i są cenami netto. Ustawowy podatek VAT jest doliczany dodatkowo. Letni Program Startowy jest niedostępny od 25 lipca 2026. Aktualna oferta startowa jest dostępna do 1 września 2026 włącznie; obowiązują wyżej wymienione warunki.
+    </p>
+
+    <p class="text-center text-muted text-sm md:text-base mt-10 reveal" style="transition-delay:0.15s">
+      Odzyskanie zaledwie jednej klientki miesięcznie zazwyczaj pokrywa ten koszt.
+    </p>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION 9 — FAQ
+════════════════════════════════════════════ -->
+<section id="faq" class="py-24 md:py-32">
+  <div class="max-w-3xl mx-auto px-5 md:px-8">
+
+    <div class="text-center mb-12 reveal">
+      <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-ink">
+        Najczęściej zadawane pytania
+      </h2>
+    </div>
+
+    <div class="space-y-0 reveal" style="transition-delay:0.1s" role="list">
+
+      <!-- EDITABLE: FAQ items -->
+      <div class="faq-item border-t border-line" role="listitem">
+        <button class="faq-trigger w-full flex items-center justify-between gap-4 py-6 text-left" aria-expanded="false">
+          <span class="font-medium text-ink text-base">Czy potrzebuję wiedzy technicznej?</span>
+          <i data-lucide="plus" class="faq-icon w-5 h-5 text-mintDeep flex-shrink-0"></i>
+        </button>
+        <div class="faq-answer">
+          <p class="text-muted text-sm leading-relaxed pb-6">Nie. Wszystko konfigurujemy razem z Panią. Nie musi się Pani uczyć żadnego skomplikowanego oprogramowania.</p>
+        </div>
+      </div>
+
+      <div class="faq-item border-t border-line" role="listitem">
+        <button class="faq-trigger w-full flex items-center justify-between gap-4 py-6 text-left" aria-expanded="false">
+          <span class="font-medium text-ink text-base">Ile trwa uruchomienie?</span>
+          <i data-lucide="plus" class="faq-icon w-5 h-5 text-mintDeep flex-shrink-0"></i>
+        </button>
+        <div class="faq-answer">
+          <p class="text-muted text-sm leading-relaxed pb-6">Po naszej pierwszej rozmowie Gili jest zwykle gotowa do pracy w ciągu kilku dni.</p>
+        </div>
+      </div>
+
+      <div class="faq-item border-t border-line" role="listitem">
+        <button class="faq-trigger w-full flex items-center justify-between gap-4 py-6 text-left" aria-expanded="false">
+          <span class="font-medium text-ink text-base">Co dzieje się z danymi moich klientek?</span>
+          <i data-lucide="plus" class="faq-icon w-5 h-5 text-mintDeep flex-shrink-0"></i>
+        </button>
+        <div class="faq-answer">
+          <p class="text-muted text-sm leading-relaxed pb-6">Są wykorzystywane wyłącznie do komunikacji Pani salonu i nigdy nie są przekazywane innym firmom.</p>
+        </div>
+      </div>
+
+      <div class="faq-item border-t border-line" role="listitem">
+        <button class="faq-trigger w-full flex items-center justify-between gap-4 py-6 text-left" aria-expanded="false">
+          <span class="font-medium text-ink text-base">Co się dzieje przy bardzo szczegółowym zapytaniu?</span>
+          <i data-lucide="plus" class="faq-icon w-5 h-5 text-mintDeep flex-shrink-0"></i>
+        </button>
+        <div class="faq-answer">
+          <p class="text-muted text-sm leading-relaxed pb-6">Jeśli Gili nie może z pewnością odpowiedzieć na zapytanie, jest ono przekazywane bezpośrednio do Pani.</p>
+        </div>
+      </div>
+
+      <div class="faq-item border-t border-line" role="listitem">
+        <button class="faq-trigger w-full flex items-center justify-between gap-4 py-6 text-left" aria-expanded="false">
+          <span class="font-medium text-ink text-base">Czy mogę zrezygnować w każdej chwili?</span>
+          <i data-lucide="plus" class="faq-icon w-5 h-5 text-mintDeep flex-shrink-0"></i>
+        </button>
+        <div class="faq-answer">
+          <p class="text-muted text-sm leading-relaxed pb-6">Tak. Z Gili można zrezygnować z miesiąca na miesiąc.</p>
+        </div>
+      </div>
+
+      <div class="faq-item border-t border-line" role="listitem">
+        <button class="faq-trigger w-full flex items-center justify-between gap-4 py-6 text-left" aria-expanded="false">
+          <span class="font-medium text-ink text-base">Przez jakie kanały komunikuje się Gili?</span>
+          <i data-lucide="plus" class="faq-icon w-5 h-5 text-mintDeep flex-shrink-0"></i>
+        </button>
+        <div class="faq-answer">
+          <p class="text-muted text-sm leading-relaxed pb-6">Gili odpowiada na zapytania przez <span class="wa-green">WhatsApp</span> — tam, gdzie Pani klientki już są. Komunikacja zawsze odbywa się w imieniu Pani salonu. Instagram i bezpośrednie połączenie ze stroną są w przygotowaniu.</p>
+        </div>
+      </div>
+
+      <div class="faq-item border-t border-line border-b" role="listitem">
+        <button class="faq-trigger w-full flex items-center justify-between gap-4 py-6 text-left" aria-expanded="false">
+          <span class="font-medium text-ink text-base">Czy Gili się opłaca dla mojego salonu?</span>
+          <i data-lucide="plus" class="faq-icon w-5 h-5 text-mintDeep flex-shrink-0"></i>
+        </button>
+        <div class="faq-answer">
+          <p class="text-muted text-sm leading-relaxed pb-6">To zależy od Pani salonu — ale odzyskanie zaledwie kilku klientek miesięcznie zwykle pokrywa koszt. Kalkulator powyżej daje pierwsze oszacowanie.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION 10 — FINAL CTA
+════════════════════════════════════════════ -->
+<section class="py-24 md:py-32 bg-roseSoft">
+  <div class="max-w-3xl mx-auto px-5 md:px-8 text-center reveal">
+    <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-ink mb-6">
+      Gotowa, by zamienić więcej klientek w regularny przychód?
+    </h2>
+    <p class="text-muted text-base md:text-lg leading-relaxed mb-10">
+      Proszę poznać Gili osobiście i bez zobowiązań, przez <span class="wa-green">WhatsApp</span>.
+    </p>
+    <!-- EDITABLE: Final CTA -->
+    <a href="#" class="whatsapp-cta inline-flex items-center gap-2 bg-rose text-ink font-semibold px-8 py-4 rounded-xl hover:bg-roseDeep transition-colors text-base mb-5">
+      <span class="cta-wa-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.13-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.84-.2-.49-.4-.42-.56-.43h-.47c-.16 0-.43.06-.65.31-.22.25-.85.84-.85 2.03 0 1.2.87 2.35.99 2.51.12.16 1.71 2.61 4.15 3.66.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.68-1.18.2-.58.2-1.08.15-1.18-.06-.11-.22-.17-.47-.29Z"/></svg></span>
+      <span>Napisz do nas na WhatsApp</span>
+      <i data-lucide="arrow-right" class="w-5 h-5"></i>
+    </a>
+    <p class="text-xs text-muted tracking-wide">Bez karty kredytowej · Bez zobowiązań</p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION 11 — FOOTER
+════════════════════════════════════════════ -->
+<footer class="border-t border-line bg-canvas py-12 md:py-16">
+  <div class="max-w-6xl mx-auto px-5 md:px-8">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+      <div>
+        <a href="#" class="font-serif text-2xl tracking-tight text-ink block mb-3" aria-label="Gili">
+          Gili<span style="color:#E8A0A8">.</span>
+        </a>
+        <!-- EDITABLE: Contact email -->
+        <a href="mailto:hallo@gili.live" class="text-muted text-sm hover:text-ink transition-colors">hallo@gili.live</a>
+      </div>
+      <nav aria-label="Informacje prawne" class="flex flex-wrap gap-6 text-sm text-muted">
+        <a href="/impressum" class="hover:text-ink transition-colors">Nota prawna</a>
+        <a href="/datenschutz" class="hover:text-ink transition-colors">Polityka prywatności</a>
+        <button type="button" data-cookie-settings class="hover:text-ink transition-colors">Ustawienia plików cookie</button>
+      </nav>
+    </div>
+    <p class="mt-10 text-xs text-muted">© <span id="current-year"></span> Gili. Wszelkie prawa zastrzeżone.</p>
+  </div>
+</footer>
+
+
+<!-- Pilot interest form. Netlify detects this form at deploy time. -->
+<div id="pilot-popup" class="privacy-overlay privacy-hidden" data-modal-lock="true" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="pilot-title">
+  <div class="privacy-dialog pilot-dialog">
+    <div class="privacy-dialog-inner">
+      <button type="button" class="privacy-close" data-close-pilot aria-label="Zamknij okno">×</button>
+      <h2 id="pilot-title">Program pilotażowy nowych funkcji Gili</h2>
+      <p>Proszę dołączyć, gdy testujemy wiadomości DM na Instagramie i czat na stronie.</p>
+
+      <form id="pilot-form" class="pilot-form" name="pilot-interest" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="pilot-interest" />
+        <p class="privacy-hidden">
+          <label>Proszę nie wypełniać tego pola: <input name="bot-field" /></label>
+        </p>
+        <label class="pilot-label">
+          E-mail
+          <input class="pilot-input" type="email" name="email" autocomplete="email" required placeholder="pani@email.pl" />
+        </label>
+        <label class="pilot-consent">
+          <input type="checkbox" name="marketing_consent" value="ja" />
+          <span>Chcę otrzymywać e-mailem informacje o programie pilotażowym Gili, nowościach i ofertach. Zgodę można wycofać w dowolnym momencie. <a class="privacy-link" href="/datenschutz">Polityka prywatności</a></span>
+        </label>
+        <button type="submit" class="privacy-btn privacy-btn-primary">Zapisz się do programu pilotażowego</button>
+        <div id="pilot-status" class="pilot-status" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- First-layer consent notice -->
+<div id="cookie-banner" class="cookie-banner privacy-hidden" aria-hidden="true" role="region" aria-labelledby="cookie-title">
+  <div class="cookie-banner-card">
+    <div class="cookie-banner-copy">
+      <span class="cookie-banner-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M12 21c4-2.2 7-5.7 7-10V6.2L12 3 5 6.2V11c0 4.3 3 7.8 7 10Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+          <path d="m9.2 12 1.8 1.8 3.9-4.1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <div>
+        <h2 id="cookie-title">Pani prywatność, Pani wybór</h2>
+        <p>Opcjonalne pliki cookie pomagają nam ulepszać Gili i mierzyć skuteczność reklam. Decyzja należy do Pani. Więcej informacji w naszej <a class="privacy-link" href="/datenschutz">polityce prywatności</a>.</p>
+      </div>
+    </div>
+    <div class="cookie-banner-actions">
+      <button type="button" class="privacy-btn cookie-choice-accept" data-consent-all>Zaakceptuj wszystkie</button>
+      <button type="button" class="privacy-btn cookie-choice-necessary" data-consent-reject>Tylko niezbędne</button>
+      <button type="button" class="privacy-btn cookie-settings-btn" data-cookie-settings>Dostosuj ustawienia</button>
+    </div>
+  </div>
+</div>
+
+<!-- Detailed consent settings -->
+<div id="cookie-settings" class="privacy-overlay privacy-hidden" data-modal-lock="true" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+  <div class="privacy-dialog">
+    <div class="privacy-dialog-inner">
+      <button type="button" class="privacy-close" data-close-settings aria-label="Zamknij ustawienia">×</button>
+      <h2 id="settings-title">Ustawienia plików cookie</h2>
+      <p>Funkcje niezbędne są zawsze aktywne. Statystyka i marketing uruchamiają się dopiero po wyrażeniu zgody.</p>
+      <div class="privacy-options">
+        <label class="privacy-option">
+          <input type="checkbox" checked disabled />
+          <span><strong>Niezbędne</strong>Zapisują Pani wybór i umożliwiają bezpieczne formularze.</span>
+        </label>
+        <label class="privacy-option">
+          <input id="consent-statistics" type="checkbox" />
+          <span><strong>Statystyka</strong>Google Analytics i Microsoft Clarity pomagają nam zrozumieć odwiedziny i sposób korzystania ze strony.</span>
+        </label>
+        <label class="privacy-option">
+          <input id="consent-marketing" type="checkbox" />
+          <span><strong>Marketing</strong>Piksel Meta mierzy skuteczność kampanii i może umożliwiać spersonalizowaną reklamę.</span>
+        </label>
+      </div>
+      <div class="privacy-actions">
+        <button type="button" class="privacy-btn privacy-btn-primary" data-consent-save>Zapisz wybór</button>
+        <button type="button" class="privacy-btn" data-consent-all>Zaakceptuj wszystkie</button>
+        <button type="button" class="privacy-btn" data-consent-reject>Tylko niezbędne</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════ -->
+<script src="/tracking-config.js"></script>
+<script src="/privacy.js"></script>
+<script>
+  // ─── EDITABLE: WhatsApp contact URL with a pre-filled message ───
+  const WHATSAPP_URL = "https://wa.me/436604088773?text=Dzie%C5%84%20dobry%20Gili%2C%20chcia%C5%82abym%20dowiedzie%C4%87%20si%C4%99%20wi%C4%99cej%20o%20tym%2C%20jak%20Gili%20mo%C5%BCe%20wesprze%C4%87%20m%C3%B3j%20salon.%20%F0%9F%8C%B8";
+
+  document.querySelectorAll('.whatsapp-cta, #nav-cta, #nav-cta-mobile').forEach(el => {
+    el.href = WHATSAPP_URL;
+    el.target = "_blank";
+    el.rel = "noopener noreferrer";
+  });
+
+  // Manual language switch — remember the choice so the auto-redirect never fires again
+  document.querySelectorAll('[data-lang-link]').forEach(el => {
+    el.addEventListener('click', () => {
+      localStorage.setItem('lang-choice', '1');
+    });
+  });
+
+  // ─── Language dropdown (nav) ───
+  document.querySelectorAll('.lang-dropdown').forEach(dropdown => {
+    const trigger = dropdown.querySelector('.lang-dropdown-trigger');
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = dropdown.classList.toggle('open');
+      trigger.setAttribute('aria-expanded', isOpen);
+    });
+  });
+  document.querySelectorAll('.lang-dropdown-mobile').forEach(dropdown => {
+    const trigger = dropdown.querySelector('.lang-dropdown-trigger-mobile');
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = dropdown.classList.toggle('open');
+      trigger.setAttribute('aria-expanded', isOpen);
+    });
+  });
+  document.addEventListener('click', (e) => {
+    document.querySelectorAll('.lang-dropdown.open, .lang-dropdown-mobile.open').forEach(dropdown => {
+      if (dropdown.contains(e.target)) return;
+      dropdown.classList.remove('open');
+      dropdown.querySelector('[aria-expanded]').setAttribute('aria-expanded', 'false');
+    });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    document.querySelectorAll('.lang-dropdown.open, .lang-dropdown-mobile.open').forEach(dropdown => {
+      dropdown.classList.remove('open');
+      dropdown.querySelector('[aria-expanded]').setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  document.getElementById('current-year').textContent = new Date().getFullYear();
+
+  lucide.createIcons();
+
+  // ─── Smooth scroll ───
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const target = this.getAttribute('href');
+      if (target === '#') return;
+      const el = document.querySelector(target);
+      if (!el) return;
+      e.preventDefault();
+      const navHeight = document.getElementById('nav').offsetHeight;
+      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - navHeight - 16, behavior: 'smooth' });
+    });
+  });
+
+  // ─── Mobile menu ───
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  menuToggle.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', isOpen);
+    menuToggle.setAttribute('aria-label', isOpen ? 'Zamknij menu' : 'Otwórz menu');
+    menuToggle.querySelector('[data-lucide]').setAttribute('data-lucide', isOpen ? 'x' : 'menu');
+    lucide.createIcons();
+  });
+
+  document.querySelectorAll('.mobile-nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Otwórz menu');
+      menuToggle.querySelector('[data-lucide]').setAttribute('data-lucide', 'menu');
+      lucide.createIcons();
+    });
+  });
+
+  // ─── FAQ accordions ───
+  document.querySelectorAll('.faq-trigger').forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const item = trigger.closest('.faq-item');
+      const answer = item.querySelector('.faq-answer');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-answer').classList.remove('open');
+        i.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        answer.classList.add('open');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  // ─── Revenue calculator ───
+  // Illustrative scenarios only. Every number shown is derived from the
+  // visitor's own two inputs — no aggregate or claimed statistics.
+  const SCENARIOS = [0.20, 0.30, 0.40, 0.50];
+  const PEOPLE_ICONS = 10;
+
+  const clientsInput = document.getElementById('calc-clients');
+  const priceInput   = document.getElementById('calc-price');
+  const scenarioGrid = document.getElementById('scenario-grid');
+
+  const euro = new Intl.NumberFormat('pl-PL', {
+    style: 'currency', currency: 'EUR',
+    minimumFractionDigits: 0, maximumFractionDigits: 0
+  });
+
+  function personSvg(on) {
+    return `<svg viewBox="0 0 24 24" fill="currentColor" class="${on ? 'person-on' : 'person-off'}">
+      <circle cx="12" cy="6.5" r="4.2"/>
+      <path d="M3.6 21v-1.2A6.4 6.4 0 0 1 10 13.4h4a6.4 6.4 0 0 1 6.4 6.4V21z"/></svg>`;
+  }
+
+  function clampNumber(input, max) {
+    const raw = parseFloat(input.value);
+    if (!isFinite(raw) || raw < 0) return 0;
+    return Math.min(raw, max);
+  }
+
+  function renderScenarios() {
+    const clients = clampNumber(clientsInput, 10000);
+    const price   = clampNumber(priceInput, 10000);
+
+    scenarioGrid.innerHTML = SCENARIOS.map(rate => {
+      const revenue = clients * rate * price;
+      const filled  = Math.round(rate * PEOPLE_ICONS);
+      const people  = Array.from({ length: PEOPLE_ICONS }, (_, i) => personSvg(i < filled)).join('');
+
+      return `
+        <div class="scenario-card">
+          <div class="scenario-rate">${Math.round(rate * 100)} % wraca</div>
+          <div class="people-row">${people}</div>
+          <div class="scenario-value">${euro.format(revenue)}</div>
+          <div class="scenario-unit">miesięcznie</div>
+        </div>`;
+    }).join('');
+  }
+
+  if (clientsInput && priceInput && scenarioGrid) {
+    renderScenarios();
+    clientsInput.addEventListener('input', renderScenarios);
+    priceInput.addEventListener('input', renderScenarios);
+  }
+
+  // ─── Scroll-reveal ───
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (prefersReducedMotion) {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+  } else {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  }
+
+  // ─── Hero chat animation ───
+  function animateChat(chatId, delay = 300) {
+    if (prefersReducedMotion) {
+      document.querySelectorAll(`#${chatId} .wa-msg`).forEach(m => m.classList.add('show'));
+      return;
+    }
+    document.querySelectorAll(`#${chatId} .wa-msg`).forEach((msg, i) => {
+      setTimeout(() => msg.classList.add('show'), delay + i * 650);
+    });
+  }
+
+  const phone1Observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      phone1Observer.unobserve(entry.target);
+      animateChat('chat1', 250);
+    });
+  }, { threshold: 0.25 });
+  const phone1 = document.getElementById('phone1');
+  if (phone1) phone1Observer.observe(phone1);
+</script>
+
+</body>
+</html>

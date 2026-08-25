@@ -15,6 +15,8 @@
   <link rel="alternate" hreflang="de" href="https://gili.live/" />
   <link rel="alternate" hreflang="fr" href="https://gili.live/fr/" />
   <link rel="alternate" hreflang="en" href="https://gili.live/en/" />
+  <link rel="alternate" hreflang="es" href="https://gili.live/es/" />
+  <link rel="alternate" hreflang="pl" href="https://gili.live/pl/" />
   <link rel="stylesheet" href="/privacy.css" />
 
   <!-- Google Fonts -->
@@ -376,7 +378,51 @@
 
     /* ─── Mobile menu ─── */
     #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-    #mobile-menu.open { max-height: 300px; }
+    #mobile-menu.open { max-height: 460px; }
+
+    /* ─── Language dropdown (nav) ─── */
+    .lang-dropdown { position: relative; }
+    .lang-dropdown-trigger {
+      display: inline-flex; align-items: center;
+      background: none; border: none; padding: 2px; margin: 0;
+      font-size: 17px; line-height: 1; cursor: pointer; color: inherit;
+      border-radius: 6px;
+    }
+    .lang-dropdown-menu {
+      position: absolute; top: calc(100% + 12px); right: 0;
+      background: #FDFAF7; border: 1px solid #EFE7E1; border-radius: 12px;
+      box-shadow: 0 10px 28px rgba(42,40,37,0.10), 0 2px 8px rgba(42,40,37,0.05);
+      padding: 6px; min-width: 116px;
+      display: none; flex-direction: column; gap: 1px; z-index: 60;
+    }
+    .lang-dropdown.open .lang-dropdown-menu { display: flex; }
+    .lang-dropdown-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 7px 10px; border-radius: 8px;
+      font-size: 14px; font-weight: 500; color: #2A2825; text-decoration: none;
+    }
+    .lang-dropdown-item:hover { background: rgba(42,40,37,0.05); }
+
+    /* Mobile variant — reveals inline in the mobile-nav flow instead of an
+       absolutely positioned overlay, so it never gets clipped by
+       #mobile-menu's max-height/overflow-hidden open animation. */
+    .lang-dropdown-trigger-mobile {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: none; border: none; padding: 0; margin: 0;
+      font: inherit; font-size: 17px; color: inherit; cursor: pointer;
+    }
+    .lang-dropdown-mobile-menu {
+      display: none; flex-direction: column; gap: 2px;
+      margin-top: 10px; padding-left: 2px;
+    }
+    .lang-dropdown-mobile.open .lang-dropdown-mobile-menu { display: flex; }
+
+    /* Language-choice modal now holds only a row of flag buttons (no heading
+       or paragraph) — shrink the shared .privacy-dialog box to fit that row
+       instead of the generic 560px width used by the cookie/pilot dialogs. */
+    #lang-modal .privacy-dialog { width: auto; max-width: min(92vw, 420px); }
+    #lang-modal .privacy-dialog-inner { padding: 18px; }
+    #lang-modal .privacy-actions { justify-content: center; margin-top: 0; }
 
     /* ─── Focus ─── */
     :focus-visible { outline: 2px solid #2E7D64; outline-offset: 3px; border-radius: 4px; }
@@ -401,8 +447,17 @@
         <a href="#rechner"       class="hover:text-ink transition-colors">Rechner</a>
         <a href="#preise"        class="hover:text-ink transition-colors">Preise</a>
         <a href="#faq"           class="hover:text-ink transition-colors">FAQ</a>
-        <a href="/fr/" class="lang-switch hover:text-ink transition-colors" data-lang-link aria-label="Passer au français">FR</a>
-        <a href="/en/" class="lang-switch hover:text-ink transition-colors" data-lang-link aria-label="Switch to English">EN</a>
+        <div class="lang-dropdown">
+          <button type="button" class="lang-dropdown-trigger" aria-haspopup="true" aria-expanded="false" aria-label="Sprache wechseln">
+            <span aria-hidden="true">🇩🇪</span>
+          </button>
+          <div class="lang-dropdown-menu" role="menu">
+            <a href="/fr/" class="lang-dropdown-item" role="menuitem" data-lang-link aria-label="Passer au français"><span aria-hidden="true">🇫🇷</span> FR</a>
+            <a href="/en/" class="lang-dropdown-item" role="menuitem" data-lang-link aria-label="Switch to English"><span aria-hidden="true">🇬🇧</span> EN</a>
+            <a href="/es/" class="lang-dropdown-item" role="menuitem" data-lang-link aria-label="Cambiar a español"><span aria-hidden="true">🇪🇸</span> ES</a>
+            <a href="/pl/" class="lang-dropdown-item" role="menuitem" data-lang-link aria-label="Przełącz na polski"><span aria-hidden="true">🇵🇱</span> PL</a>
+          </div>
+        </div>
       </nav>
 
       <!-- EDITABLE: primary CTA links to WhatsApp -->
@@ -428,8 +483,17 @@
         <a href="#rechner"       class="hover:text-ink transition-colors mobile-nav-link">Rechner</a>
         <a href="#preise"        class="hover:text-ink transition-colors mobile-nav-link">Preise</a>
         <a href="#faq"           class="hover:text-ink transition-colors mobile-nav-link">FAQ</a>
-        <a href="/fr/" class="lang-switch hover:text-ink transition-colors mobile-nav-link" data-lang-link aria-label="Passer au français">FR</a>
-        <a href="/en/" class="lang-switch hover:text-ink transition-colors mobile-nav-link" data-lang-link aria-label="Switch to English">EN</a>
+        <div class="lang-dropdown-mobile">
+          <button type="button" class="lang-dropdown-trigger-mobile" aria-haspopup="true" aria-expanded="false" aria-label="Sprache wechseln">
+            <span aria-hidden="true">🇩🇪</span>
+          </button>
+          <div class="lang-dropdown-mobile-menu" role="menu">
+            <a href="/fr/" class="lang-dropdown-item mobile-nav-link" role="menuitem" data-lang-link aria-label="Passer au français"><span aria-hidden="true">🇫🇷</span> FR</a>
+            <a href="/en/" class="lang-dropdown-item mobile-nav-link" role="menuitem" data-lang-link aria-label="Switch to English"><span aria-hidden="true">🇬🇧</span> EN</a>
+            <a href="/es/" class="lang-dropdown-item mobile-nav-link" role="menuitem" data-lang-link aria-label="Cambiar a español"><span aria-hidden="true">🇪🇸</span> ES</a>
+            <a href="/pl/" class="lang-dropdown-item mobile-nav-link" role="menuitem" data-lang-link aria-label="Przełącz na polski"><span aria-hidden="true">🇵🇱</span> PL</a>
+          </div>
+        </div>
       </nav>
     </div>
   </div>
@@ -1220,15 +1284,15 @@
 </div>
 
 <!-- Language choice — shown once on first visit to the German root page -->
-<div id="lang-modal" class="privacy-overlay privacy-hidden" data-modal-lock="true" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="lang-modal-title">
+<div id="lang-modal" class="privacy-overlay privacy-hidden" data-modal-lock="true" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Sprache wählen · Choisir la langue · Choose language · Elegir idioma · Wybierz język">
   <div class="privacy-dialog">
     <div class="privacy-dialog-inner">
-      <h2 id="lang-modal-title">Wähle deine Sprache · Choisis ta langue · Choose your language</h2>
-      <p>Gili gibt es auf Deutsch, Französisch und Englisch.</p>
       <div class="privacy-actions">
-        <button type="button" class="privacy-btn privacy-btn-primary" data-lang-choice="de">Deutsch</button>
-        <button type="button" class="privacy-btn privacy-btn-primary" data-lang-choice="fr">Français</button>
-        <button type="button" class="privacy-btn privacy-btn-primary" data-lang-choice="en">English</button>
+        <button type="button" class="privacy-btn privacy-btn-primary" data-lang-choice="de"><span aria-hidden="true">🇩🇪</span> DE</button>
+        <button type="button" class="privacy-btn privacy-btn-primary" data-lang-choice="fr"><span aria-hidden="true">🇫🇷</span> FR</button>
+        <button type="button" class="privacy-btn privacy-btn-primary" data-lang-choice="en"><span aria-hidden="true">🇬🇧</span> EN</button>
+        <button type="button" class="privacy-btn privacy-btn-primary" data-lang-choice="es"><span aria-hidden="true">🇪🇸</span> ES</button>
+        <button type="button" class="privacy-btn privacy-btn-primary" data-lang-choice="pl"><span aria-hidden="true">🇵🇱</span> PL</button>
       </div>
     </div>
   </div>
@@ -1270,12 +1334,46 @@
       setLangChoice();
       if (el.dataset.langChoice === 'fr') { location.href = '/fr/'; return; }
       if (el.dataset.langChoice === 'en') { location.href = '/en/'; return; }
+      if (el.dataset.langChoice === 'es') { location.href = '/es/'; return; }
+      if (el.dataset.langChoice === 'pl') { location.href = '/pl/'; return; }
       hideLangModal();
     });
   });
   if (!localStorage.getItem('lang-choice') && langModal) {
     showLangModal();
   }
+
+  // ─── Language dropdown (nav) ───
+  document.querySelectorAll('.lang-dropdown').forEach(dropdown => {
+    const trigger = dropdown.querySelector('.lang-dropdown-trigger');
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = dropdown.classList.toggle('open');
+      trigger.setAttribute('aria-expanded', isOpen);
+    });
+  });
+  document.querySelectorAll('.lang-dropdown-mobile').forEach(dropdown => {
+    const trigger = dropdown.querySelector('.lang-dropdown-trigger-mobile');
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = dropdown.classList.toggle('open');
+      trigger.setAttribute('aria-expanded', isOpen);
+    });
+  });
+  document.addEventListener('click', (e) => {
+    document.querySelectorAll('.lang-dropdown.open, .lang-dropdown-mobile.open').forEach(dropdown => {
+      if (dropdown.contains(e.target)) return;
+      dropdown.classList.remove('open');
+      dropdown.querySelector('[aria-expanded]').setAttribute('aria-expanded', 'false');
+    });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    document.querySelectorAll('.lang-dropdown.open, .lang-dropdown-mobile.open').forEach(dropdown => {
+      dropdown.classList.remove('open');
+      dropdown.querySelector('[aria-expanded]').setAttribute('aria-expanded', 'false');
+    });
+  });
 
   document.getElementById('current-year').textContent = new Date().getFullYear();
 
