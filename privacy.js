@@ -179,7 +179,20 @@
     if (consent) {
       applyConsent(consent);
     } else {
-      setModalVisible(banner, true);
+      showBannerAfterLanguage();
+    }
+
+    // Visitors from a personal link first pick a language; the banner waits until that is done.
+    function showBannerAfterLanguage() {
+      const langModal = document.getElementById("lang-modal");
+      const busy = () => langModal && !langModal.classList.contains("privacy-hidden");
+      if (!busy()) return setModalVisible(banner, true);
+      const observer = new MutationObserver(() => {
+        if (busy()) return;
+        observer.disconnect();
+        window.setTimeout(() => setModalVisible(banner, true), 600);
+      });
+      observer.observe(langModal, { attributes: true, attributeFilter: ["class"] });
     }
   }
 
