@@ -1206,14 +1206,19 @@
   document.querySelectorAll('[data-lang-choice]').forEach(el => {
     el.addEventListener('click', () => {
       setLangChoice();
-      if (el.dataset.langChoice === 'fr') { location.href = '/fr/'; return; }
-      if (el.dataset.langChoice === 'en') { location.href = '/en/'; return; }
-      if (el.dataset.langChoice === 'es') { location.href = '/es/'; return; }
-      if (el.dataset.langChoice === 'pl') { location.href = '/pl/'; return; }
+      // A personal link's ref travels to the chosen language (see privacy.js).
+      const link = window.GILI_PERSONAL_LINK;
+      const query = link ? '?ref=' + encodeURIComponent(link.ref) + '&ref_seen=1' : '';
+      if (el.dataset.langChoice === 'fr') { location.href = '/fr/' + query; return; }
+      if (el.dataset.langChoice === 'en') { location.href = '/en/' + query; return; }
+      if (el.dataset.langChoice === 'es') { location.href = '/es/' + query; return; }
+      if (el.dataset.langChoice === 'pl') { location.href = '/pl/' + query; return; }
       hideLangModal();
     });
   });
-  if (!localStorage.getItem('lang-choice') && langModal) {
+  // First visit, or arriving from a personal link: always ask for the language.
+  const fromPersonalLink = window.GILI_PERSONAL_LINK && window.GILI_PERSONAL_LINK.firstPage;
+  if ((!localStorage.getItem('lang-choice') || fromPersonalLink) && langModal) {
     showLangModal();
   }
 
