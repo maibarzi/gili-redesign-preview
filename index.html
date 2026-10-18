@@ -855,6 +855,58 @@
 
 
 <!-- ═══════════════════════════════════════════
+     SECTION 5b — OWNER MODE
+     The owner writes to Gili from her own number; Gili recognises her.
+════════════════════════════════════════════ -->
+<section class="py-24 md:py-32">
+  <div class="max-w-5xl mx-auto px-5 md:px-8">
+    <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+
+      <div class="reveal">
+        <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-ink mb-6">
+          Du bleibst die Chefin. Gili hält sich an deinen Kalender.
+        </h2>
+        <p class="text-muted text-base md:text-lg leading-relaxed mb-8">
+          Schreib Gili einfach von deiner eigenen Nummer. Gili erkennt, dass du die Inhaberin bist, und setzt um, was du ihr sagst.
+        </p>
+        <ul class="space-y-4">
+          <li class="flex gap-3 text-ink text-sm md:text-base leading-relaxed"><i data-lucide="check" class="w-5 h-5 text-mintDeep flex-shrink-0 mt-0.5"></i><span>Zeiten blockieren, wenn du nicht im Salon bist</span></li>
+          <li class="flex gap-3 text-ink text-sm md:text-base leading-relaxed"><i data-lucide="check" class="w-5 h-5 text-mintDeep flex-shrink-0 mt-0.5"></i><span>Einen Termin eintragen, den du am Telefon vereinbart hast</span></li>
+          <li class="flex gap-3 text-ink text-sm md:text-base leading-relaxed"><i data-lucide="check" class="w-5 h-5 text-mintDeep flex-shrink-0 mt-0.5"></i><span>Nachfragen, zum Beispiel: Wer kommt morgen?</span></li>
+        </ul>
+      </div>
+
+      <!-- Owner writing to Gili -->
+      <div class="reveal" style="transition-delay:0.1s">
+        <div class="wa-screen mx-auto" style="max-width:380px;">
+          <div class="wa-header">
+            <div class="wa-avatar">G</div>
+            <div class="wa-header-text">
+              <h3>Gili</h3>
+              <p>online</p>
+            </div>
+          </div>
+          <div class="wa-body">
+            <span class="wa-daystamp">Dienstag</span>
+            <div class="wa-bubble out">
+              Hallo Gili, kannst du morgen von 14:00 bis 16:00 Uhr im Kalender blockieren? Ich bin da nicht im Salon, ich muss etwas erledigen.
+              <span class="wa-time">09:12 <svg class="wa-ticks" viewBox="0 0 15 10" aria-hidden="true"><path d="M1 5.4 L3.6 8 L8.6 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.4 5.4 L8 8 L13 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </div>
+            <div class="wa-bubble in">
+              Hallo Vivian vom Rosa Beauty Salon! Danke für die Info 🌸 Morgen zwischen 14:00 und 16:00 Uhr können Kundinnen keine Termine buchen, wie gewünscht.
+              <span class="wa-time">09:12</span>
+            </div>
+          </div>
+        </div>
+        <p class="wa-caption">Eine Nachricht von dir genügt.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
      SECTION 6 — REVENUE CALCULATOR
      Illustrative scenarios only. Every figure is computed
      from the visitor's own two inputs — no claimed data.
@@ -1071,6 +1123,16 @@
         </button>
         <div class="faq-answer">
           <p class="text-muted text-sm leading-relaxed pb-6">Wenn Gili eine Anfrage nicht sicher beantworten kann, wird sie direkt an dich weitergeleitet.</p>
+        </div>
+      </div>
+
+      <div class="faq-item border-t border-line" role="listitem">
+        <button class="faq-trigger w-full flex items-center justify-between gap-4 py-6 text-left" aria-expanded="false">
+          <span class="font-medium text-ink text-base">Funktioniert Gili mit Treatwell?</span>
+          <i data-lucide="plus" class="faq-icon w-5 h-5 text-mintDeep flex-shrink-0"></i>
+        </button>
+        <div class="faq-answer">
+          <p class="text-muted text-sm leading-relaxed pb-6">Ja. Gili verbindet sich mit deinem Treatwell-Kalender: Termine, die über Treatwell gebucht werden, sind bei Gili automatisch blockiert, und Gili bietet diese Zeiten nicht an. Termine, die über Gili gebucht werden, trägst du in Treatwell selbst ein, so wie heute Termine, die du am Telefon vereinbarst.</p>
         </div>
       </div>
 
