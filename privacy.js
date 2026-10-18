@@ -259,9 +259,55 @@
     });
   }
 
+  // Personal links (the button in our WhatsApp message after a phone call)
+  // carry ?ref=<lead id>. The ref is kept only in this page: it goes into the
+  // pilot form, is reported once to our own webhook, and is removed from the
+  // address bar so a shared or bookmarked link does not carry it. Nothing is
+  // stored in cookies or local storage. Switching language passes it on with
+  // ref_seen=1, so the visit is not reported twice.
+  // Read right away (not on DOMContentLoaded): the language popup script in
+  // the page needs to know about it while the page is still loading.
+  const personalLink = (function () {
+    const params = new URLSearchParams(window.location.search);
+    const ref = params.get("ref");
+    const seen = params.has("ref_seen");
+    if (!ref && !seen) return null;
+    params.delete("ref");
+    params.delete("ref_seen");
+    const query = params.toString();
+    window.history.replaceState(null, "", window.location.pathname + (query ? "?" + query : "") + window.location.hash);
+    if (!ref || !/^[A-Za-z0-9_-]{1,40}$/.test(ref)) return null;
+    window.GILI_PERSONAL_LINK = { ref: ref, firstPage: !seen };
+    return window.GILI_PERSONAL_LINK;
+  })();
+
+  function initPersonalLink() {
+    if (!personalLink) return;
+    const ref = personalLink.ref;
+    document.querySelectorAll('input[name="ref"]').forEach(function (input) { input.value = ref; });
+    document.querySelectorAll("[data-lang-link]").forEach(function (link) {
+      link.href = link.getAttribute("href").split("?")[0] + "?ref=" + encodeURIComponent(ref) + "&ref_seen=1";
+    });
+    if (!personalLink.firstPage) return;
+
+    if (config.visitWebhook && navigator.sendBeacon) {
+      navigator.sendBeacon(config.visitWebhook, new URLSearchParams({
+        ref: ref,
+        page: window.location.pathname,
+        at: new Date().toISOString()
+      }));
+    }
+
+    // Statistics only with consent, possibly given later on this page.
+    function report() { trackStatisticsEvent("personal_link_visit", { ref: ref }); }
+    if (readConsent()) report();
+    else document.addEventListener("gili:consent-updated", function () { window.setTimeout(report, 1500); }, { once: true });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initConsentUi();
     initPilotPopup();
     initInteractionTracking();
+    initPersonalLink();
   });
 })();
