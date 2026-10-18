@@ -181,16 +181,14 @@
     </div>
   </footer>
 
-  <div id="cookie-banner" class="privacy-overlay privacy-hidden" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="cookie-title">
-    <div class="privacy-dialog"><div class="privacy-dialog-inner">
-      <h2 id="cookie-title">Tu privacidad, tu elección</h2>
-      <p>Usamos cookies opcionales y tecnologías similares para mejorar esta web y medir nuestra publicidad. Tú decides. Más información en nuestra <a class="privacy-link" href="/datenschutz">política de privacidad</a>.</p>
-      <div class="privacy-actions">
-        <button type="button" class="privacy-btn privacy-btn-primary" data-consent-all>Aceptar todo</button>
-        <button type="button" class="privacy-btn" data-consent-reject>Solo necesarias</button>
-        <button type="button" class="privacy-btn" data-cookie-settings>Ajustar configuración</button>
+  <div id="cookie-banner" class="cookie-banner privacy-hidden" aria-hidden="true" role="region" aria-labelledby="cookie-title">
+    <div class="cookie-banner-card">
+      <p id="cookie-title">¿Podemos usar cookies para medir cómo se usa nuestra web y qué anuncios funcionan? Así vemos qué ayuda de verdad a los salones. <button type="button" class="cookie-details" data-cookie-settings>Detalles</button></p>
+      <div class="cookie-banner-actions">
+        <button type="button" class="privacy-btn" data-consent-all>Claro</button>
+        <button type="button" class="privacy-btn" data-consent-reject>Mejor no</button>
       </div>
-    </div></div>
+    </div>
   </div>
 
   <div id="cookie-settings" class="privacy-overlay privacy-hidden" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="settings-title">

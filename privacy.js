@@ -3,6 +3,8 @@
 
   const STORAGE_KEY = "gili_cookie_consent_v1";
   const POPUP_KEY = "gili_pilot_popup_v1";
+  // Off during the phone campaign: one message on the page, no second sign-up.
+  const PILOT_POPUP_ENABLED = false;
   const config = window.GILI_TRACKING || {};
   let loadedStatistics = false;
   let loadedMarketing = false;
@@ -177,7 +179,20 @@
     if (consent) {
       applyConsent(consent);
     } else {
-      setModalVisible(banner, true);
+      showBannerAfterLanguage();
+    }
+
+    // Visitors from a personal link first pick a language; the banner waits until that is done.
+    function showBannerAfterLanguage() {
+      const langModal = document.getElementById("lang-modal");
+      const busy = () => langModal && !langModal.classList.contains("privacy-hidden");
+      if (!busy()) return setModalVisible(banner, true);
+      const observer = new MutationObserver(() => {
+        if (busy()) return;
+        observer.disconnect();
+        window.setTimeout(() => setModalVisible(banner, true), 600);
+      });
+      observer.observe(langModal, { attributes: true, attributeFilter: ["class"] });
     }
   }
 
@@ -199,6 +214,7 @@
     closeButtons.forEach((button) => button.addEventListener("click", closePopup));
 
     function schedulePopup() {
+      if (!PILOT_POPUP_ENABLED) return;
       const dismissedAt = Number(localStorage.getItem(POPUP_KEY) || 0);
       if (dismissedAt && Date.now() - dismissedAt <= fourteenDays) return;
       window.setTimeout(() => {
