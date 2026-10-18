@@ -438,6 +438,7 @@
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-muted" aria-label="Navegación principal">
         <a href="#kundenbindung" class="hover:text-ink transition-colors">Fidelización</a>
         <a href="#rechner"       class="hover:text-ink transition-colors">Calculadora</a>
+        <a href="#pakete"        class="hover:text-ink transition-colors">Planes</a>
         <a href="#faq"           class="hover:text-ink transition-colors">FAQ</a>
         <div class="lang-dropdown">
           <button type="button" class="lang-dropdown-trigger" aria-haspopup="true" aria-expanded="false" aria-label="Cambiar idioma">
@@ -473,6 +474,7 @@
       <nav class="py-4 border-t border-line flex flex-col gap-4 text-sm font-medium text-muted">
         <a href="#kundenbindung" class="hover:text-ink transition-colors mobile-nav-link">Fidelización</a>
         <a href="#rechner"       class="hover:text-ink transition-colors mobile-nav-link">Calculadora</a>
+        <a href="#pakete"        class="hover:text-ink transition-colors mobile-nav-link">Planes</a>
         <a href="#faq"           class="hover:text-ink transition-colors mobile-nav-link">FAQ</a>
         <div class="lang-dropdown-mobile">
           <button type="button" class="lang-dropdown-trigger-mobile" aria-haspopup="true" aria-expanded="false" aria-label="Cambiar idioma">
@@ -668,11 +670,33 @@
     </h2>
     <p class="font-medium text-ink mb-14 max-w-4xl reveal" style="transition-delay:0.1s">Todo en nombre de tu salón.</p>
 
-    <!-- Three across only once there is room for 15px chat text; below that they
+    <!-- Two by two once there is room for 15px chat text; below that they
          stack and are capped so the bubbles keep chat-like proportions.
          Items stretch, so the shorter conversation simply shows empty chat
          space at the bottom, as a real screen would. -->
-    <div class="grid lg:grid-cols-3 gap-8 lg:gap-7 reveal" style="transition-delay:0.1s">
+    <div class="grid lg:grid-cols-2 gap-8 lg:gap-7 reveal" style="transition-delay:0.1s">
+
+      <!-- Mockup 0 — a regular booking -->
+      <div class="wa-screen w-full max-w-[420px] mx-auto lg:max-w-none">
+        <div class="wa-header">
+          <div class="wa-avatar">F</div>
+          <div class="wa-header-text">
+            <h3>FLORENCE BEAUTY SALON</h3>
+            <p>online</p>
+          </div>
+        </div>
+        <div class="wa-body">
+          <span class="wa-daystamp">Lunes</span>
+          <div class="wa-bubble out">
+            Hola, me gustaría pedir cita para un corte de pelo la semana que viene.
+            <span class="wa-time">18:02 <svg class="wa-ticks" viewBox="0 0 15 10" aria-hidden="true"><path d="M1 5.4 L3.6 8 L8.6 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.4 5.4 L8 8 L13 2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+          <div class="wa-bubble in">
+            Bienvenida a Florence Beauty Salon&nbsp;🌸 Con mucho gusto. ¿Hay algún día que te venga bien?
+            <span class="wa-time">18:02</span>
+          </div>
+        </div>
+      </div>
 
       <!-- Mockup A — invitation to return -->
       <div class="wa-screen w-full max-w-[420px] mx-auto lg:max-w-none">
@@ -928,6 +952,62 @@
       La mayoría de los sistemas responden mensajes.<br class="hidden md:block" />
       Gili construye relaciones.
     </p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION 8 — PLANS
+     No prices on purpose: new salons get a special price on WhatsApp.
+════════════════════════════════════════════ -->
+<section id="pakete" class="py-24 md:py-32">
+  <div class="max-w-5xl mx-auto px-5 md:px-8">
+
+    <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight text-ink mb-12 md:mb-16 text-center reveal">
+      El plan adecuado para tu salón
+    </h2>
+
+    <div class="grid md:grid-cols-2 gap-6 md:gap-8 reveal" style="transition-delay:0.1s">
+
+      <!-- Starter -->
+      <div class="flex flex-col bg-white border border-line rounded-2xl p-7 md:p-9">
+        <p class="text-sm font-semibold tracking-[0.12em] uppercase text-muted mb-3">Starter</p>
+        <h3 class="font-serif text-2xl md:text-3xl leading-tight text-ink mb-3">Reservas por WhatsApp</h3>
+        <p class="text-muted text-sm md:text-base leading-relaxed mb-7">Tus clientas reservan su cita directamente en el chat, a cualquier hora.</p>
+        <ul class="space-y-3 mb-8">
+          <li class="flex gap-3 text-ink text-sm md:text-base leading-relaxed"><i data-lucide="check" class="w-5 h-5 text-mintDeep flex-shrink-0 mt-0.5"></i><span>Reservas por WhatsApp, en nombre de tu salón</span></li>
+          <li class="flex gap-3 text-ink text-sm md:text-base leading-relaxed"><i data-lucide="check" class="w-5 h-5 text-mintDeep flex-shrink-0 mt-0.5"></i><span>Respuestas a cualquier hora</span></li>
+          <li class="flex gap-3 text-ink text-sm md:text-base leading-relaxed"><i data-lucide="check" class="w-5 h-5 text-mintDeep flex-shrink-0 mt-0.5"></i><span>Las citas llegan directamente a tu calendario</span></li>
+        </ul>
+        <div class="mt-auto pt-6 border-t border-line">
+          <p class="text-sm font-semibold text-mintDeep mb-4">Precio especial para salones nuevos</p>
+          <a href="#" class="whatsapp-cta flex w-full items-center justify-center gap-2 bg-white border border-ink/15 text-ink font-semibold px-6 py-3.5 rounded-xl hover:border-ink/40 transition-colors text-sm">
+            <span class="cta-wa-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.13-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.84-.2-.49-.4-.42-.56-.43h-.47c-.16 0-.43.06-.65.31-.22.25-.85.84-.85 2.03 0 1.2.87 2.35.99 2.51.12.16 1.71 2.61 4.15 3.66.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.68-1.18.2-.58.2-1.08.15-1.18-.06-.11-.22-.17-.47-.29Z"/></svg></span><span>Escríbenos por WhatsApp</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Pro -->
+      <div class="relative flex flex-col bg-white border-2 border-rose rounded-2xl p-7 md:p-9">
+        <span class="absolute -top-3.5 left-7 bg-rose text-ink text-sm font-semibold px-3 py-1 rounded-xl">Recomendado</span>
+        <p class="text-sm font-semibold tracking-[0.12em] uppercase text-muted mb-3">Pro</p>
+        <h3 class="font-serif text-2xl md:text-3xl leading-tight text-ink mb-3">Tu gestora de clientas</h3>
+        <p class="text-muted text-sm md:text-base leading-relaxed mb-7">Todo lo que necesitas para mantener el contacto con tus clientas y que vuelvan.</p>
+        <ul class="space-y-3 mb-8">
+          <li class="flex gap-3 text-ink text-sm md:text-base leading-relaxed"><i data-lucide="check" class="w-5 h-5 text-mintDeep flex-shrink-0 mt-0.5"></i><span>Reservas por WhatsApp</span></li>
+          <li class="flex gap-3 text-ink text-sm md:text-base leading-relaxed"><i data-lucide="check" class="w-5 h-5 text-mintDeep flex-shrink-0 mt-0.5"></i><span>Recordatorios antes de cada cita</span></li>
+          <li class="flex gap-3 text-ink text-sm md:text-base leading-relaxed"><i data-lucide="check" class="w-5 h-5 text-mintDeep flex-shrink-0 mt-0.5"></i><span>Una invitación a volver unas semanas después de cada visita</span></li>
+          <li class="flex gap-3 text-ink text-sm md:text-base leading-relaxed"><i data-lucide="check" class="w-5 h-5 text-mintDeep flex-shrink-0 mt-0.5"></i><span>Promociones especiales para tus clientas</span></li>
+        </ul>
+        <div class="mt-auto pt-6 border-t border-line">
+          <p class="text-sm font-semibold text-mintDeep mb-4">Precio especial para salones nuevos</p>
+          <a href="#" class="whatsapp-cta flex w-full items-center justify-center gap-2 bg-rose text-ink font-semibold px-6 py-3.5 rounded-xl hover:bg-roseDeep transition-colors text-sm">
+            <span class="cta-wa-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.13-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.84-.2-.49-.4-.42-.56-.43h-.47c-.16 0-.43.06-.65.31-.22.25-.85.84-.85 2.03 0 1.2.87 2.35.99 2.51.12.16 1.71 2.61 4.15 3.66.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.68-1.18.2-.58.2-1.08.15-1.18-.06-.11-.22-.17-.47-.29Z"/></svg></span><span>Escríbenos por WhatsApp</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
