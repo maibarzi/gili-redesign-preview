@@ -3,6 +3,8 @@
 
   const STORAGE_KEY = "gili_cookie_consent_v1";
   const POPUP_KEY = "gili_pilot_popup_v1";
+  // Off during the phone campaign: one message on the page, no second sign-up.
+  const PILOT_POPUP_ENABLED = false;
   const config = window.GILI_TRACKING || {};
   let loadedStatistics = false;
   let loadedMarketing = false;
@@ -199,6 +201,7 @@
     closeButtons.forEach((button) => button.addEventListener("click", closePopup));
 
     function schedulePopup() {
+      if (!PILOT_POPUP_ENABLED) return;
       const dismissedAt = Number(localStorage.getItem(POPUP_KEY) || 0);
       if (dismissedAt && Date.now() - dismissedAt <= fourteenDays) return;
       window.setTimeout(() => {
