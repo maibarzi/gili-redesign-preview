@@ -259,9 +259,40 @@
     });
   }
 
+  // Personal links (the button in our WhatsApp message after a phone call)
+  // carry ?ref=<lead id>. The ref is kept only in this page: it goes into the
+  // pilot form, is reported once to our own webhook, and is removed from the
+  // address bar so a shared or bookmarked link does not carry it. Nothing is
+  // stored in cookies or local storage.
+  function initPersonalLink() {
+    const params = new URLSearchParams(window.location.search);
+    const ref = params.get("ref");
+    if (!ref || !/^[A-Za-z0-9_-]{1,40}$/.test(ref)) return;
+
+    params.delete("ref");
+    const query = params.toString();
+    window.history.replaceState(null, "", window.location.pathname + (query ? "?" + query : "") + window.location.hash);
+
+    document.querySelectorAll('input[name="ref"]').forEach(function (input) { input.value = ref; });
+
+    if (config.visitWebhook && navigator.sendBeacon) {
+      navigator.sendBeacon(config.visitWebhook, new URLSearchParams({
+        ref: ref,
+        page: window.location.pathname,
+        at: new Date().toISOString()
+      }));
+    }
+
+    // Statistics only with consent, possibly given later on this page.
+    function report() { trackStatisticsEvent("personal_link_visit", { ref: ref }); }
+    if (readConsent()) report();
+    else document.addEventListener("gili:consent-updated", function () { window.setTimeout(report, 1500); }, { once: true });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initConsentUi();
     initPilotPopup();
     initInteractionTracking();
+    initPersonalLink();
   });
 })();
